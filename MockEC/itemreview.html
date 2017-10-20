@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>商品詳細</title>
+    <!-- BootstrapのCSS読み込み -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- オリジナルCSS読み込み -->
+    <link href="css/original/common.css" rel="stylesheet">
+    <!-- Jqeryの読み込み -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+     <script src="https://code.jquery.com/jquery-3.1.0.slim.min.js"></script>
+    <!-- BootstrapのJS読み込み -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- レイアウトカスタマイズ用個別CSS -->
+
+
+  <!--画像インプット用-->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<style>
+.imagePreview {
+  width: 100%;
+  height: 320px;
+  margin-top: 5px;
+  background-position: center center;
+  background-size: cover;
+  -webkit-box-shadow: 0 0 1px 1px rgba(0, 0, 0, .3);
+  display: inline-block;
+}
+</style>
+  <script>
+  $(document).on('change', ':file', function() {
+      var input = $(this),
+      numFiles = input.get(0).files ? input.get(0).files.length : 1,
+      label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+      input.parent().parent().next(':text').val(label);
+
+      var files = !!this.files ? this.files : [];
+      if (!files.length || !window.FileReader) return; // no file selected, or no FileReader support
+      if (/^image/.test( files[0].type)){ // only image file
+          var reader = new FileReader(); // instance of the FileReader
+          reader.readAsDataURL(files[0]); // read the local file
+          reader.onloadend = function(){ // set image data as background of div
+              input.parent().parent().parent().prev('.imagePreview').css("background-image", "url("+this.result+")");
+          }
+      }
+  });
+  </script>
+
+  </head>
+
+  <body>
+
+    <!-- header -->
+
+    <header>
+      <div id="navbar-main">
+  <!-- Fixed navbar -->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <img src="img/logo.png" class="logo"/>
+        </button>
+        <a class="navbar-brand hidden-xs hidden-sm" href="#home"> <img src="img/logo.png" class="logo"/></a>
+      </div>
+      <div class="navbar-collapse collapse" >
+        <ul class="nav navbar-nav">
+        <li><a href="index.html">EC</a></li>
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Menu <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+              <li><a href="cart.html">買い物かご</a></li>
+            <li><a href="ranking">ランキング</a></li>
+            <li> <a href="itemList">ほしい物リスト</a></li>
+            <li> <a href="history">最近見た商品</a></li>
+            <li> <a href="item.html">ランダムページ</a></li>
+          </ul>
+        </li>
+
+
+        </ul>
+
+           <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown"><a href="userCreate.html"  >新規登録</a></li>
+            <li class="dropdown"><a href="userDetail.html">ユーザ名 さん</a></li>
+            <li class="dropdown"><a href="login.html" class="navbar-link logout-link">ログアウト</a></li>
+           </ul>
+        </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+      </header>
+
+    <!-- /header -->
+    <br><br><br><br>
+
+
+
+    <!-- body -->
+
+    <div class="container">
+
+      <h1 align="center">商品レビュー</h1>
+
+
+      <br><br>
+
+
+      <div class="container">
+
+      	<div class="row">
+          <div class="col-md-3">
+            <br>
+            <div class="card">
+                <div class="card-image">
+                  <a href="item.html">
+                 <img  src="./img/fd401266.jpg"  width="260" height="250" 　/>
+                  </a>
+                  <div class="card-content">
+                  <br>
+                  <span class="card-title">美味しいもも</span>
+                  <br><br>
+                  10000000円
+                </div>
+               </div>
+              </div>
+            </div>
+          <div class="col-md-5">
+            <form>
+　　　　　　　
+            <div class="form-group">
+              <label for="review">レビュー
+                  <!--<div class="col-sm-6">-->
+                  <input  type="text" class="form-control" placeholder="Title"/>
+                  <!--</div>-->
+              </label>
+              <textarea rows="15" class="form-control" id="review"></textarea>
+            </div>
+
+
+         </div>
+         <div class="col-md-3">
+           <br>写真を投稿する<br>
+               <!--<form action="" method="post" enctype="">-->
+                   <div class="imagePreview"></div>
+                   <div class="input-group">
+                       <label class="input-group-btn">
+                           <span class="btn btn-primary">
+                               Choose File<input type="file" style="display:none" class="uploadFile">
+                           </span>
+                       </label>
+                       <input type="text" class="form-control" readonly="">
+                   </div><br><br><br>
+
+               <a class="btn btn-primary" href="userbuyhistorydetail.html">レビュー送信</a>
+    　　　　　</form>
+           </div>
+
+
+      </div>
+
+
+
+
+
+
+  </body>
+</html>

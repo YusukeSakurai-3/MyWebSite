@@ -1,0 +1,172 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>購入</title>
+    <!-- BootstrapのCSS読み込み -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- オリジナルCSS読み込み -->
+    <link href="css/original/common.css" rel="stylesheet">
+    <!-- Jqeryの読み込み -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+    <script src="https://code.jquery.com/jquery-3.1.0.slim.min.js"></script>
+    <!-- BootstrapのJS読み込み -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- レイアウトカスタマイズ用個別CSS -->
+
+  </head>
+  <body>
+
+    <!-- header -->
+
+    <header>
+      <div id="navbar-main">
+  <!-- Fixed navbar -->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <img src="img/logo.png" class="logo"/>
+        </button>
+        <a class="navbar-brand hidden-xs hidden-sm" href="#home"> <img src="img/logo.png" class="logo"/></a>
+      </div>
+      <div class="navbar-collapse collapse" >
+        <ul class="nav navbar-nav">
+        <li><a href="index.html">EC </a></li>
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Menu <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+              <li><a href="cart.html">買い物かご</a></li>
+            <li><a href="ranking.html">ランキング</a></li>
+            <li> <a href="itemList.html">ほしい物リスト</a></li>
+            <li> <a href="history.html">最近見た商品</a></li>
+            <li> <a href="item.html">ランダムページ</a></li>
+          </ul>
+        </li>
+
+
+        </ul>
+
+           <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown"><a href="userCreate.html"  >新規登録</a></li>
+            <li class="dropdown"><a href="userDetail.html">ユーザ名 さん</a></li>
+            <li class="dropdown"><a href="login.html" class="navbar-link logout-link">ログアウト</a></li>
+           </ul>
+        </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+      </header>
+
+    <!-- /header -->
+    <br><br><br>
+
+    <!-- body -->
+    <div class="container">
+
+
+
+
+
+
+
+  <!--購入詳細-->
+  <div class="container">
+    <h1 align="center">購入詳細</h1>
+
+          <div class="table-responsive">
+               <table class="table table-striped " class="table table-bordered">
+                 <thead>
+                   <tr>
+                     <th >購入日時</th>
+                     <th >配送方法</th>
+                     <th >合計金額</th>
+
+                   </tr>
+                 </thead>
+                 <tbody>
+                   <tr class="something">
+                     <td class="col-md-8">2017年10月20日13時37分</td>
+                       <td class="col-md-2">特急配送</td>
+                       <td class="col-md-2">300000円</td>
+                    </tr>
+
+
+
+
+
+                 </tbody>
+               </table>
+             </div>
+
+
+
+      　　　</form>
+    　　</div>
+
+
+
+
+    <div class="container">
+            <div class="table-responsive">
+                 <table class="table table-striped " class="table table-bordered">
+                   <thead>
+                     <tr>
+                       <th >商品名</th>
+                       <th></th>
+                       <th >単価</th>
+
+
+                     </tr>
+                   </thead>
+                   <tbody>
+                     <tr class="something">
+                       <td class="col-md-6">美味しいぶどう</td>
+                       <td>  <a href="itemreview.html" class="btn  btn-primary col-sm-4 " type="submit" name="action">レビューする</a>
+                      </td>
+                         <td class="col-md-2">30000円</td>
+
+                      </tr>
+                     <tr>
+                       <td >松茸</td>
+                       <td>  <a href="itemreview.html" class="btn  btn-primary col-sm-4" type="submit" name="action">レビューする</a>
+                      </td>
+                       <td >123456円</td>
+
+
+                     </tr>
+                     <tr>
+                       <td >キーボード</td>
+                       <td>  <a href="itemreview.html" class="btn  btn-primary col-sm-4 " type="submit" name="action">レビューする</a>
+                      </td>
+                      <td >123456円</td>
+                     </tr>
+
+                       <tr>
+                         <td ></td>
+                         <td >特急配送</td>
+                         <td >1000円</td>
+                       </tr>
+                       <tr>
+                         <td ></td>
+                         <td >合計</td>
+                         <td >2345678円</td>
+                       </tr>
+                   </tbody>
+                 </table>
+               </div>
+      　　　　</div>
+        </div>
+      </div>
+
+
+  </body>
+</html>
+<!--
+<div class="col-sm-12">
+<th>  <a href="index.html" class="btn  btn-primary col-sm-4 col-sm-offset-4" type="submit" name="action">商品をレビューする</a>
+</th>
+</div>
+-->

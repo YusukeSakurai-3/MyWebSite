@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ログイン画面</title>
+    <!-- BootstrapのCSS読み込み -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- オリジナルCSS読み込み -->
+    <link href="css/original/common2.css" rel="stylesheet">
+    <!-- Jqeryの読み込み -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+    <script src="https://code.jquery.com/jquery-3.1.0.slim.min.js"></script>
+    <!-- BootstrapのJS読み込み -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- レイアウトカスタマイズ用個別CSS -->
+  </head>
+
+
+  <!-- header -->
+
+  <header>
+    <div id="navbar-main">
+<!-- Fixed navbar -->
+  <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+      <img src="img/logo.png" class="logo"/>
+      </button>
+      <a class="navbar-brand hidden-xs hidden-sm" href="#home"> <img src="img/logo.png" class="logo"/></a>
+    </div>
+    <div class="navbar-collapse collapse" >
+      <ul class="nav navbar-nav">
+      <li><a href="index.html">EC</a></li>
+      <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Menu <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+            <li><a href="cart.html">買い物かご</a></li>
+          <li><a href="ranking.html">ランキング</a></li>
+          <li> <a href="itemList">ほしい物リスト</a></li>
+          <li> <a href="history">最近見た商品</a></li>
+          <li> <a href="item.html">ランダムページ</a></li>
+        </ul>
+      </li>
+
+
+      </ul>
+
+         <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown"><a href="userCreate.html"  >新規登録</a></li>
+          <li class="dropdown"><a href="userDetail.html">ユーザ名 さん</a></li>
+          <li class="dropdown"><a href="login.html" class="navbar-link logout-link">ログアウト</a></li>
+         </ul>
+      </div><!--/.nav-collapse -->
+      </div>
+    </div>
+  </div>
+    </header>
+    <br><br><br>
+
+
+
+  <body>
+    <div class="container">
+        	<div class="row">
+    			<div class="col-md-6 col-md-offset-3">
+    				<div class="panel panel-login">
+    					<div class="panel-heading">
+                <form class="form-signin" action="index.html">
+                <h1>Login<h1>
+    					</div>
+    					<div class="panel-body">
+    						<div class="row">
+    							<div class="col-lg-12">
+    									<div class="form-group">
+    										<input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" >
+    									</div>
+    									<div class="form-group">
+    										<input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password" >
+    									</div>
+                      <button href="index.html" class="btn btn-lg btn-primary btn-block btn-signin"  type="submit">Login</button>
+
+                          </form>
+                          <div class="text-right">
+                            <br><a href="userCreate.html" class="btn btn-success">register</a>
+                          </div><!-- /form -->
+  </body>
+</html>

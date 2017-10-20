@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>商品詳細</title>
+    <!-- BootstrapのCSS読み込み -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- オリジナルCSS読み込み -->
+    <link href="css/original/common.css" rel="stylesheet">
+    <!-- Jqeryの読み込み -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+     <script src="https://code.jquery.com/jquery-3.1.0.slim.min.js"></script>
+    <!-- BootstrapのJS読み込み -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- レイアウトカスタマイズ用個別CSS -->
+
+
+  </head>
+
+  <body>
+
+    <!-- header -->
+
+    <header>
+      <div id="navbar-main">
+  <!-- Fixed navbar -->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <img src="img/logo.png" class="logo"/>
+        </button>
+        <a class="navbar-brand hidden-xs hidden-sm" href="#home"> <img src="img/logo.png" class="logo"/></a>
+      </div>
+      <div class="navbar-collapse collapse" >
+        <ul class="nav navbar-nav">
+        <li><a href="index.html">EC</a></li>
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Menu <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+              <li><a href="cart.html">買い物かご</a></li>
+            <li><a href="ranking.html">ランキング</a></li>
+            <li> <a href="itemgetList.html">ほしい物リスト</a></li>
+            <li> <a href="history.html">最近見た商品</a></li>
+            <li> <a href="item.html">ランダムページ</a></li>
+          </ul>
+        </li>
+
+
+        </ul>
+
+           <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown"><a href="userCreate.html"  >新規登録</a></li>
+            <li class="dropdown"><a href="userDetail.html">ユーザ名 さん</a></li>
+            <li class="dropdown"><a href="login.html" class="navbar-link logout-link">ログアウト</a></li>
+           </ul>
+        </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+      </header>
+
+    <!-- /header -->
+    <br><br><br><br>
+
+
+
+    <!-- body -->
+
+    <div class="container">
+
+      <h1 align="center">ユーザさんの最近見た商品</h1>
+      <br><br>
+      <div class="container">
+
+
+          <form align="left" action="#staticModal" method="POST">
+            <input type="hidden" name="delete" value="">
+            <!--<button class="btn btn-info" type="submit" name="action" >-->
+              <li class="dropdown">
+              <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" >履歴を削除する<span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a data-toggle="modal" data-target="#staticModal" >全件削除</a></li>
+                  <li><a href="#">選択削除</a></li>
+                </ul>
+              </li>
+            <!--<div style="width:120px;">削除</div>-->
+            <!--href="#staticModal"-->
+          </button>
+        </form>
+
+        <!-- モーダルダイアログ -->
+        <div class="modal" id="staticModal" tabindex="-1" role="dialog" aria-labelledby="staticModalLabel" aria-hidden="true" data-show="true" data-keyboard="false" data-backdrop="static">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+
+                <h4 class="modal-title">全件削除</h4>
+              </div><!-- /modal-header -->
+              <div class="modal-body">
+                <p class="recipient">本当に削除しますか?</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">削除</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">閉じる</button>
+              </div>
+            </div> <!-- /.modal-content -->
+          </div> <!-- /.modal-dialog -->
+        </div>
+
+        <!--<li class="dropdown">
+        <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" >履歴を削除する<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">全件削除</a></li>
+            <li><a href="#">選択削除</a></li>
+          </ul>
+        </li>-->
+
+
+        	 <div class="row">
+
+            <div class="col-md-3">
+              <br>
+              <div class="card">
+                  <div class="card-image">
+                    <a href="item.html">
+                  <img   src="./img/matsutake.jpg"  width="260" height="250" 　/>
+                    </a>
+                   <div class="card-content">
+                    <br>
+                    <span class="card-title">美味しいもも</span>
+                    <br><br>
+                    10000000円
+                    <p>
+                   <input type="checkbox"  name="delete_item_id_list" value="" /> 削除
+                   </p>
+                  </div>
+                 </div>
+                </div>
+              </div>
+
+
+      
+            <div class="col-md-3">
+              <br>
+              <div class="card">
+                  <div class="card-image">
+                    <a href="item.html">
+                  <img   src="./img/fd401266.jpg"  width="260" height="250" 　/>
+                   </a>
+                   <div class="card-content">
+                    <br>
+                    <span class="card-title">ぶどう</span>
+                    <br><br>
+                    10000000円
+                    <p>
+                   <input type="checkbox"  name="delete_item_id_list" value="" /> 削除
+                   </p>
+                  </div>
+                 </div>
+                </div>
+              </div>
+
+
+
+
+                <div class="col-md-3">
+                  <br>
+                  <div class="card">
+                      <div class="card-image">
+                        <a href="item.html">
+                      <img   src="./img/fd401097.jpg"  width="260" height="250" 　/>
+                       </a>
+                       <div class="card-content">
+                        <br>
+                        <span class="card-title">美味しいもも</span>
+                        <br><br>
+                        10000000円
+                        <p>
+                       <input type="checkbox"  name="delete_item_id_list" value="" /> 削除
+                       </p>
+                      </div>
+                     </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-3">
+                    <br>
+                    <div class="card">
+                        <div class="card-image">
+                          <a href="item.html">
+                         <img  src="./img/fd400947.jpg"  width="260" height="250" 　/>
+                          </a>
+                          <div class="card-content">
+                          <br>
+                          <span class="card-title">美味しいもも</span>
+                          <br><br>
+                          10000000円
+                          <p>
+                         <input type="checkbox"  name="delete_item_id_list" value="" /> 削除
+                         </p>
+                        </div>
+                       </div>
+                      </div>
+                    </div>
+                </div>
+              </div>
+
+  <br>
+
+
+
+        <div class="container">
+
+        	<div class="row">
+
+            <div class="col-md-3">
+              <br>
+              <div class="card">
+                  <div class="card-image">
+                    <a href="item.html">
+                   <img  src="./img/matsutake.jpg"  width="260" height="250" 　/>
+                    </a>
+                    <div class="card-content">
+                    <br>
+                    <span class="card-title">美味しいもも</span>
+                    <br><br>
+                    10000000円
+                    <p>
+                   <input type="checkbox"  name="delete_item_id_list" value="" /> 削除
+                   </p>
+                  </div>
+                 </div>
+                </div>
+              </div>
+
+
+      
+            <div class="col-md-3">
+              <br>
+              <div class="card">
+                  <div class="card-image">
+                    <a href="item.html">
+                  <img  src="./img/fd401266.jpg"  width="260" height="250" 　/>
+                   </a>
+                   <div class="card-content">
+                    <br>
+                    <span class="card-title">ぶどう</span>
+                    <br><br>
+                    10000000円
+                    <p>
+                   <input type="checkbox"  name="delete_item_id_list" value="" /> 削除
+                   </p>
+                  </div>
+                 </div>
+                </div>
+              </div>
+
+
+                <div class="col-md-3">
+                  <br>
+                  <div class="card">
+                      <div class="card-image">
+                        <a href="item.html">
+                      <img  src="./img/fd401097.jpg"  width="260" height="250" 　/>
+                       </a>
+                       <div class="card-content">
+                        <br>
+                        <span class="card-title">美味しいもも</span>
+                        <br><br>
+                        10000000円
+                        <p>
+                       <input type="checkbox"  name="delete_item_id_list" value="" /> 削除
+                       </p>
+                      </div>
+                     </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-3">
+                    <br>
+                    <div class="card">
+                        <div class="card-image">
+                          <a href="item.html">
+                        <img  src="./img/fd400947.jpg"  width="260" height="250" 　/>
+                          </a>
+                          <div class="card-content">
+                          <br>
+                          <span class="card-title">美味しいもも</span>
+                          <br><br>
+                          10000000円
+                          <p>
+                         <input type="checkbox"  name="delete_item_id_list" value="" /> 削除
+                         </p>
+                        </div>
+                       </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div><br><br><br>
+
+              <div class="text-center">
+                <ul class="pagination">
+
+                <li><a href="#">≪ 前へ</a></li>
+                <li><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+                <li><a href="#">6</a></li>
+                <li><a href="#">次へ ≫</a></li>
+              </ul>
+             </div>
+             <br><br><br>
+
+
+
+
+
+  </body>
+</html>

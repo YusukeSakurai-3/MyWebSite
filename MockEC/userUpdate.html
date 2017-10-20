@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ユーザ更新画面</title>
+    <!-- BootstrapのCSS読み込み -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- オリジナルCSS読み込み -->
+    <link href="css/original/common.css" rel="stylesheet">
+    <!-- Jqeryの読み込み -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+    <script src="https://code.jquery.com/jquery-3.1.0.slim.min.js"></script>
+    <!-- BootstrapのJS読み込み -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- レイアウトカスタマイズ用個別CSS -->
+
+  </head>
+  <body>
+
+    <!-- header -->
+
+    <header>
+      <div id="navbar-main">
+  <!-- Fixed navbar -->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <img src="img/logo.png" class="logo"/>
+        </button>
+        <a class="navbar-brand hidden-xs hidden-sm" href="#home"> <img src="img/logo.png" class="logo"/></a>
+      </div>
+      <div class="navbar-collapse collapse" >
+        <ul class="nav navbar-nav">
+        <li><a href="index.html">EC</a></li>
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Menu <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+              <li><a href="cart.html">買い物かご</a></li>
+            <li><a href="ranking">ランキング</a></li>
+            <li> <a href="itemList">ほしい物リスト</a></li>
+            <li> <a href="history">最近見た商品</a></li>
+            <li> <a href="item.html">ランダムページ</a></li>
+          </ul>
+        </li>
+
+
+        </ul>
+
+           <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown"><a href="userCreate.html"  >新規登録</a></li>
+            <li class="dropdown"><a href="userDetail.html">ユーザ名 さん</a></li>
+            <li class="dropdown"><a href="login.html" class="navbar-link logout-link">ログアウト</a></li>
+           </ul>
+        </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+      </header>
+      <br><br><br>
+
+    <!-- body -->
+    <div class="container">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="panel-body">
+            <form method="post" action="#" class="form-horizontal">
+              <div class="form-group">
+                <label for="user-id" class="control-label col-sm-2">ログインID</label>
+                <div  class="form-control-static col-sm-6">
+                  id0001
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="password" class="control-label col-sm-2">パスワード</label>
+                <div class="col-sm-6">
+                  <input type="password" name="password" id="password" class="form-control" required/>
+                </div>
+              </div>
+              <div class="form-group form-margin">
+                <label for="password-confirm" class="control-label col-sm-2">パスワード(確認)</label>
+                <div class="col-sm-6">
+                  <input type="password" name="password-confirm" id="password-confirm" class="form-control" required/>
+                </div>
+              </div>
+              <div class="form-group form-margin">
+                <label for="user-name" class="control-label col-sm-2">ユーザ名</label>
+                <div class="col-sm-6">
+                  <input type="text" name="user-name" id="user-name" class="form-control" value="田中太郎" required/>
+                </div>
+              </div>
+              <div class="form-group form-margin">
+                <label for="continent" class="control-label col-sm-2">生年月日</label>
+                <div class="row">
+                  <div class="col-sm-5">
+                    <input  type="date" name="birthDate" id="date-start" class="form-control" size="30" value="1989-04-26" required/>
+                  </div>
+              </div>
+              </div>
+              <div class="form-group form-margin">
+                <label for="continent" class="control-label col-sm-2">住所</label>
+                <div class="row">
+                  <div class="col-sm-5">
+                    <input  type="text" name=""  class="form-control" size="30" value="" />
+                  </div>
+              </div>
+              </div>
+
+              <div>
+                <button type="submit" value="更新" class="btn btn-primary center-block form-submit">更新</button>
+              </div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xs-4">
+        <a href="userDetail.html">戻る</a>
+      </div>
+
+
+    </div>
+  </body>
+</html>

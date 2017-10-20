@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ユーザ詳細参照画面</title>
+    <!-- BootstrapのCSS読み込み -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- オリジナルCSS読み込み -->
+    <link href="css/original/common.css" rel="stylesheet">
+    <!-- Jqeryの読み込み -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+    <script src="https://code.jquery.com/jquery-3.1.0.slim.min.js"></script>
+    <!-- BootstrapのJS読み込み -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- レイアウトカスタマイズ用個別CSS -->
+
+  </head>
+  <body>
+
+    <!-- header -->
+
+    <header>
+      <div id="navbar-main">
+  <!-- Fixed navbar -->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <img src="img/logo.png" class="logo"/>
+        </button>
+        <a class="navbar-brand hidden-xs hidden-sm" href="#home"> <img src="img/logo.png" class="logo"/></a>
+      </div>
+      <div class="navbar-collapse collapse" >
+        <ul class="nav navbar-nav">
+        <li><a href="index.html">EC</a></li>
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Menu <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+              <li><a href="cart.html">買い物かご</a></li>
+            <li><a href="ranking.html">ランキング</a></li>
+            <li> <a href="itemgetList.html">ほしい物リスト</a></li>
+            <li> <a href="history">最近見た商品</a></li>
+            <li> <a href="item.html">ランダムページ</a></li>
+          </ul>
+        </li>
+        </ul>
+
+           <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown"><a href="userCreate.html"  >新規登録</a></li>
+            <li class="dropdown"><a href="userDetail.html">ユーザ名 さん</a></li>
+            <li class="dropdown"><a href="login.html" class="navbar-link logout-link">ログアウト</a></li>
+           </ul>
+        </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+      </header>
+      <br><br><br>
+
+    <!-- body -->
+    <div class="container">
+      <h1 align="center">ユーザー情報</h1>
+      <div class="panel panel-default">
+        <div class="panel-body">
+
+          <div class="panel-body">
+            <form method="post" action="#" class="form-horizontal">
+              <div class="form-group">
+                <label for="user-id" class="control-label col-sm-2">ログインID</label>
+                <div class="form-control-static static-padding">
+                  id0001
+                </div>
+              </div>
+              <div class="form-group form-margin">
+                <label for="user-name" class="control-label col-sm-2">ユーザ名</label>
+                <p class="form-control-static static-padding">
+                  田中太郎
+                </p>
+              </div>
+              <div class="form-group form-margin">
+                <label for="continent" class="control-label col-sm-2">生年月日</label>
+                <p class="form-control-static static-padding">
+                  2000年04月26日
+                </p>
+              </div>
+              <div class="form-group form-margin">
+                <label for="user-name" class="control-label col-sm-2">住所</label>
+                <p class="form-control-static static-padding">
+                  埼玉県さいたま市さいたま町3131-31
+                </p>
+              </div>
+          </div>
+          <div class="text-right">
+            <a class="btn btn-primary" href="userUpdate.html">更新</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+<!--購入履歴-->
+<div class="container">
+  <h1 align="center">購入履歴</h1>
+
+
+          <div class="table-responsive">
+               <table class="table table-striped " class="table table-bordered">
+                 <thead>
+                   <tr>
+                     <th></th>
+                     <th >購入日時</th>
+                     <th >配送方法</th>
+                     <th >合計金額</th>
+                   </tr>
+                 </thead>
+                 <tbody>
+                   <tr class="something">
+
+                       <th><a class="btn btn-info" href="userbuyhistorydetail.html">詳細</a>
+                     <td class="col-md-5 col-md-offset-2">2017年10月20日13時37分</td>
+                       <td class="col-md-2">特急配送</td>
+                       <td class="col-md-2">300000円</td>
+                    </tr>
+                    <tr class="something">
+
+                        <th><a class="btn btn-info" href="userbuyhistorydetail.html">詳細</a>
+                      <td class="col-md-5 col-md-offset-2">2017年10月20日13時37分</td>
+                        <td class="col-md-2">特急配送</td>
+                        <td class="col-md-2">300000円</td>
+                     </tr>
+                     <tr class="something">
+
+                         <th><a class="btn btn-info" href="userbuyhistorydetail.html">詳細</a>
+                       <td class="col-md-5 col-md-offset-2">2017年10月20日13時37分</td>
+                         <td class="col-md-2">日時指定配送</td>
+                         <td class="col-md-2">33568380円</td>
+                      </tr>
+                      <tr class="something">
+
+                          <th><a class="btn btn-info" href="userbuyhistorydetail.html">詳細</a>
+                        <td class="col-md-5 col-md-offset-2">2017年10月20日13時37分</td>
+                          <td class="col-md-2">通常配送</td>
+                          <td class="col-md-2">302347245円</td>
+                       </tr>
+
+                 </tbody>
+               </table>
+             </div>
+    　　
+
+
+      <div class="col-xs-4">
+        <a href="index.html">戻る</a>
+      </div><br><br>
+      <div class="col-xs-4">
+        <a href="userList.html">ユーザー一覧画面へ</a>
+        <a href="itemmanagement.html">商品マスタ一覧画面へ</a>
+      </div>
+      <br><br><br>
+    </div>
+
+
+
+  </body>
+</html>

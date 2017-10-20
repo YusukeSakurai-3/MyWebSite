@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>商品一覧</title>
+    <!-- BootstrapのCSS読み込み -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- オリジナルCSS読み込み -->
+    <link href="css/original/common.css" rel="stylesheet">
+    <!-- Jqeryの読み込み -->
+   <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">-->
+   <!--モーダルウィンドウのため変更-->
+   <script src="https://code.jquery.com/jquery-3.1.0.slim.min.js"></script>
+
+    <!-- BootstrapのJS読み込み -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- レイアウトカスタマイズ用個別CSS -->
+
+
+  <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+
+
+</head>
+<body>
+
+
+    <!-- header -->
+    <header>
+      <div id="navbar-main">
+  <!-- Fixed navbar -->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <img src="img/logo.png" class="logo"/>
+        </button>
+        <a class="navbar-brand hidden-xs hidden-sm" href="#home"> <img src="img/logo.png" class="logo"/></a>
+      </div>
+      <div class="navbar-collapse collapse" >
+        <ul class="nav navbar-nav">
+        <li><a href="#">EC</a></li>
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Menu <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+              <li><a href="cart.html">買い物かご</a></li>
+            <li><a href="ranking.html">ランキング</a></li>
+            <li> <a href="itemList.html">ほしい物リスト</a></li>
+            <li> <a href="history.html">最近見た商品</a></li>
+            <li> <a href="item.html">ランダムページ</a></li>
+          </ul>
+        </li>
+
+      <li>
+      <form class="navbar-form navbar-right search" action="itemsearchresult.html" role="search" style=" display: inline; ">
+        <div class="form-group ">
+        <input type="text" class="form-control" placeholder="Search" size="50">
+        </div>
+        <button type="submit" class="btn btn-primary" >
+          検索
+        </button>
+      </form>
+        </li>
+
+      <button class="btn btn-success " href="#staticModal" data-toggle="modal" style="position: relative;top :8px">詳細</button>
+      </ul>
+
+         <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown"><a href="userCreate.html"  >新規登録</a></li>
+          <li class="dropdown"><a href="userDetail.html">ユーザ名 さん</a></li>
+          <li class="dropdown"><a href="login.html" class="navbar-link logout-link">ログアウト</a></li>
+         </ul>
+      </div><!--/.nav-collapse -->
+      </div>
+    </div>
+  </div>
+    </header>
+    <!-- /header -->
+
+    <!-- body -->
+    <br>
+    <br>
+    <br>
+    <br>
+
+
+    <div class="container">
+      <h1><font color="#ff9933">ECサイト</font></h1>
+      <h1 align="center">商品一覧</h1>
+    </div>
+
+
+      <!-- モーダルダイアログ -->
+      <div class="modal" id="staticModal" tabindex="-1" role="dialog" aria-labelledby="staticModalLabel" aria-hidden="true" data-show="true" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog">
+          <div class="modal-content"　>
+            <div class="modal-header " style="background-color:#6495ed; border-radius: 5px 5px 5px 5px;"  >
+              <button type="button" class="close" data-dismiss="modal">
+                <span aria-hidden="true">&#215;</span><span class="sr-only">閉じる</span>
+              </button>
+              <h4 class="modal-title ">詳細検索</h4>
+            </div><!-- /modal-header -->
+            <div class="modal-body">
+              <!--<p class="recipient">検索</p>-->
+
+
+                        <div class="panel-title"></div>
+                    </div>
+                    <div class="panel-body">
+                      <form method="post" action="itemsearchresult.html" class="form-horizontal">
+                        <div class="form-group">
+                          <label for="code" class="control-label col-sm-3">カテゴリ</label>
+                          <div class="col-sm-6">
+                              <select class="form-control" name="example1" style="position: relative;top :4px">
+                              <option value="カテゴリ1">カテゴリ1</option>
+                              <option value="カテゴリ2">カテゴリ2</option>
+                              <option value="カテゴリ3">カテゴリ3</option>
+                              <option value="カテゴリ4">カテゴリ4</option>
+                              <option value="カテゴリ5">カテゴリ5</option>
+                              </select>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label for="name" class="control-label col-sm-3">キーワード</label>
+                          <div class="col-sm-6">
+                            <input type="text" name="word" id="user-name" class="form-control"/>
+                            and<input type="radio" name="select" value="and">
+                             or<input type="radio" name="select" value="or">
+                          </div>
+                        </div>
+
+                        <div class="form-group">
+                          <label for="continent" class="control-label col-sm-3">価格</label>
+                          <div class="row">
+                            <div class="col-sm-3">
+                              <input type="text" name="price-start" id="date-start" class="form-control" size="30"/>
+                            </div>
+                            <div class="col-xs-1 text-center">
+                              ~
+                            </div>
+                            <div class="col-sm-3">
+                              <input type="text" name="price-end" id="date-end" class="form-control"/>
+                            </div>
+                        </div>
+                        </div>
+
+
+                  </div>
+
+
+      <div class="modal-footer">
+        <a type="button" class="btn btn-primary" href="itemsearchresult.html">検索</a>
+        <button type="button" class="btn btn-default" data-dismiss="modal">閉じる</button>
+       </form>
+      </div>
+    </div> <!-- /.modal-content -->
+  </div> <!-- /.modal-dialog -->
+</div> <!-- /.modal -->
+
+
+
+
+
+
+  <div class="container">
+    <h4>オススメ商品<h4>
+  	 <div class="row">
+
+      <div class="col-md-3">
+        <br>
+        <div class="card">
+            <div class="card-image">
+              <a href="item.html">
+            <img   src="./img/matsutake.jpg"  width="260" height="250" 　/>
+              </a>
+             <div class="card-content">
+              <br>
+              <span class="card-title">美味しいもも</span>
+              <br><br>
+              10000000円
+            </div>
+           </div>
+          </div>
+        </div>
+
+
+
+      <div class="col-md-3">
+        <br>
+        <div class="card">
+            <div class="card-image">
+              <a href="item.html">
+            <img   src="./img/fd401266.jpg"  width="260" height="250" 　/>
+             </a>
+             <div class="card-content">
+              <br>
+              <span class="card-title">ぶどう</span>
+              <br><br>
+              10000000円
+            </div>
+           </div>
+          </div>
+        </div>
+
+
+
+
+          <div class="col-md-3">
+            <br>
+            <div class="card">
+                <div class="card-image">
+                  <a href="item.html">
+                <img   src="./img/fd401097.jpg"  width="260" height="250" 　/>
+                 </a>
+                 <div class="card-content">
+                  <br>
+                  <span class="card-title">美味しいもも</span>
+                  <br><br>
+                  10000000円
+                </div>
+               </div>
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <br>
+              <div class="card">
+                  <div class="card-image">
+                    <a href="item.html">
+                   <img  src="./img/fd400947.jpg"  width="260" height="250" 　/>
+                    </a>
+                    <div class="card-content">
+                    <br>
+                    <span class="card-title">美味しいもも</span>
+                    <br><br>
+                    10000000円
+                  </div>
+                 </div>
+                </div>
+              </div>
+          </div>
+        </div>
+
+<br>
+<br>
+<br>
+
+
+  <div class="container">
+    <h4>最近見た商品<h4>
+  	<div class="row">
+
+      <div class="col-md-3">
+        <br>
+        <div class="card">
+            <div class="card-image">
+              <a href="item.html">
+             <img  src="./img/matsutake.jpg"  width="260" height="250" 　/>
+              </a>
+              <div class="card-content">
+              <br>
+              <span class="card-title">美味しいもも</span>
+              <br><br>
+              10000000円
+            </div>
+           </div>
+          </div>
+        </div>
+
+
+
+      <div class="col-md-3">
+        <br>
+        <div class="card">
+            <div class="card-image">
+              <a href="item.html">
+            <img  src="./img/fd401266.jpg"  width="260" height="250" 　/>
+             </a>
+             <div class="card-content">
+              <br>
+              <span class="card-title">ぶどう</span>
+              <br><br>
+              10000000円
+            </div>
+           </div>
+          </div>
+        </div>
+
+
+          <div class="col-md-3">
+            <br>
+            <div class="card">
+                <div class="card-image">
+                  <a href="item.html">
+                <img  src="./img/fd401097.jpg"  width="260" height="250" 　/>
+                 </a>
+                 <div class="card-content">
+                  <br>
+                  <span class="card-title">美味しいもも</span>
+                  <br><br>
+                  10000000円
+                </div>
+               </div>
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <br>
+              <div class="card">
+                  <div class="card-image">
+                    <a href="item.html">
+                  <img  src="./img/fd400947.jpg"  width="260" height="250" 　/>
+                    </a>
+                    <div class="card-content">
+                    <br>
+                    <span class="card-title">美味しいもも</span>
+                    <br><br>
+                    10000000円
+                  </div>
+                 </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+
+
+  </body>
+</html>

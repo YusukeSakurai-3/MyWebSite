@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ユーザ削除画面</title>
+    <!-- BootstrapのCSS読み込み -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- オリジナルCSS読み込み -->
+    <link href="css/original/common.css" rel="stylesheet">
+    <!-- Jqeryの読み込み -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+    <!-- BootstrapのJS読み込み -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- レイアウトカスタマイズ用個別CSS -->
+
+  </head>
+  <body>
+
+    <!-- header -->
+    <header>
+      <nav class="navbar navbar-inverse">
+      	<div class="container">
+      		<div class="navbar-header">
+            <a class="navbar-brand" href="userList.html">ユーザ削除確認</a>
+      		</div>
+
+          <ul class="nav navbar-nav navbar-right">
+  						<li class="navbar-text">ユーザ名 さん </li>
+  						<li class="dropdown">
+  							<a href="index.html" class="navbar-link logout-link">ログアウト</a>
+              </li>
+  				</ul>
+      	</div>
+      </nav>
+    </header>
+    <!-- /header -->
+
+
+    <!-- body -->
+    <div class="container">
+
+      <div class="panel panel-default">
+        <div class="panel-body">
+
+          <p>ログインID:id0001</p>
+          <p>を本当に削除してもよろしいでしょうか。</p>
+
+          <div class="text-center">
+            <a class="btn btn-default form-submit" href="userList.html">Cancel</a>
+            <a class="btn btn-primary form-submit" href="userList.html">OK</a>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-xs-4">
+        <a href="userList.html">戻る</a>
+      </div>
+    </div>
+  </body>
+</html>
