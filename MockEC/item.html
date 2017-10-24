@@ -70,13 +70,29 @@
 
       <h1 align="center">商品詳細</h1>
 
-      　　<form align="right" action="cart.html" method="POST">
-						<input type="hidden" name="item_id" value="">
-						<button class="btn btn-primary" type="submit" name="action">
+      <div class="row">
+
+      <form class="col-sm-2 col-sm-offset-8" action="cart.html" method="POST" >
+						<input type="hidden" name="item_id" value="" >
+						<button class=" btn btn-primary" type="submit" name="action" >
 							買い物かごに追加
 						</button>
 					</form>
+
+
+      <form class="col-sm-2" action="itemgetList.html" method="POST" >
+						<input type="hidden" name="item_id" value="" >
+						<button class="btn btn-success" type="submit" name="action" >
+							ほしい物リストに追加
+						</button>
+					</form>
+
       </div>
+
+      　　
+
+
+
       <br><br>
 
     <div class="container">
@@ -88,6 +104,7 @@
         <div class="col-md-6">
           <h2>商品タイトル商品タイトル商品タイトル商品タイトル商品タイトル</h2>
           <h4>10000000000000000円</h4>
+          100000000000000pt<br><br>
           学習デスク 勉強机 勉強デスク
           二人 人気 木製 2人 学習机
           ツインデスク 子供 勉強デスク
@@ -106,83 +123,73 @@
          </div>
       </div>
    </div><br>
+
    <div class="container">
-        <h4>この商品のレビュー<h4>
-     <div class="panel ">
-       <div class="panel-body">
-     <div class="col-md-6">
-     <img id="profile-img" class="profile-img-card" src="./img/fd400947.jpg"  width="400" height="400" />
-     </div>
-       <div class="col-md-6">
-         <h2>美味しいです</h2>
-         美味しいです美味しいです美味しいです美味しいです美味しいです美味しいです
-         美味しいです美味しいです美味しいです美味しいです美味しいです美味しいです
-         美味しいです美味しいです美味しいです美味しいです美味しいです美味しいです
-         美味しいです美味しいです美味しいです美味しいです美味しいです美味しいです
-         美味しいです美味しいです美味しいです美味しいです美味しいです美味しいです
-         美味しいです美味しいです美味しいです美味しいです美味しいです美味しいです
-         美味しいです美味しいです美味しいです美味しいです美味しいです美味しいです
-         美味しいです美味しいです美味しいです美味しいです美味しいです美味しいです
-         美味しいです美味しいです美味しいです美味しいです美味しいです美味しいです
-         美味しいです美味しいです美味しいです美味しいです美味しいです美味しいです
-         美味しいです美味しいです美味しいです美味しいです美味しいです美味しいです
-         美味しいです美味しいです美味しいです美味しいです美味しいです美味しいです
-         美味しいです美味しいです美味しいです美味しいです美味しいです美味しいです
-         美味しいです美味しいです美味しいです美味しいです美味しいです美味しいです
-        </div>
-     </div>
-  </div><br>
+     <h4>同じカテゴリの商品<h4>
+    <div class="row">
 
-
-     <div class="container">
-       <h4>同じカテゴリの商品<h4>
-     	<div class="row">
-
-         <div class="col-md-3">
-           <br>
-           <div class="card">
-               <div class="card-image">
-                 <a href="item.html">
-                <img  src="./img/matsutake.jpg"  width="260" height="250" 　/>
-                 </a>
-                 <div class="card-content">
-                 <br>
-                 <span class="card-title">美味しいもも</span>
-                 <br><br>
-                 10000000円
-               </div>
-              </div>
+       <div class="col-md-3">
+         <br>
+         <div class="card">
+             <div class="card-image">
+               <a href="item.html">
+              <img  src="./img/matsutake.jpg"  width="260" height="250" 　/>
+               </a>
+               <div class="card-content">
+               <br>
+               <span class="card-title">美味しいもも</span>
+               <br><br>
+               10000000円
              </div>
+            </div>
            </div>
+         </div>
 
 
-   
-         <div class="col-md-3">
-           <br>
-           <div class="card">
-               <div class="card-image">
-                 <a href="item.html">
-               <img src="./img/fd401266.jpg"  width="260" height="250" 　/>
-                </a>
-                <div class="card-content">
-                 <br>
-                 <span class="card-title">ぶどう</span>
-                 <br><br>
-                 10000000円
-               </div>
-              </div>
+  
+       <div class="col-md-3">
+         <br>
+         <div class="card">
+             <div class="card-image">
+               <a href="item.html">
+             <img src="./img/fd401266.jpg"  width="260" height="250" 　/>
+              </a>
+              <div class="card-content">
+               <br>
+               <span class="card-title">ぶどう</span>
+               <br><br>
+               10000000円
              </div>
+            </div>
            </div>
+         </div>
 
+
+           <div class="col-md-3">
+             <br>
+             <div class="card">
+                 <div class="card-image">
+                   <a href="item.html">
+                 <img   src="./img/fd401097.jpg"  width="260" height="250" 　/>
+                  </a>
+                  <div class="card-content">
+                   <br>
+                   <span class="card-title">美味しいもも</span>
+                   <br><br>
+                   10000000円
+                 </div>
+                </div>
+               </div>
+             </div>
 
              <div class="col-md-3">
                <br>
                <div class="card">
                    <div class="card-image">
                      <a href="item.html">
-                   <img   src="./img/fd401097.jpg"  width="260" height="250" 　/>
-                    </a>
-                    <div class="card-content">
+                   <img   src="./img/fd400947.jpg"  width="260" height="250" 　/>
+                     </a>
+                     <div class="card-content">
                      <br>
                      <span class="card-title">美味しいもも</span>
                      <br><br>
@@ -191,25 +198,67 @@
                   </div>
                  </div>
                </div>
-
-               <div class="col-md-3">
-                 <br>
-                 <div class="card">
-                     <div class="card-image">
-                       <a href="item.html">
-                     <img   src="./img/fd400947.jpg"  width="260" height="250" 　/>
-                       </a>
-                       <div class="card-content">
-                       <br>
-                       <span class="card-title">美味しいもも</span>
-                       <br><br>
-                       10000000円
-                     </div>
-                    </div>
-                   </div>
-                 </div>
-               </div>
              </div>
+           </div>
+
+   <div class="container">
+        <h4>ユーザーさんのレビュー<h4>
+
+
+     <div class="panel ">
+       <div class="panel-body">
+     <div class="col-md-6">
+     <img id="profile-img" class="profile-img-card" src="./img/fd400947.jpg"  width="400" height="400" />
+     </div>
+       <div class="col-md-6">
+         <h2>美味しいです</h2>
+         <div class="star-rating">
+             <div class="star-rating-front" style="width: 80%">★★★★★</div>
+             <div class="star-rating-back">★★★★★</div>
+        </div>
+        <br>
+         美味しいです美味しいです美味しいです美味しいです美味しいです美味しいです
+         美味しいです美味しいです美味しいです美味しいです美味しいです美味しいです
+         美味しいです美味しいです美味しいです美味しいです美味しいです美味しいです
+         美味しいです美味しいです美味しいです美味しいです美味しいです美味しいです
+         美味しいです美味しいです美味しいです美味しいです美味しいです美味しいです
+         美味しいです美味しいです美味しいです美味しいです美味しいです美味しいです
+         美味しいです美味しいです美味しいです美味しいです美味しいです美味しいです
+         美味しいです美味しいです美味しいです美味しいです美味しいです美味しいです
+         美味しいです美味しいです美味しいです美味しいです美味しいです美味しいです
+
+        </div>
+     </div>
+  </div><br>
+
+     <div class="container">
+          <h4>ユーザー2さんのレビュー<h4>
+
+
+       <div class="panel ">
+         <div class="panel-body">
+       <div class="col-md-6">
+       <img id="profile-img" class="profile-img-card" src="./img/fd400947.jpg"  width="400" height="400" />
+       </div>
+         <div class="col-md-6">
+           <h2>美味しいか？</h2>
+           <div class="star-rating">
+               <div class="star-rating-front" style="width: 40%">★★★★★</div>
+               <div class="star-rating-back">★★★★★</div>
+          </div>
+          <br>
+          美味しいか？美味しいか？美味しいか？美味しいか？美味しいか？美味しいか？美味しいか？
+          美味しいか？美味しいか？美味しいか？美味しいか？美味しいか？美味しいか？美味しいか？
+          美味しいか？美味しいか？美味しいか？美味しいか？美味しいか？美味しいか？美味しいか？
+          美味しいか？美味しいか？美味しいか？美味しいか？美味しいか？美味しいか？美味しいか？
+          美味しいか？美味しいか？美味しいか？美味しいか？美味しいか？美味しいか？美味しいか？
+          美味しいか？美味しいか？美味しいか？美味しいか？美味しいか？美味しいか？美味しいか？
+
+
+          </div>
+       </div>
+    </div><br>
+
 
 
 
