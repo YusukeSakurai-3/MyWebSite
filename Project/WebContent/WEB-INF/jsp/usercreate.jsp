@@ -1,70 +1,18 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="ja">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>ユーザ新規登録画面</title>
-    <!-- BootstrapのCSS読み込み -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <!-- オリジナルCSS読み込み -->
-    <link href="css/original/common.css" rel="stylesheet">
-    <!-- Jqeryの読み込み -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
-    <script src="https://code.jquery.com/jquery-3.1.0.slim.min.js"></script>
-    <!-- BootstrapのJS読み込み -->
-    <script src="js/bootstrap.min.js"></script>
-    <!-- レイアウトカスタマイズ用個別CSS -->
+  <title>ユーザー新規登録</title>
+   <jsp:include page="/baselayout/head.html" />
 
+  <jsp:include page="/baselayout/header.jsp" />
   </head>
   <body>
 
     <!-- header -->
-
-    <header>
-      <div id="navbar-main">
-  <!-- Fixed navbar -->
-    <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-        <img src="img/logo.png" class="logo"/>
-        </button>
-        <a class="navbar-brand hidden-xs hidden-sm" href="#home"> <img src="img/logo.png" class="logo"/></a>
-      </div>
-      <div class="navbar-collapse collapse" >
-        <ul class="nav navbar-nav">
-        <li><a href="index.html">Home</a></li>
-        <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Menu <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-              <li><a href="cart.html">買い物かご</a></li>
-            <li><a href="ranking.html">ランキング</a></li>
-            <li> <a href="itemgetList.html">ほしい物リスト</a></li>
-            <li> <a href="history.html">最近見た商品</a></li>
-            <li> <a href="item.html">ランダムページ</a></li>
-          </ul>
-        </li>
-
-
-        </ul>
-
-           <ul class="nav navbar-nav navbar-right">
-            <li class="dropdown"><a href="userCreate.html"  >新規登録</a></li>
-            <li class="dropdown"><a href="userDetail.html">ユーザ名 さん</a></li>
-            <li class="dropdown"><a href="login.html" class="navbar-link logout-link">ログアウト</a></li>
-           </ul>
-        </div><!--/.nav-collapse -->
-        </div>
-      </div>
-    </div>
-      </header>
-
   <br><br><br>
-    <!-- /header -->
-
     <!-- body -->
-
-
     <div class="container">
         <h1 align="center">ユーザ新規登録</h1>
       <div class="panel panel-default">
