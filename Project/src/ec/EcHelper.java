@@ -1,18 +1,24 @@
 package ec;
 
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 import javax.servlet.http.HttpSession;
+import javax.xml.bind.DatatypeConverter;
 
 public class EcHelper {
 	// 検索結果
 		static final String SEARCH_RESULT_PAGE = "/itemsearchresult.jsp";
 		// 商品ページ
-		static final String ITEM_PAGE = "/item.jsp";
+		static final String ITEM_PAGE = "WEB-INF/jsp/item.jsp";
 		// TOPページ
 		static final String TOP_PAGE = "/WEB-INF/jsp/index.jsp";
 		// エラーページ
 		static final String ERROR_PAGE = "/error.jsp";
 		// 買い物かごページ
-		static final String CART_PAGE = "/cart.jsp";
+		static final String CART_PAGE = "/WEB-INF/jsp/cart.jsp";
 		// 購入
 		static final String BUY_PAGE = "/buy.jsp";
 		// 購入確認
@@ -20,11 +26,11 @@ public class EcHelper {
 		// 購入完了
 		static final String BUY_RESULT_PAGE = "/buyresult.jsp";
 		// ユーザー情報
-		static final String USER_DATA_PAGE = "/userdata.jsp";
+		static final String USER_DETAIL_PAGE = "WEB-INF/jsp/userdetail.jsp";
 		// ユーザー情報更新確認
 		static final String USER_DATA_UPDATE_CONFIRM_PAGE = "/userdataupdateconfirm.jsp";
 		// ユーザー情報更新完了
-		static final String USER_DATA_UPDATA_RESULT_PAGE = "/userdataupdateresult.jsp";
+		static final String USER_UPDATE_PAGE = "WEB-INF/jsp/userupdate.jsp";
 		// ユーザー購入履歴
 		static final String USER_BUY_HISTORY_DETAIL_PAGE = "/userbuyhistorydetail.jsp";
 		// ログイン
@@ -38,6 +44,31 @@ public class EcHelper {
 		// 新規登録完了
 		static final String REGIST_RESULT_PAGE = "/registresult.jsp";
 
+
+		/**暗号メソッド
+		 * @param  source ;
+		 * @return 暗号化された文字列
+		 */
+		public static String toCode(String source) {
+
+
+			//ハッシュ生成前にバイト配列に置き換える際のCharset
+			Charset charset = StandardCharsets.UTF_8;
+			//ハッシュアルゴリズム
+			String algorithm = "MD5";
+
+			//ハッシュ生成処理
+			byte[] bytes;
+			try {
+				bytes = MessageDigest.getInstance(algorithm).digest(source.getBytes(charset));
+				String result = DatatypeConverter.printHexBinary(bytes);
+				return result;
+
+			} catch (NoSuchAlgorithmException e) {
+				e.printStackTrace();
+				return null;
+			}
+		}
 
 
 	/**

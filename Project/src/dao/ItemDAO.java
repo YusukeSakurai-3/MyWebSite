@@ -11,6 +11,11 @@ import beans.ItemDataBeans;
 
 public class ItemDAO {
 
+	// インスタンスオブジェクトを返却させてコードの簡略化
+	public static ItemDAO getInstance() {
+		return new ItemDAO();
+	}
+
 	/**
 	 * ランダムで引数指定分のItemDataBeansを取得
 	 * @param limit 取得したいかず
@@ -41,6 +46,45 @@ public class ItemDAO {
 			}
 			System.out.println("getAllItem completed");
 			return itemList;
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			throw new SQLException(e);
+		} finally {
+			if (con != null) {
+				con.close();
+			}
+		}
+	}
+
+	/**
+	 * 商品IDによる商品検索
+	 * @param itemId
+	 * @return ItemDataBeans
+	 * @throws SQLException
+	 */
+	public static ItemDataBeans getItemByItemID(int itemId) throws SQLException {
+		Connection con = null;
+		PreparedStatement st = null;
+		try {
+			con = DBManager.getConnection();
+
+			st = con.prepareStatement("SELECT * FROM m_item WHERE id = ?");
+			st.setInt(1, itemId);
+
+			ResultSet rs = st.executeQuery();
+
+			ItemDataBeans item = new ItemDataBeans();
+			if (rs.next()) {
+				item.setId(rs.getInt("id"));
+				item.setName(rs.getString("name"));
+				item.setDetail(rs.getString("detail"));
+				item.setPrice(rs.getInt("price"));
+				item.setFileName(rs.getString("file_name"));
+			}
+
+			System.out.println("searching item by itemID has been completed");
+
+			return item;
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 			throw new SQLException(e);

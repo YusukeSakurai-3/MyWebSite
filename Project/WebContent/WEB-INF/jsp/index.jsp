@@ -7,7 +7,6 @@
   <head>
   <title>商品一覧</title>
   <jsp:include page="/baselayout/head.html" />
-
   <jsp:include page="/baselayout/header.jsp" />
  <%
 	ArrayList<ItemDataBeans> itemList = (ArrayList<ItemDataBeans>) request.getAttribute("itemList");
@@ -29,94 +28,18 @@
 				<div class="col-md-3">
 					<div class="card">
 						<div class="card-image">
-							<a href="Item?item_id=<%=item.getId()%>"><img src="<%="./img/" + item.getFileName()%>"></a>
+							<a href="Item?item_id=<%=item.getId()%>"><img src="<%="img/" + item.getFileName()%>" width="260" height="250"/></a>
 						</div>
 						<div class="card-content">
 							<span class="card-title"><%=item.getName()%></span>
-							<p><%=item.getPrice()%>円
-							</p>
+							<%=item.getPrice()%>円
 						</div>
 					</div>
 				</div>
 				<%
 					}
 				%>
-
-      <!--  <div class="col-md-3">
-        <br>
-        <div class="card">
-            <div class="card-image">
-              <a href="item.html">
-            <img   src="./img/matsutake.jpg"  width="260" height="250" 　/>
-              </a>
-             <div class="card-content">
-              <br>
-              <span class="card-title">美味しいもも</span>
-              <br><br>
-              10000000円
-            </div>
-           </div>
-          </div>
-        </div>
-
-
-
-      <div class="col-md-3">
-        <br>
-        <div class="card">
-            <div class="card-image">
-              <a href="item.html">
-            <img   src="./img/fd401266.jpg"  width="260" height="250" 　/>
-             </a>
-             <div class="card-content">
-              <br>
-              <span class="card-title">ぶどう</span>
-              <br><br>
-              10000000円
-            </div>
-           </div>
-          </div>
-        </div>
-
-
-
-
-          <div class="col-md-3">
-            <br>
-            <div class="card">
-                <div class="card-image">
-                  <a href="item.html">
-                <img   src="./img/fd401097.jpg"  width="260" height="250" 　/>
-                 </a>
-                 <div class="card-content">
-                  <br>
-                  <span class="card-title">美味しいもも</span>
-                  <br><br>
-                  10000000円
-                </div>
-               </div>
-              </div>
-            </div>
-
-            <div class="col-md-3">
-              <br>
-              <div class="card">
-                  <div class="card-image">
-                    <a href="item.html">
-                   <img  src="./img/fd400947.jpg"  width="260" height="250" 　/>
-                    </a>
-                    <div class="card-content">
-                    <br>
-                    <span class="card-title">美味しいもも</span>
-                    <br><br>
-                    10000000円
-                  </div>
-                 </div>
-                </div>
-              </div>
-          </div>
-          -->
-        </div>
+				</div>
 
 <br>
 <br>

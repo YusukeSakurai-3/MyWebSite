@@ -1,7 +1,6 @@
 package ec;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,27 +13,26 @@ import beans.ItemDataBeans;
 import dao.ItemDAO;
 
 /**
- * Servlet implementation class Index
+ * Servlet implementation class Item
  */
-@WebServlet("/Index")
-public class Index extends HttpServlet {
+@WebServlet("/Item")
+public class Item extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		try {
+			//選択された商品のIDを型変換し利用
+			int id = Integer.parseInt(request.getParameter("item_id"));
+			//戻るページ表示用
+			int pageNum = Integer.parseInt(request.getParameter("page_num")==null?"1":request.getParameter("page_num"));
+			//対象のアイテム情報を取得
+			ItemDataBeans item = ItemDAO.getInstance().getItemByItemID(id);
+			//リクエストパラメーターにセット
+			request.setAttribute("item", item);
+			request.setAttribute("pageNum", pageNum);
 
-
-			//商品情報を取得
-			ArrayList<ItemDataBeans>itemList = ItemDAO.getRandItem(4);
-
-			//リクエストスコープにセット
-			request.setAttribute("itemList", itemList);
-
-			request.getRequestDispatcher(EcHelper.TOP_PAGE).forward(request, response);
+			request.getRequestDispatcher(EcHelper.ITEM_PAGE).forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
 			session.setAttribute("errorMessage", e.toString());

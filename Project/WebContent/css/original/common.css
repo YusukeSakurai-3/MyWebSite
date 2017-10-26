@@ -122,12 +122,17 @@ li{
 
 .card-content {
   padding: 20px;
+  height:160px;
 }
 
 .card-title {
   font-size: 20px;
-  margin-bottom: 20px;
-  text-align: center;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow:hidden;
+  margin-bottom: 10px;
+
   color: #333;
 }
 .card-text {

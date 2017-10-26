@@ -42,9 +42,11 @@
         </button>
       </form>
         </li>
+        <li>
 
 
       <button class="btn btn-success " href="#staticModal" data-toggle="modal" style="position: relative;top :8px">詳細</button>
+      </li>
 
       <%} %>
 
@@ -56,7 +58,7 @@
           <li class="dropdown"><a href="UserCreate"  >新規登録</a></li>
           <li class="dropdown"><a href="Login" class="navbar-link login-link">ログイン</a></li>
           <%}else{ %>
-          <li class="dropdown"><a href="userDetail.html"><%=userName %>さん</a></li>
+          <li class="dropdown"><a href="UserDetail"><%=userName %>さん</a></li>
           <li class="dropdown"><a href="Logout" class="navbar-link logout-link">ログアウト</a></li>
            <%} %>
          </ul>
@@ -66,7 +68,7 @@
   </div>
 
 
-
+<%if ("/MyWebSiteEC/WEB-INF/jsp/index.jsp".equals(request.getRequestURI())){%>
       <!-- モーダルダイアログ -->
       <div class="modal" id="staticModal" tabindex="-1" role="dialog" aria-labelledby="staticModalLabel" aria-hidden="true" data-show="true" data-keyboard="false" data-backdrop="static">
         <div class="modal-dialog">
@@ -133,3 +135,4 @@
     </div> <!-- /.modal-content -->
   </div> <!-- /.modal-dialog -->
 </div> <!-- /.modal -->
+<%} %>
