@@ -23,7 +23,7 @@
               <div class="form-group">
                 <label for="user-id" class="control-label col-sm-2">ログインID</label>
                 <div  class="form-control-static col-sm-6">
-                  <%= udb.getLoginId()%>
+
                 </div>
               </div>
               <div class="form-group">

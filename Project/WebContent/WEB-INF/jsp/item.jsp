@@ -24,7 +24,7 @@
 
       <div class="row">
 
-       <form class="col-sm-2 col-sm-offset-8" action="Cart" method="POST" >
+       <form class="col-sm-2 col-sm-offset-8" action="ItemAdd" method="POST" >
 			<input type="hidden" name="item_id" value="<%=item.getId()%>" >
 			  <button class=" btn btn-primary" type="submit" name="action" >
 				買い物かごに追加

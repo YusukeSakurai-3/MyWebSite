@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="beans.ItemDataBeans"%>
+<%@page import=" java.util.ArrayList"%>
+
 <!DOCTYPE html>
 <html lang="ja">
   <head>
@@ -8,6 +11,9 @@
   </head>
   <br><br><br>
   <body>
+  <%
+  ArrayList<ItemDataBeans> cart = (ArrayList<ItemDataBeans>) session.getAttribute("cart");
+  %>
 
 
   <!-- body -->
@@ -67,8 +73,30 @@
 			     <div class="container">
 			       <h4>カートの商品<h4>
 			     	<div class="row">
+	   <%
+		for (ItemDataBeans item : cart) {
 
-			         <div class="col-md-3">
+		%>
+
+			<div class="col-md-3">
+				<div class="card">
+					<div class="card-image">
+							<a href="Item?item_id=<%=item.getId()%>"><img src="<%="img/" + item.getFileName()%>" width="260" height="250"/></a>
+					</div>
+					<div class="card-content">
+						<span class="card-title"><%=item.getName()%></span>
+						<%=item.getPrice()%>円
+					<br>
+						<input type="checkbox"  name="delete_item_id_list" value="" /> 削除
+					</div>
+				</div>
+			</div>
+		<%
+		}
+		%>
+				</div>
+
+			         <!--  <div class="col-md-3">
 			           <br>
 			           <div class="card">
 			               <div class="card-image">
@@ -115,6 +143,7 @@
 			           </div>
 							 </div>
 						 </div>
+						 -->
 
   </body>
 </html>

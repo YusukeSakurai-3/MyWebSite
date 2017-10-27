@@ -10,7 +10,7 @@ import javax.xml.bind.DatatypeConverter;
 
 public class EcHelper {
 	// 検索結果
-		static final String SEARCH_RESULT_PAGE = "/itemsearchresult.jsp";
+		static final String SEARCH_RESULT_PAGE = "WEB-INF/jsp/itemsearchresult.jsp";
 		// 商品ページ
 		static final String ITEM_PAGE = "WEB-INF/jsp/item.jsp";
 		// TOPページ

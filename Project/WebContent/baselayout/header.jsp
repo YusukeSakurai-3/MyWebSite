@@ -1,11 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="ec.EcHelper" %>
+<%@page import="dao.ItemDAO" %>
+<%@page import="java.util.Random" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
-<% boolean isLogin = session.getAttribute("isLogin")!=null?(boolean) session.getAttribute("isLogin"):false; %>
-<% boolean isIndex = session.getAttribute("isIndex")!=null?(boolean) session.getAttribute("isIndex"):false; %>
-<% String userName = session.getAttribute("userName")!=null?(String) session.getAttribute("userName"):"no"; %>
+<% boolean isLogin = session.getAttribute("isLogin")!=null?(boolean) session.getAttribute("isLogin"):false;
+ boolean isIndex = session.getAttribute("isIndex")!=null?(boolean) session.getAttribute("isIndex"):false;
+ String userName = session.getAttribute("userName")!=null?(String) session.getAttribute("userName"):"no";
+ String searchWord = ("/MyWebSiteEC/WEB-INF/jsp/itemsearchresult.jsp".equals(request.getRequestURI()))? (String)session.getAttribute("searchWord"):"";
+ Random rnd = new Random();%>
     <!-- header -->
 
     <div id="navbar-main">
@@ -23,28 +27,28 @@
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">Menu <span class="caret"></span></a>
           <ul class="dropdown-menu">
-              <li><a href="cart.html">買い物かご</a></li>
-            <li><a href="ranking.html">ランキング</a></li>
-            <li> <a href="itemgetList.html">ほしい物リスト</a></li>
-            <li> <a href="history.html">最近見た商品</a></li>
-            <li> <a href="item.html">ランダムページ</a></li>
+              <li><a href="Cart">買い物かご</a></li>
+            <li><a href="Ranking">ランキング</a></li>
+            <li> <a href="ItemgetList">ほしい物リスト</a></li>
+            <li> <a href="Index">最近見た商品</a></li>
+            <li> <a href="Item?item_id=<%= rnd.nextInt(ItemDAO.getMaxItemID())+1 %>">ランダムページ</a></li>
           </ul>
         </li>
 
-     <%if ("/MyWebSiteEC/WEB-INF/jsp/index.jsp".equals(request.getRequestURI())){%>
+     <%if ("/MyWebSiteEC/WEB-INF/jsp/index.jsp".equals(request.getRequestURI())
+    		 ||"/MyWebSiteEC/WEB-INF/jsp/itemsearchresult.jsp".equals(request.getRequestURI())){%>
       <li>
-      <form class="navbar-form navbar-right search" action="itemsearchresult.html" role="search" >
-        <div class="form-group ">
-        <input type="text" class="form-control" placeholder="Search" size="50">
-        </div>
+
+      <form  class="navbar-form navbar-right" action="ItemSearchResult">
+
+        <input type="text" name="search_word" class="form-control" placeholder="Search" value="<%=searchWord%>" size="50">
         <button type="submit" class="btn btn-primary" >
           検索
         </button>
       </form>
-        </li>
-        <li>
+     </li>
 
-
+      <li>
       <button class="btn btn-success " href="#staticModal" data-toggle="modal" style="position: relative;top :8px">詳細</button>
       </li>
 
@@ -68,7 +72,8 @@
   </div>
 
 
-<%if ("/MyWebSiteEC/WEB-INF/jsp/index.jsp".equals(request.getRequestURI())){%>
+<%if ("/MyWebSiteEC/WEB-INF/jsp/index.jsp".equals(request.getRequestURI())
+		||"/MyWebSiteEC/WEB-INF/jsp/itemsearchresult.jsp".equals(request.getRequestURI())){%>
       <!-- モーダルダイアログ -->
       <div class="modal" id="staticModal" tabindex="-1" role="dialog" aria-labelledby="staticModalLabel" aria-hidden="true" data-show="true" data-keyboard="false" data-backdrop="static">
         <div class="modal-dialog">
@@ -86,7 +91,8 @@
                         <div class="panel-title"></div>
                     </div>
                     <div class="panel-body">
-                      <form method="post" action="itemsearchresult.html" class="form-horizontal">
+                      <form  action="ItemSearchResult" class="form-horizontal">
+
                         <div class="form-group">
                           <label for="code" class="control-label col-sm-3">カテゴリ</label>
                           <div class="col-sm-6">
@@ -100,9 +106,9 @@
                           </div>
                         </div>
                         <div class="form-group">
-                          <label for="name" class="control-label col-sm-3">キーワード</label>
+                          <label  class="control-label col-sm-3">キーワード</label>
                           <div class="col-sm-6">
-                            <input type="text" name="word" id="user-name" class="form-control"/>
+                            <input type="text" name="search_word"  class="form-control" value="<%=searchWord%>"/>
                             and<input type="radio" name="select" value="and">
                              or<input type="radio" name="select" value="or">
                           </div>
@@ -112,23 +118,20 @@
                           <label for="continent" class="control-label col-sm-3">価格</label>
                           <div class="row">
                             <div class="col-sm-3">
-                              <input type="text" name="price-start" id="date-start" class="form-control" size="30"/>
+                              <input type="text" name="price_start"  class="form-control" size="30"/>
                             </div>
                             <div class="col-xs-1 text-center">
                               ~
                             </div>
                             <div class="col-sm-3">
-                              <input type="text" name="price-end" id="date-end" class="form-control"/>
+                              <input type="text" name="price_end"  class="form-control"/>
                             </div>
                         </div>
                         </div>
-
-
                   </div>
 
-
       <div class="modal-footer">
-        <a type="button" class="btn btn-primary" href="itemsearchresult.html">検索</a>
+        <button type="submit" class="btn btn-primary" >検索</button>
         <button type="button" class="btn btn-default" data-dismiss="modal">閉じる</button>
        </form>
       </div>

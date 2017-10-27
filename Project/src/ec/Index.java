@@ -35,6 +35,7 @@ public class Index extends HttpServlet {
 			request.setAttribute("itemList", itemList);
 
 			request.getRequestDispatcher(EcHelper.TOP_PAGE).forward(request, response);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			session.setAttribute("errorMessage", e.toString());
