@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import base.DBManager;
+import beans.PointDataBeans;
 
 public class PointDAO {
 	// インスタンスオブジェクトを返却させてコードの簡略化
@@ -65,6 +66,36 @@ public class PointDAO {
 
 			System.out.println("searching point has been completed");
 			return point;
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			throw new SQLException(e);
+		} finally {
+			if (con != null) {
+				con.close();
+			}
+		}
+	}
+
+	/**
+	 * ユーザーを登録した時同時にポイントを0で登録する
+	 *
+	 * @param id
+	 *            対応したデータを保持しているJavaBeans
+	 * @throws SQLException
+	 *             呼び出し元にcatchさせるためにスロー
+	 */
+	public void updateUserPoint(PointDataBeans pdb) throws SQLException {
+		Connection con = null;
+		PreparedStatement st = null;
+		try {
+			con = DBManager.getConnection();
+			st = con.prepareStatement("UPDATE t_point SET point = point + ? WHERE user_id = ?");
+
+			st.setInt(1,pdb.getPoint());
+			st.setInt(2,pdb.getUserId());
+			System.out.println(pdb.getPoint()+":"+pdb.getUserId());
+			st.executeUpdate();
+			System.out.println("update userpoint has been completed");
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 			throw new SQLException(e);

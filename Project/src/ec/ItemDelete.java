@@ -13,28 +13,34 @@ import javax.servlet.http.HttpSession;
 import beans.ItemDataBeans;
 
 /**
- * Servlet implementation class Cart
+ * Servlet implementation class ItemDelete
  */
-@WebServlet("/Cart")
-public class Cart extends HttpServlet {
+@WebServlet("/ItemDelete")
+public class ItemDelete extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
+
 		try {
+			String[] deleteItemIdList = request.getParameterValues("delete_item_id_list");
 			ArrayList<ItemDataBeans> cart = (ArrayList<ItemDataBeans>) session.getAttribute("cart");
-			//セッションにカートがない場合カートを作成
-			if (cart == null) {
-				cart = new ArrayList<ItemDataBeans>();
-				session.setAttribute("cart", cart);
-			}
 
 			String cartActionMessage = "";
-			//カートに商品が入っていないなら
-			if(cart.size() == 0) {
-				cartActionMessage = "カートに商品がありません";
+			if (deleteItemIdList != null) {
+				//削除対象の商品を削除
+				for (String deleteItemId : deleteItemIdList) {
+					System.out.println(deleteItemId);
+					for (ItemDataBeans cartInItem : cart) {
+						if (cartInItem.getId() == Integer.parseInt(deleteItemId)) {
+							cart.remove(cartInItem);
+							break;
+						}
+					}
+				}
+				cartActionMessage = "削除しました";
+			} else {
+				cartActionMessage = "削除する商品が選択されていません";
 			}
-
 			request.setAttribute("cartActionMessage", cartActionMessage);
 			request.getRequestDispatcher(EcHelper.CART_PAGE).forward(request, response);
 
@@ -44,7 +50,4 @@ public class Cart extends HttpServlet {
 			response.sendRedirect("Error");
 		}
 	}
-
-
-
 }

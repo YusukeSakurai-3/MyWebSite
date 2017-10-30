@@ -4,9 +4,12 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpSession;
 import javax.xml.bind.DatatypeConverter;
+
+import beans.ItemDataBeans;
 
 public class EcHelper {
 	// 検索結果
@@ -20,11 +23,13 @@ public class EcHelper {
 		// 買い物かごページ
 		static final String CART_PAGE = "/WEB-INF/jsp/cart.jsp";
 		// 購入
-		static final String BUY_PAGE = "/buy.jsp";
+		static final String BUY_PAGE = "/WEB-INF/jsp/buy.jsp";
 		// 購入確認
-		static final String BUY_CONFIRM_PAGE = "/buyconfirm.jsp";
+		static final String BUY_CONFIRM_PAGE = "WEB-INF/jsp/buyconfirm.jsp";
 		// 購入完了
-		static final String BUY_RESULT_PAGE = "/buyresult.jsp";
+		static final String BUY_RESULT_PAGE = "WEB-INF/jsp/buyresult.jsp";
+		//ほしい物リストページ
+		static final String  ITEM_GET_LIST_PAGE= "WEB-INF/jsp/itemgetlist.jsp";
 		// ユーザー情報
 		static final String USER_DETAIL_PAGE = "WEB-INF/jsp/userdetail.jsp";
 		// ユーザー情報更新確認
@@ -69,6 +74,41 @@ public class EcHelper {
 				return null;
 			}
 		}
+
+
+
+		/**
+		 * 文字列の引数を符号付き 10 進数の整数型として構文解析します。
+		 * 文字列が構文解析可能な int 値を含まない場合は、指定されたデフォルトの int 値を返します。
+		 * @param value 構文解析対象の int 表現を含む String
+		 * @param defaultValue デフォルト値
+		 * @return 10 進数の引数で表される整数値
+		 */
+		public static int parseInt(String value, int defaultValue) {
+
+		    try {
+		        // intに変換して返す
+		        return Integer.parseInt(value);
+		    } catch ( NumberFormatException e ) {
+		        // デフォルト値を返す
+		        return defaultValue;
+		  }
+		}
+
+	/**
+    * 商品の合計金額を算出する
+	*
+    * @param items
+    * @return total
+     */
+	public static int getTotalItemPrice(ArrayList<ItemDataBeans> items) {
+		int total = 0;
+		for (ItemDataBeans item : items) {
+			total += item.getPrice();
+		}
+		return total;
+	}
+
 
 
 	/**

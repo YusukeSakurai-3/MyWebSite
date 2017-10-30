@@ -29,7 +29,7 @@
           <ul class="dropdown-menu">
               <li><a href="Cart">買い物かご</a></li>
             <li><a href="Ranking">ランキング</a></li>
-            <li> <a href="ItemgetList">ほしい物リスト</a></li>
+            <li> <a href="ItemGetList">ほしい物リスト</a></li>
             <li> <a href="Index">最近見た商品</a></li>
             <li> <a href="Item?item_id=<%= rnd.nextInt(ItemDAO.getMaxItemID())+1 %>">ランダムページ</a></li>
           </ul>
@@ -118,13 +118,13 @@
                           <label for="continent" class="control-label col-sm-3">価格</label>
                           <div class="row">
                             <div class="col-sm-3">
-                              <input type="text" name="price_start"  class="form-control" size="30"/>
+                              <input type="text" name="morePrice"  class="form-control" size="30"/>
                             </div>
                             <div class="col-xs-1 text-center">
                               ~
                             </div>
                             <div class="col-sm-3">
-                              <input type="text" name="price_end"  class="form-control"/>
+                              <input type="text" name="lessPrice"  class="form-control"/>
                             </div>
                         </div>
                         </div>

@@ -17,6 +17,9 @@
 	int pageNum = (int) request.getAttribute("pageNum");
 	int itemCount = (int) request.getAttribute("itemCount");
 	String select = (String)request.getAttribute("select");
+	int morePrice = request.getAttribute("morePrice")!=null?(int)request.getAttribute("morePrice"):-1;
+	int lessPrice = request.getAttribute("lessPrice")!=null?(int)request.getAttribute("lessPrice"):-1;
+
 %>
 
     <!-- body -->
@@ -74,13 +77,15 @@
 			<ul class="pagination">
 				<!-- １ページ戻るボタン  -->
 				<%
-				    String check = select.equals("and")?"&select=and&":"&select=or&";
+				    String check = select.equals("and")?"&select=and&":"";
+				    String mPrice = morePrice!=-1?"&morePrice="+morePrice+"&":"";
+				    String ePrice = lessPrice!=-1?"&lessPrice="+lessPrice+"&":"";
 				    boolean flagMin = true;
 				    boolean flagMax = true;
 					if (pageNum == 1) {
 				%><li><a><font color="black">≪ 前へ</font></a></li>
 				<% }else{%>
-				<li><a href="<%="ItemSearchResult?search_word=" + searchWord+check + "&page_num=" + (pageNum - 1)%>">≪ 前へ</a></li>
+				<li><a href="<%="ItemSearchResult?search_word=" + searchWord+check+mPrice+ePrice + "&page_num=" + (pageNum - 1)%>">≪ 前へ</a></li>
 				<%
 					}
 				%>
@@ -98,13 +103,13 @@
 				if( pageNum > 3 && flagMin == true){
 					flagMin = false;
 				 %>
-				<li><a href="<%="ItemSearchResult?search_word=" + searchWord+ check + "&page_num=" + 1%>"><%=1 %></a></li>
+				<li><a href="<%="ItemSearchResult?search_word=" + searchWord+ check +mPrice+ePrice + "&page_num=" + 1%>"><%=1 %></a></li>
 				<%if(!(pageNum == 4)){ %>
 				<li><a>⋯</a></li>
 				<%}
 				}
 				%>
-				<li <%if (pageNum == j) {%> class="active" <%}%>><a href="<%="ItemSearchResult?search_word=" + searchWord+ check + "&page_num=" + j%>"><%=j%></a></li>
+				<li <%if (pageNum == j) {%> class="active" <%}%>><a href="<%="ItemSearchResult?search_word=" + searchWord+ check +mPrice +ePrice+ "&page_num=" + j%>"><%=j%></a></li>
 				<!-- MAXを越さないように -->
 				<%
 					if (pageMax <= j) {
@@ -120,14 +125,14 @@
 				if(!(pageNum==pageMax-3)){%>
 				<li><a>⋯</a></li>
 				<%} %>
-				<li><a href="<%="ItemSearchResult?search_word=" + searchWord + check  + "&page_num=" + pageMax%>"><%=pageMax %></a></li>
+				<li><a href="<%="ItemSearchResult?search_word=" + searchWord + check +mPrice +ePrice + "&page_num=" + pageMax%>"><%=pageMax %></a></li>
 				<%} %>
 				<!-- 1ページ送るボタン -->
 				<%
 					if (pageNum == pageMax || pageMax == 0) {
 				%><li><a><font color="black">次へ ≫</a></li>
 				<%}else{ %>
-				<li><a href="<%="ItemSearchResult?search_word=" + searchWord + check + "&page_num=" + (pageNum + 1)%>">次へ ≫</a></li>
+				<li><a href="<%="ItemSearchResult?search_word=" + searchWord + check +mPrice+ePrice + "&page_num=" + (pageNum + 1)%>">次へ ≫</a></li>
 				<%
 					}
 				%>

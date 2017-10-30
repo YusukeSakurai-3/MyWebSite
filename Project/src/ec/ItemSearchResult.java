@@ -28,6 +28,10 @@ public class ItemSearchResult extends HttpServlet {
 
 	    String searchWord = request.getParameter("search_word");
 	    String select = request.getParameter("select")!=null?(String)request.getParameter("select"):"or";
+	    int morePrice = request.getParameter("morePrice")!=null? EcHelper.parseInt(request.getParameter("morePrice"),-1):-1;
+	    int lessPrice = request.getParameter("lessPrice")!=null? EcHelper.parseInt(request.getParameter("lessPrice"),-1):-1;
+	    System.out.println("morePrice:"+morePrice);
+
 
 		//表示ページ番号 未指定の場合 1ページ目を表示
 		int pageNum = Integer.parseInt(request.getParameter("page_num") == null ? "1" : request.getParameter("page_num"));
@@ -37,15 +41,11 @@ public class ItemSearchResult extends HttpServlet {
 		System.out.println(searchWord);
 
 		// 商品リストを取得 ページ表示分のみ
-		int priceStart = 0; int priceEnd = 0;
-		ArrayList<ItemDataBeans> searchResultItemList = ItemDAO.getInstance().getItemsDetail(searchWord,priceStart,priceEnd,select,pageNum,PAGE_MAX_ITEM_COUNT);
+		ArrayList<ItemDataBeans> searchResultItemList = ItemDAO.getInstance().getItemsDetail(searchWord,morePrice,lessPrice,select,pageNum,PAGE_MAX_ITEM_COUNT);
 
 		// 検索ワードに対しての総ページ数を取得
 		String[] searchWords = searchWord.split("　", 0);
-		//double itemCount = 0.0;
-		//for (String word:searchWords) {
-		double itemCount = ItemDAO.getItemCount(searchWord,select);
-		//}
+		double itemCount = ItemDAO.getItemCount(searchWord,select,morePrice,lessPrice);
 		System.out.println(select);
 
 		int pageMax = (int) Math.ceil(itemCount / PAGE_MAX_ITEM_COUNT);
@@ -54,6 +54,9 @@ public class ItemSearchResult extends HttpServlet {
 
 		//and もしくは or
 		request.setAttribute("select", select);
+		//price
+		request.setAttribute("morePrice",morePrice);
+		request.setAttribute("lessPrice",lessPrice);
 		//総アイテム数
 		request.setAttribute("itemCount", (int) itemCount);
 		 //総ページ数

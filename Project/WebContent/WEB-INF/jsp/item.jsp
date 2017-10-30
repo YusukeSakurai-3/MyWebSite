@@ -32,7 +32,7 @@
 	 </form>
 
 
-     <form class="col-sm-2" action="itemgetList.html" method="POST" >
+     <form class="col-sm-2" action="ItemListAdd" method="POST" >
 		<input type="hidden" name="itemget_id" value="<%=item.getId()%>" >
 			<button class="btn btn-success" type="submit" name="action" >
 				ほしい物リストに追加

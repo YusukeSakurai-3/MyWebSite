@@ -14,6 +14,13 @@ import beans.ItemDataBeans;
 import dao.ItemDAO;
 
 /**
+ *
+ *
+ *
+ *
+ *
+ *
+ *
  * Servlet implementation class Index
  */
 @WebServlet("/Index")

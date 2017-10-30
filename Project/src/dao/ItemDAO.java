@@ -159,7 +159,7 @@ public class ItemDAO {
 	 * @return
 	 * @throws SQLException
 	 */
-	public ArrayList<ItemDataBeans> getItemsDetail(String searchWord,int priceStart,int priceEnd, String select, int pageNum, int pageMaxItemCount) throws SQLException {
+	public ArrayList<ItemDataBeans> getItemsDetail(String searchWord,int morePrice,int lessPrice, String select, int pageNum, int pageMaxItemCount) throws SQLException {
 		Connection con = null;
 		PreparedStatement st = null;
 		try {
@@ -167,7 +167,7 @@ public class ItemDAO {
 			con = DBManager.getConnection();
 			ResultSet rs;
 
-			if (searchWord.length() == 0) {
+			if (searchWord.length() == 0&&morePrice==-1&&lessPrice==-1) {
 				// 全検索
 				st = con.prepareStatement("SELECT * FROM m_item ORDER BY id ASC LIMIT ?,? ");
 				st.setInt(1, startiItemNum);
@@ -187,6 +187,13 @@ public class ItemDAO {
 				  }else {
 					  sql = sql +" "+select+" name like " + word;
 					  }
+				}
+
+				if(morePrice!=-1) {
+				    sql = sql +" and "+"price >="+morePrice+" ";
+				    		}
+				if(lessPrice!=-1) {
+				    sql = sql+" and "+"price <="+lessPrice+" ";
 				}
 
 				//st.setString(1,searchWord);
@@ -228,7 +235,7 @@ public class ItemDAO {
 	 * @return
 	 * @throws SQLException
 	 */
-	public static double getItemCount(String searchWord,String select) throws SQLException {
+	public static double getItemCount(String searchWord,String select,int morePrice,int lessPrice) throws SQLException {
 		Connection con = null;
 		PreparedStatement st = null;
 		boolean flag = true;
@@ -246,6 +253,12 @@ public class ItemDAO {
 			  }else {
 				  sql = sql +" "+select+" name like " + word;
 				  }
+			}
+			if(morePrice!=-1) {
+			    sql = sql +" and "+"price >="+morePrice+" ";
+			    		}
+			if(lessPrice!=-1) {
+			    sql = sql+" and "+"price <="+lessPrice+" ";
 			}
 			//System.out.println(sql);
 
