@@ -72,9 +72,6 @@ public class BuyConfirm extends HttpServlet {
 					pdb.setUserId(userId);
 					pdb.setPoint(-point);
 				}
-
-
-
 				//購入確定で利用
 				System.out.println(point);
 

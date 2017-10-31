@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="beans.ItemDataBeans"%>
+<%@page import="beans.ReviewDataBeans"%>
+<%@page import="java.util.ArrayList"%>
+
 <!DOCTYPE html>
 <html lang="ja">
   <head>
@@ -9,6 +12,7 @@
    </head>
 <%
 	ItemDataBeans item = (ItemDataBeans) request.getAttribute("item");
+    ArrayList<ReviewDataBeans> reviewList = (ArrayList<ReviewDataBeans>)request.getAttribute("reviewList");
 	//String searchWord = (String) session.getAttribute("searchWord");
 	int pageNum = (int) request.getAttribute("pageNum");
 %>
@@ -135,6 +139,7 @@
              </div>
            </div>
 
+<%for(ReviewDataBeans review:reviewList) {%>
    <div class="container">
         <h4>ユーザーさんのレビュー<h4>
 
@@ -142,56 +147,22 @@
      <div class="panel ">
        <div class="panel-body">
      <div class="col-md-6">
-     <img id="profile-img" class="profile-img-card" src="./img/fd400947.jpg"  width="400" height="400" />
+     <img  src="./img/fd400947.jpg"  width="400" height="400" />
      </div>
        <div class="col-md-6">
-         <h2>美味しいです</h2>
+         <h2><%=review.getTitle() %></h2>
          <div class="star-rating">
              <div class="star-rating-front" style="width: 80%">★★★★★</div>
              <div class="star-rating-back">★★★★★</div>
         </div>
         <br>
-         美味しいです美味しいです美味しいです美味しいです美味しいです美味しいです
-         美味しいです美味しいです美味しいです美味しいです美味しいです美味しいです
-         美味しいです美味しいです美味しいです美味しいです美味しいです美味しいです
-         美味しいです美味しいです美味しいです美味しいです美味しいです美味しいです
-         美味しいです美味しいです美味しいです美味しいです美味しいです美味しいです
-         美味しいです美味しいです美味しいです美味しいです美味しいです美味しいです
-         美味しいです美味しいです美味しいです美味しいです美味しいです美味しいです
-         美味しいです美味しいです美味しいです美味しいです美味しいです美味しいです
-         美味しいです美味しいです美味しいです美味しいです美味しいです美味しいです
+        <%= review.getReviewText()%>
 
         </div>
      </div>
-  </div><br>
-
-     <div class="container">
-          <h4>ユーザー2さんのレビュー<h4>
-
-
-       <div class="panel ">
-         <div class="panel-body">
-       <div class="col-md-6">
-       <img id="profile-img" class="profile-img-card" src="./img/fd400947.jpg"  width="400" height="400" />
-       </div>
-         <div class="col-md-6">
-           <h2>美味しいか？</h2>
-           <div class="star-rating">
-               <div class="star-rating-front" style="width: 40%">★★★★★</div>
-               <div class="star-rating-back">★★★★★</div>
-          </div>
-          <br>
-          美味しいか？美味しいか？美味しいか？美味しいか？美味しいか？美味しいか？美味しいか？
-          美味しいか？美味しいか？美味しいか？美味しいか？美味しいか？美味しいか？美味しいか？
-          美味しいか？美味しいか？美味しいか？美味しいか？美味しいか？美味しいか？美味しいか？
-          美味しいか？美味しいか？美味しいか？美味しいか？美味しいか？美味しいか？美味しいか？
-          美味しいか？美味しいか？美味しいか？美味しいか？美味しいか？美味しいか？美味しいか？
-          美味しいか？美味しいか？美味しいか？美味しいか？美味しいか？美味しいか？美味しいか？
-
-
-          </div>
-       </div>
-    </div><br>
+  </div>
+  <%} %><br>
+<br>
 
 
 

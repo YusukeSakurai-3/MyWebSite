@@ -43,9 +43,9 @@
         </div>
 
         <div class="col-sm-6">
-          <form align="right" action="userDetail.html" method="POST">
+          <form align="right" action="UserDetail">
             <input type="hidden" name="item_id" value="">
-            <button class="btn btn-success" type="submit" name="action"　>
+            <button class="btn btn-success" type="submit" name="action">
             <div style="width:120px;">ユーザー情報へ</div>
           </button>
         </form>
@@ -107,7 +107,11 @@
                 	 %>
                    <tr class="something">
                      <td class="col-md-6"><%=buyIDB.getName() %></td>
-                     <td>  <a href="itemreview.html" class="btn  btn-primary col-sm-5 " type="submit" name="action">レビューする</a>
+                     <td>
+                    <form action="ItemReview" >
+                      <input type="hidden" name="item_id" value="<%=buyIDB.getId() %>">
+                      <button class="btn btn-primary col-sm-4" type="submit">レビューする</button>
+                    </form>
                     </td>
                        <td class="col-md-2"><%=buyIDB.getPrice() %>円</td>
 

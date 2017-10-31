@@ -7,6 +7,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 import javax.xml.bind.DatatypeConverter;
 
 import beans.ItemDataBeans;
@@ -37,17 +38,27 @@ public class EcHelper {
 		// ユーザー情報更新完了
 		static final String USER_UPDATE_PAGE = "WEB-INF/jsp/userupdate.jsp";
 		// ユーザー購入履歴
-		static final String USER_BUY_HISTORY_DETAIL_PAGE = "/userbuyhistorydetail.jsp";
+		static final String USER_BUY_HISTORY_DETAIL_PAGE = "WEB-INF/jsp/userbuyhistorydetail.jsp";
 		// ログイン
 		static final String LOGIN_PAGE = "/WEB-INF/jsp/login.jsp";
-		// ログアウト
-		static final String LOGOUT_PAGE = "/logout.jsp";
+		//商品レビュー詳細ページ
+		static final String USER_LIST_PAGE ="WEB-INF/jsp/userlist.jsp";
+		//商品マスタ一覧ページ
+		static final String ITEM_MANAGEMENT_PAGE ="WEB-INF/jsp/itemmanagement.jsp";
 		// 新規登録
 		static final String USER_CREATE_PAGE = "WEB-INF/jsp/usercreate.jsp";
 		// 新規登録入力内容確認
 		static final String REGIST_CONFIRM_PAGE = "/registconfirm.jsp";
 		// 新規登録完了
 		static final String REGIST_RESULT_PAGE = "/registresult.jsp";
+		//ランキングページ
+		static final String RANKING_PAGE ="WEB-INF/jsp/ranking.jsp";
+		//商品レビューページ
+		static final String ITEM_REVIEW_PAGE ="WEB-INF/jsp/itemreview.jsp";
+		//商品レビュー一覧ページ
+		static final String ITEM_REVIEW_LIST_PAGE ="WEB-INF/jsp/itemreviewlist.jsp";
+		//商品レビュー詳細ページ
+		static final String ITEM_REVIEW_DETAIL_PAGE ="WEB-INF/jsp/itemreviewdetail.jsp";
 
 
 		/**暗号メソッド
@@ -124,5 +135,17 @@ public class EcHelper {
 
 		return test;
 	}
+
+	public static String getFileName(Part part) {
+        String name = null;
+        for (String dispotion : part.getHeader("Content-Disposition").split(";")) {
+            if (dispotion.trim().startsWith("filename")) {
+                name = dispotion.substring(dispotion.indexOf("=") + 1).replace("\"", "").trim();
+                name = name.substring(name.lastIndexOf("\\") + 1);
+                break;
+            }
+        }
+        return name;
+    }
 
 }

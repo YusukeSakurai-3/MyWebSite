@@ -1,7 +1,6 @@
 package ec;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,34 +13,30 @@ import beans.ItemDataBeans;
 import dao.ItemDAO;
 
 /**
- *
- *
- * Servlet implementation class Index
+ * Servlet implementation class ItemReview
  */
-@WebServlet("/Index")
-public class Index extends HttpServlet {
+@WebServlet("/ItemReview")
+public class ItemReview extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		try {
 
+			//選択された商品のIDを型変換し利用
+			int id = Integer.parseInt(request.getParameter("item_id"));
 
-			//商品情報を取得
-			ArrayList<ItemDataBeans>itemList = ItemDAO.getRandItem(4);
+			//対象のアイテム情報を取得
+			ItemDataBeans item = ItemDAO.getInstance().getItemByItemID(id);
 
-			//リクエストスコープにセット
-			request.setAttribute("itemList", itemList);
+			//リクエストパラメーターにセット
+			request.setAttribute("item", item);
 
-			request.getRequestDispatcher(EcHelper.TOP_PAGE).forward(request, response);
-
+			request.getRequestDispatcher(EcHelper.ITEM_REVIEW_PAGE).forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
 			session.setAttribute("errorMessage", e.toString());
 			response.sendRedirect("Error");
 		}
 	}
+
 }

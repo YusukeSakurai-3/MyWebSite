@@ -130,5 +130,42 @@ public class BuyDetailDAO {
 		}
 	}
 
+	/**
+	 *
+	 * 購入数の多い商品IDを検索
+	 * @return itemId
+	 * @throws SQLException
+	 */
+	public ArrayList<Integer> getCountGroupByItemId() throws SQLException {
+		Connection con = null;
+		PreparedStatement st = null;
+		try {
+			con = DBManager.getConnection();
+
+			st = con.prepareStatement("SELECT item_id,count(*)as sum FROM t_buy_detail GROUP BY item_id ORDER BY sum DESC");
+
+			ResultSet rs = st.executeQuery();
+
+			ArrayList<Integer> itemIdList = new ArrayList<Integer>();
+
+
+			while (rs.next()&&itemIdList.size()<8) {
+				int i = 0;
+				i = rs.getInt("item_id");
+				itemIdList.add(i);
+			}
+
+			System.out.println("searching item_id  has been completed");
+			return itemIdList;
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			throw new SQLException(e);
+		} finally {
+			if (con != null) {
+				con.close();
+			}
+		}
+	}
+
 
 }

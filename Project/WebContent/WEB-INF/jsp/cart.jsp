@@ -39,24 +39,6 @@
 							-->
 					</button>
 				</div>
-				<!-- モーダルダイアログ -->
-				<div class="modal" id="staticModal" tabindex="-1" role="dialog" aria-labelledby="staticModalLabel" aria-hidden="true" data-show="true" data-keyboard="false" data-backdrop="static">
-					<div class="modal-dialog">
-						<div class="modal-content">
-							<div class="modal-header">
-
-								<h4 class="modal-title">削除</h4>
-							</div><!-- /modal-header -->
-							<div class="modal-body">
-								<p class="recipient">削除しました</p>
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-default" data-dismiss="modal">閉じる</button>
-							</div>
-						</div> <!-- /.modal-content -->
-					</div> <!-- /.modal-dialog -->
-				</div>
-
 
 
 

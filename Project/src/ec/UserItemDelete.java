@@ -33,6 +33,7 @@ public class UserItemDelete extends HttpServlet {
 
 
 			String listActionMessage = "削除しました";
+			//ほしい物リストの取得
 			ArrayList<ItemDataBeans> userItemList = ItemGetListDAO.getInstance().getUserItemList(userId);
 			request.setAttribute("listActionMessage",listActionMessage);
 			request.setAttribute("userItemList", userItemList);

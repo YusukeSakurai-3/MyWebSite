@@ -10,38 +10,32 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import beans.ItemDataBeans;
-import dao.ItemDAO;
+import beans.ReviewDataBeans;
+import dao.ReviewDAO;
 
 /**
- *
- *
- * Servlet implementation class Index
+ * Servlet implementation class ItemReviewList
  */
-@WebServlet("/Index")
-public class Index extends HttpServlet {
+@WebServlet("/ItemReviewList")
+public class ItemReviewList extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		try {
+			int userId = (int)session.getAttribute("userId");
+			ArrayList<ReviewDataBeans> rdb = new ArrayList<ReviewDataBeans>();
+			rdb  = ReviewDAO.getInstance().getReviewListByUserId(userId);
 
+			//リクエストパラメーターにセット
+			request.setAttribute("rdb", rdb);
 
-			//商品情報を取得
-			ArrayList<ItemDataBeans>itemList = ItemDAO.getRandItem(4);
-
-			//リクエストスコープにセット
-			request.setAttribute("itemList", itemList);
-
-			request.getRequestDispatcher(EcHelper.TOP_PAGE).forward(request, response);
-
+			request.getRequestDispatcher(EcHelper.ITEM_REVIEW_LIST_PAGE).forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
 			session.setAttribute("errorMessage", e.toString());
 			response.sendRedirect("Error");
 		}
 	}
+
 }

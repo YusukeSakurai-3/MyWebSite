@@ -281,6 +281,7 @@ public class ItemDAO {
 		}
 	}
 
+
 	/**
 	 * 商品IDの最大値を返す
 	 *

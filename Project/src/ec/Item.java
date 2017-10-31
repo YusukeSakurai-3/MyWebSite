@@ -1,6 +1,7 @@
 package ec;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,7 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import beans.ItemDataBeans;
+import beans.ReviewDataBeans;
 import dao.ItemDAO;
+import dao.ReviewDAO;
 
 /**
  * Servlet implementation class Item
@@ -29,8 +32,11 @@ public class Item extends HttpServlet {
 			int pageNum = Integer.parseInt(request.getParameter("page_num")==null?"1":request.getParameter("page_num"));
 			//対象のアイテム情報を取得
 			ItemDataBeans item = ItemDAO.getInstance().getItemByItemID(id);
+			//対象のレビュー情報を取得
+			ArrayList<ReviewDataBeans> rdb = ReviewDAO.getInstance().getReviewListByItemId(id);
 			//リクエストパラメーターにセット
 			request.setAttribute("item", item);
+			request.setAttribute("reviewList", rdb);
 			request.setAttribute("pageNum", pageNum);
 
 			request.getRequestDispatcher(EcHelper.ITEM_PAGE).forward(request, response);
@@ -40,7 +46,5 @@ public class Item extends HttpServlet {
 			response.sendRedirect("Error");
 		}
 	}
-
-
 
 }

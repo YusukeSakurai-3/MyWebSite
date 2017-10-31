@@ -29,7 +29,6 @@ public class ItemDelete extends HttpServlet {
 			if (deleteItemIdList != null) {
 				//削除対象の商品を削除
 				for (String deleteItemId : deleteItemIdList) {
-					System.out.println(deleteItemId);
 					for (ItemDataBeans cartInItem : cart) {
 						if (cartInItem.getId() == Integer.parseInt(deleteItemId)) {
 							cart.remove(cartInItem);

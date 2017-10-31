@@ -24,17 +24,25 @@ public class ItemGetList extends HttpServlet {
 	HttpSession session = request.getSession();
 
 	try {
-		int userId = (int) session.getAttribute("userId");
+		boolean isLogin = session.getAttribute("isLogin")!=null?(boolean) session.getAttribute("isLogin"):false;
+		if(!isLogin) {
+			//ログインしていなければログインページに移動
 
-		//userIdのほしい物リストを取得
-		ArrayList<ItemDataBeans>userItemList = ItemGetListDAO.getInstance().getUserItemList(userId);
+			response.sendRedirect("Login");
+		}else {
+
+			int userId = (int) session.getAttribute("userId");
+
+			//userIdのほしい物リストを取得
+			ArrayList<ItemDataBeans>userItemList = ItemGetListDAO.getInstance().getUserItemList(userId);
 
 
-		request.setAttribute("userItemList", userItemList);
+			request.setAttribute("userItemList", userItemList);
 
 
-		request.setAttribute("UserListActionMessage", "商品をほしい物リストに追加しました");
-		request.getRequestDispatcher(EcHelper.ITEM_GET_LIST_PAGE).forward(request, response);
+			request.setAttribute("UserListActionMessage", "商品をほしい物リストに追加しました");
+			request.getRequestDispatcher(EcHelper.ITEM_GET_LIST_PAGE).forward(request, response);
+		}
 	} catch (Exception e) {
 		e.printStackTrace();
 		session.setAttribute("errorMessage", e.toString());

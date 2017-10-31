@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="beans.UserDataBeans" %>
+<%@ page import="beans.BuyDataBeans" %>
+<%@page import=" java.util.ArrayList"%>
+
 <!DOCTYPE html>
 <html lang="ja">
   <head>
@@ -11,6 +14,7 @@
   <jsp:include page="/baselayout/header.jsp" />
   <%
   UserDataBeans udb = (UserDataBeans)request.getAttribute("updateuser");
+  ArrayList<BuyDataBeans> bdbs = (ArrayList<BuyDataBeans>)request.getAttribute("bdb");
   %>
   </head>
   <body>
@@ -59,11 +63,11 @@
 
               <label  class="control-label col-sm-2">ほしい物リスト</label>
               <p class=" static-padding">
-                <%= udb.getIs_open() ==true ? "公開":"非公開"  %>
+                <%= udb.getIs_open() == true ? "公開":"非公開"  %>
               </p>
               <div class="row">
             <div class="col-sm-2 col-sm-offset-8">
-              <a class="btn btn-primary" href="itemreviewList.html">投稿したレビューを見る</a>
+              <a class="btn btn-primary" href="ItemReviewList">投稿したレビューを見る</a>
             </div>
           <div class="col-sm-2">
             <a class="btn btn-primary" href="UserUpdate">更新</a>
@@ -90,34 +94,22 @@
                    </tr>
                  </thead>
                  <tbody>
+                 <%for(BuyDataBeans bdb: bdbs) {%>
                    <tr class="something">
-
-                       <th><a class="btn btn-info" href="userbuyhistorydetail.html">詳細</a>
-                     <td class="col-md-5 col-md-offset-2">2017年10月20日13時37分</td>
-                       <td class="col-md-2">特急配送</td>
-                       <td class="col-md-2">300000円</td>
+                   <form action="UserBuyHistoryDetail" method="POST" style=" display: inline; ">
+                       <th><button class="btn btn-info" type="submit">詳細</button>
+                      <td class="col-md-5 col-md-offset-2"><%=bdb.getFormatDate() %></td>
+                       <td class="col-md-2"><%=bdb.getDeliveryMethodName() %></td>
+                       <td class="col-md-2"><%= bdb.getTotalPrice()%>円</td>
+                       <input type="hidden"  name="id" value=<%= bdb.getId()%>>
+					   <input type="hidden"  name="formatDate" value=<%= bdb.getFormatDate()%>>
+					   <input type="hidden"  name="deliveryMethodName" value=<%= bdb.getDeliveryMethodName()%>>
+					   <input type="hidden"  name="deliveryMethodPrice" value=<%= bdb.getDeliveryMethodPrice()%>>
+					   <input type="hidden"  name="totalPrice" value=<%= bdb.getTotalPrice()%>>
+					</form>
                     </tr>
-                    <tr class="something">
+                    <%} %>
 
-                        <th><a class="btn btn-info" href="userbuyhistorydetail.html">詳細</a>
-                      <td class="col-md-5 col-md-offset-2">2017年10月20日13時37分</td>
-                        <td class="col-md-2">特急配送</td>
-                        <td class="col-md-2">300000円</td>
-                     </tr>
-                     <tr class="something">
-
-                         <th><a class="btn btn-info" href="userbuyhistorydetail.html">詳細</a>
-                       <td class="col-md-5 col-md-offset-2">2017年10月20日13時37分</td>
-                         <td class="col-md-2">日時指定配送</td>
-                         <td class="col-md-2">33568380円</td>
-                      </tr>
-                      <tr class="something">
-
-                          <th><a class="btn btn-info" href="userbuyhistorydetail.html">詳細</a>
-                        <td class="col-md-5 col-md-offset-2">2017年10月20日13時37分</td>
-                          <td class="col-md-2">通常配送</td>
-                          <td class="col-md-2">302347245円</td>
-                       </tr>
 
                  </tbody>
                </table>
@@ -127,10 +119,12 @@
         <a class="btn btn-primary" href="Index">戻る</a>
       </div>
       <br><br>
+      <%if(udb.getLoginId().equals("admin")) {%>
       <div class="col-xs-4">
         <a href="UserList">ユーザー一覧画面へ</a>
-        <a href="itemmanagement.html">商品マスタ一覧画面へ</a>
+        <a href="ItemManagement">商品マスタ一覧画面へ</a>
       </div>
+      <%} %>
       <br><br><br>
     </div>
 

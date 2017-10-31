@@ -2,6 +2,7 @@ package ec;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,7 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import beans.BuyDataBeans;
 import beans.UserDataBeans;
+import dao.BuyDAO;
 import dao.PointDAO;
 import dao.UserDAO;
 
@@ -32,8 +35,10 @@ public class UserDetail extends HttpServlet {
 		try {
 			UserDataBeans udb = UserDAO.getUserDataBeansByUserId(userId);
 			int point = PointDAO.getInstance().getPointById(userId);
+			ArrayList<BuyDataBeans> bdb = BuyDAO.getInstance().getBuyDataBeansByBuyUserId(userId) ;
 			request.setAttribute("point", point);
 			request.setAttribute("updateuser", udb);
+			request.setAttribute("bdb",bdb);
 			request.getRequestDispatcher(EcHelper.USER_DETAIL_PAGE).forward(request, response);
 
 		} catch (SQLException e) {
