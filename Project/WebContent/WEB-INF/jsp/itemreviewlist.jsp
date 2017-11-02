@@ -36,7 +36,7 @@ ArrayList<ReviewDataBeans> rdb = (ArrayList<ReviewDataBeans>)request.getAttribut
         <div class="card">
             <div class="card-image">
               <a href="ItemReviewDetail?review_id=<%=review.getId()%>">
-            <img   src="./img/fd401266.jpg"  width="260" height="250" />
+            <img   src="<%="img/" + review.getFileName()%>"   width="260" height="250" />
               </a>
              <div class="card-content">
               <br>
@@ -44,7 +44,7 @@ ArrayList<ReviewDataBeans> rdb = (ArrayList<ReviewDataBeans>)request.getAttribut
               <br>
               <%=review.getReviewText() %></span>
               <div class="star-rating2">
-                  <div class="star-rating-front2" style="width: 30%">★★★★★</div>
+                  <div class="star-rating-front2" style="width: <%=review.getEvaluation()*20 %>%">★★★★★</div>
                   <div class="star-rating-back2">★★★★★</div>
               </div>
 

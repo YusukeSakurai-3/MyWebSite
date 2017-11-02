@@ -147,7 +147,7 @@
      <div class="panel ">
        <div class="panel-body">
      <div class="col-md-6">
-     <img  src="./img/fd400947.jpg"  width="400" height="400" />
+     <img  src="<%="img/" + review.getFileName()%>"  width="400" height="400" />
      </div>
        <div class="col-md-6">
          <h2><%=review.getTitle() %></h2>

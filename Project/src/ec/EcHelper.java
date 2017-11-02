@@ -13,7 +13,9 @@ import javax.xml.bind.DatatypeConverter;
 import beans.ItemDataBeans;
 
 public class EcHelper {
-	// 検索結果
+	    // ファイルをアップロードする場所
+	    static final String UPLOAD_PAGE = "/Users/sakurai/git/MyWebSite/Project/WebContent/img";
+	    // 検索結果
 		static final String SEARCH_RESULT_PAGE = "WEB-INF/jsp/itemsearchresult.jsp";
 		// 商品ページ
 		static final String ITEM_PAGE = "WEB-INF/jsp/item.jsp";

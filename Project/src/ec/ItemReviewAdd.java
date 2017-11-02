@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 import beans.ReviewDataBeans;
 import dao.ReviewDAO;
@@ -27,19 +28,20 @@ public class ItemReviewAdd extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 
 		try {
-			/*
-			//写真のアップロード
+
+			//アップロードされた画像ファイルを取得
+			String fileName = "";
 			 Part part = request.getPart("reviewPicture");
-		     String name = EcHelper.getFileName(part);
-		     part.write(getServletContext().getRealPath("/WEB-INF/uploadsample") + "/" + name);
-		     //response.sendRedirect("jsp/upload.jsp");
-		      *
-		      */
+			 fileName = EcHelper.getFileName(part);
+			 if(fileName.equals("")) {
+			     part.write(EcHelper.UPLOAD_PAGE+ "/" + fileName);
+			 }
 
 			int userId = (int) session.getAttribute("userId");
 			//選択された商品のIDを型変換し利用
 			int itemId = Integer.parseInt(request.getParameter("itemReviewId"));
-			int evaluation = 4;
+			int evaluation = EcHelper.parseInt(request.getParameter("evaluation"),4);
+			//evaluation = 4;
 			String reviewTitle = (String)request.getParameter("reviewTitle");
 			String reviewText = (String)request.getParameter("reviewText");
 
@@ -52,13 +54,14 @@ public class ItemReviewAdd extends HttpServlet {
 			rdb.setItemId(itemId);
 			rdb.setTitle(reviewTitle);
 			rdb.setReviewText(reviewText);
-			rdb.setFileName("");
+			rdb.setFileName(fileName);
 			rdb.setEvaluation(evaluation);
 
 
 			//レビューを追加。
 			ReviewDAO.getInstance().insertUserReview(rdb);
-
+		    //更新が反映されるのを待つ
+		    Thread.sleep(10000);
 
 			//userIdのレビューリストを取得
 			ArrayList<ReviewDataBeans> ReviewList = ReviewDAO.getInstance().getReviewListByUserId(userId);

@@ -118,6 +118,7 @@ public class ReviewDAO {
 				review.setItemId(rs.getInt("item_id"));
 				review.setTitle(rs.getString("title"));
 				review.setReviewText(rs.getString("review_text"));
+				review.setEvaluation(rs.getInt("evaluation"));
 				review.setFileName(rs.getString("file_name"));
 			}
 

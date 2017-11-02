@@ -11,6 +11,7 @@
   <body>
 <%
 ReviewDataBeans review = (ReviewDataBeans)request.getAttribute("review");
+System.out.println(review.getEvaluation());
 %>
 
     <br><br><br><br>
@@ -71,14 +72,15 @@ ReviewDataBeans review = (ReviewDataBeans)request.getAttribute("review");
      <div class="panel ">
        <div class="panel-body">
      <div class="col-md-6">
-     <img  src="./img/fd400947.jpg"  width="400" height="400" />
+     <img  src="<%="img/" + review.getFileName()%>"  width="400" height="400" />
      </div>
        <div class="col-md-6">
          <h2><%=review.getTitle() %></h2>
-         <div class="star-rating">
-             <div class="star-rating-front" style="width: 80%">★★★★★</div>
-             <div class="star-rating-back">★★★★★</div>
+         <div class="star-rating2">
+             <div class="star-rating-front2" style="width: <%= review.getEvaluation()*20 %>%">★★★★★</div>
+             <div class="star-rating-back2">★★★★★</div>
         </div>
+        <br><br>
         <%=review.getReviewText() %>
         </div>
      </div>

@@ -57,6 +57,7 @@
 
 
 
+
     <!-- body -->
 
     <div class="container">
@@ -91,9 +92,10 @@
               <label for="review">レビュー
                   <input  type="text" class="form-control" placeholder="reviewTitle" name="reviewTitle"/>
                   <div class="star-rating">
-                      <div class="star-rating-front" style="width: 50%">★★★★★</div>
+                      <div class="star-rating-front" style="width: <%=item.getId() %>%">★★★★★</div>
                       <div class="star-rating-back">★★★★★</div>
                     </div>
+
                   <!--</div>-->
               </label>
               <textarea rows="14" class="form-control" id="review" name="reviewText"></textarea>
