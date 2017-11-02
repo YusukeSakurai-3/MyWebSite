@@ -35,7 +35,6 @@
               <div class="card">
                   <div class="card-image">
                     <a href="Item?item_id=<%=item.getId()%>">
-                <!--  <img   src="./img/matsutake.jpg"  width="260" height="250" 　/>-->
                <%if(i==1){ %>
                   <div class="side-corner-tag">
                         <img src="<%="img/" + item.getFileName()%>" alt="" width="250" height="250"/>
@@ -52,7 +51,7 @@
                           <p><span style="background-color:#ac6b25;">No.3</span></p>
                       </div>
                      <%}else { %>
-                     <img  src="<%="img/"+item.getFileName() %>"  width="260" height="250" />
+                     <img  src="<%="img/"+item.getFileName() %>"  width="260" height="265" />
                     <%} %>
                     </a>
                    <div class="card-content">
