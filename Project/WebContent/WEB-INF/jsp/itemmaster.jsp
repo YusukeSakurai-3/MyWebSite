@@ -11,8 +11,18 @@
 
 <%
 ArrayList<ItemDataBeans> itemList = (ArrayList<ItemDataBeans>) request.getAttribute("itemList");
-String searchWord = (String) session.getAttribute("searchWordMaster");
+String searchWordMaster = (String) session.getAttribute("searchWordMaster");
+int pageMax = (int) request.getAttribute("pageMax");
+int pageNum = (int) request.getAttribute("pageNum");
 HashMap<Integer, Integer> purchaseNum= (HashMap<Integer, Integer>)request.getAttribute("purchaseNum");
+int itemId = request.getAttribute("itemId")!=null?(int)request.getAttribute("itemId"):-1;
+int startPrice = request.getAttribute("startPrice")!=null?(int)request.getAttribute("startPrice"):-1;
+int endPrice = request.getAttribute("endPrice")!=null?(int)request.getAttribute("endPrice"):-1;
+String startDate = request.getAttribute("startDate")!=null?(String)request.getAttribute("startDate"):"nodate";
+String endDate = request.getAttribute("endDate")!=null?(String)request.getAttribute("endDate"):"nodate";
+String createMessage = (String)request.getAttribute("createMessage");
+String deleteMessage = (String)request.getAttribute("deleteMessage");
+String updateMessage = (String)request.getAttribute("updateMessage");
 %>
   <body>
 
@@ -25,8 +35,23 @@ HashMap<Integer, Integer> purchaseNum= (HashMap<Integer, Integer>)request.getAtt
 
       <h1 align="center">商品マスタ一覧</h1>
       <div class="text-right">
-        <a href="itemcreate.html">商品登録</a>
+        <a href="ItemMasterCreate">商品登録</a>
       </div>
+ <%
+ if(createMessage!=null) {
+ %>
+  <div class="alert alert-success"><%=createMessage %></div>
+ <%} %>
+  <%
+ if(deleteMessage!=null) {
+ %>
+  <div class="alert alert-success"><%=deleteMessage %></div>
+ <%} %>
+  <%
+ if(updateMessage!=null) {
+ %>
+  <div class="alert alert-success"><%=updateMessage %></div>
+ <%} %>
 
 
       <div class="panel-body">
@@ -35,31 +60,46 @@ HashMap<Integer, Integer> purchaseNum= (HashMap<Integer, Integer>)request.getAtt
                 <div class="panel-title">検索条件</div>
             </div>
             <div class="panel-body">
-              <form method="post" action="#" class="form-horizontal">
+              <form action="ItemMaster" class="form-horizontal">
                 <div class="form-group">
                   <label for="code" class="control-label col-sm-2">商品ID</label>
                   <div class="col-sm-6">
-                    <input type="text" name="item_id" id="item/id" class="form-control"/>
+                    <input type="text" name="itemId"  class="form-control"/>
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="name" class="control-label col-sm-2">商品名</label>
                   <div class="col-sm-6">
-                    <input type="text" name="item_name" id="item_name" class="form-control"/>
+                    <input type="text" name="search_word"  class="form-control"/>
                   </div>
                 </div>
-
+             <!-- 登録日 -->
                 <div class="form-group">
                   <label for="continent" class="control-label col-sm-2">登録日</label>
                   <div class="row">
                     <div class="col-sm-2">
-                      <input type="date" name="date-start" id="date-start" class="form-control" size="30"/>
+                      <input type="date" name="startDate"  class="form-control" size="30"/>
                     </div>
                     <div class="col-xs-1 text-center">
                       ~
                     </div>
                     <div class="col-sm-2">
-                      <input type="date" name="date-end" id="date-end" class="form-control"/>
+                      <input type="date" name="endDate"  class="form-control"/>
+                    </div>
+                </div>
+                </div>
+                <!-- 価格 -->
+                <div class="form-group">
+                  <label for="continent" class="control-label col-sm-2">価格</label>
+                  <div class="row">
+                    <div class="col-sm-2">
+                      <input type="text" name="startPrice"  class="form-control" size="30"/>
+                    </div>
+                    <div class="col-xs-1 text-center">
+                      ~
+                    </div>
+                    <div class="col-sm-2">
+                      <input type="text" name="endPrice" class="form-control"/>
                     </div>
                 </div>
                 </div>
@@ -96,13 +136,13 @@ HashMap<Integer, Integer> purchaseNum= (HashMap<Integer, Integer>)request.getAtt
                    <%}else{ %>
                    <td><%=item.getName().substring(0,20) %>⋯</td>
                    <%} %>
-                   <td><%=item.getFormatDate(item.getCreateDate()) %></td>
+                   <td><%=item.getFormatCreateDate() %></td>
                    <td><%=item.getPrice()%>円</td>
                    <td><%=purchaseNum.get(item.getId())%></td>
                    <td>
-                     <a class="btn btn-primary" href="ItemMasterDetail?item_id=<%=item.getId()%>">詳細</a>
-                     <a class="btn btn-success" href="itemupdate.html">更新</a>
-                     <a class="btn btn-danger" href ="itemdelete.html">削除</a>
+                     <a class="btn btn-primary" href="ItemMasterDetail?item_id=<%=item.getId()%>&page_num=<%= pageNum%>">詳細</a>
+                     <a class="btn btn-success" href="ItemMasterUpdate?item_id=<%=item.getId()%>&page_num=<%= pageNum%>">更新</a>
+                     <a class="btn btn-danger" href ="ItemMasterDelete?item_id=<%=item.getId()%>&page_num=<%= pageNum%>">削除</a>
                    </td>
                  </tr>
                  <%} %>
@@ -111,19 +151,80 @@ HashMap<Integer, Integer> purchaseNum= (HashMap<Integer, Integer>)request.getAtt
            </div>
          </div>
       </div>
+      <br><br><br>
       <div class="text-center">
-        <ul class="pagination">
-        <li><a href="#">≪ 前へ</a></li>
-        <li><a href="#">1</a></li>
-        <li><a href="#">2</a></li>
-        <li><a href="#">3</a></li>
-        <li><a href="#">4</a></li>
-        <li><a href="#">5</a></li>
-        <li><a href="#">6</a></li>
-        <li><a href="#">次へ ≫</a></li>
-      </ul>
-     </div>
-    </div>
+			<ul class="pagination">
+
+				<%
+				    String id = itemId!=-1?"&itemId="+itemId+"&":"";
+				    String sPrice = startPrice!=-1?"&startPrice="+startPrice+"&":"";
+				    String ePrice = endPrice!=-1?"&endPrice="+endPrice+"&":"";
+				    String sDate = !startDate.equals("nodate")?"&startDate="+startDate+"&":"";
+				    String eDate = !endDate.equals("nodate")?"&endDate="+endDate+"&":"";
+				    boolean flagMin = true;
+				    boolean flagMax = true;
+					if (pageNum == 1) {
+				%>
+				<!-- １ページ戻るボタン  -->
+				<li><a><font color="black">≪ 前へ</font></a></li>
+				<% }else{%>
+				<li><a href="<%="ItemMaster?search_word=" + searchWordMaster+id+ sDate+eDate+ sPrice+ePrice+ "&page_num=" + (pageNum - 1)%>">≪ 前へ</a></li>
+				<%
+					}
+				%>
+				<!-- ページインデックス -->
+				<%
+					for (int j = pageNum - 2; j <= pageNum + 2; j++) {
+				%>
+				<!-- マイナスページが生成されないように -->
+				<%
+					if (j <= 0) {
+							j = 1;
+						}
+				%>
+				<%
+				if( pageNum > 3 && flagMin == true){
+					flagMin = false;
+				 %>
+				<li><a href="<%="ItemMaster?search_word=" + searchWordMaster +id+sDate+eDate+ sPrice+ePrice+ "&page_num=" + 1%>"><%=1 %></a></li>
+				<%if(!(pageNum == 4)){ %>
+				<li><a>⋯</a></li>
+				<%}
+				}
+				%>
+				<li <%if (pageNum == j) {%> class="active" <%}%>><a href="<%="ItemMaster?search_word=" + searchWordMaster+id+sDate+eDate+sPrice+ePrice+ "&page_num=" + j%>"><%=j%></a></li>
+				<!-- MAXを越さないように -->
+				<%
+					if (pageMax <= j) {
+							break;
+						}
+				%>
+				<%
+					}
+				%>
+				<%
+				if( pageNum < pageMax-2 && flagMax == true){
+					flagMax = false;
+				if(!(pageNum==pageMax-3)){%>
+				<li><a>⋯</a></li>
+				<%} %>
+				<li><a href="<%="ItemMaster?search_word=" + searchWordMaster+ id+sDate+eDate+sPrice+ePrice+"&page_num=" + pageMax%>"><%=pageMax %></a></li>
+				<%} %>
+				<!-- 1ページ送るボタン -->
+				<%
+					if (pageNum == pageMax || pageMax == 0) {
+				%><li><a><font color="black">次へ ≫</a></li>
+				<%}else{ %>
+				<li><a href="<%="ItemMaster?search_word=" + searchWordMaster+id+sDate+eDate+sPrice+ePrice+"&page_num=" + (pageNum + 1)%>">次へ ≫</a></li>
+				<%
+					}
+				%>
+			</ul>
+		</div>
+	</div>
+
+
+
 
   </body>
 </html>

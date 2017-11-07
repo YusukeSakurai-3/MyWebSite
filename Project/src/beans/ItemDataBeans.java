@@ -59,10 +59,17 @@ public class ItemDataBeans implements Serializable {
 		this.updateDate = updateDate;
 	}
 
-	public String getFormatDate(Date date) {
+	public String getFormatCreateDate() {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
-		return sdf.format(date);
+		return sdf.format(createDate);
 	}
+
+	public String getFormatUpdateDate() {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
+		return sdf.format(updateDate);
+	}
+
+
 
 }
 

@@ -241,11 +241,9 @@ public class ItemDAO {
 	 */
 	public static double getItemCount(String searchWord,String select,int morePrice,int lessPrice) throws SQLException {
 		Connection con = null;
-		PreparedStatement st = null;
 		boolean flag = true;
 		try {
 			con = DBManager.getConnection();
-			st = con.prepareStatement("select count(*) as cnt from m_item where name like ?");
 
 			String sql ="select count(*) as cnt from m_item where name like ";
 			String[] searchWords = searchWord.split("　", 0);

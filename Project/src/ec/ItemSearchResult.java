@@ -46,11 +46,11 @@ public class ItemSearchResult extends HttpServlet {
 		// 検索ワードに対しての総ページ数を取得
 		String[] searchWords = searchWord.split("　", 0);
 		double itemCount = ItemDAO.getItemCount(searchWord,select,morePrice,lessPrice);
-		System.out.println(select);
+		//System.out.println(select);
 
 		int pageMax = (int) Math.ceil(itemCount / PAGE_MAX_ITEM_COUNT);
-		System.out.println(itemCount);
-		System.out.println(pageMax);
+		//System.out.println(itemCount);
+		//System.out.println(pageMax);
 
 		//and もしくは or
 		request.setAttribute("select", select);

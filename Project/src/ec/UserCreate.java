@@ -78,8 +78,6 @@ public class UserCreate extends HttpServlet {
 			    //新規ユーザーのポイントを0で登録する
 			    int id = UserDAO.getInstance().getUserId(inputLoginId,inputPassword);
 			    PointDAO.getInstance().insertPoint(id);
-
-
 				request.setAttribute("udb", udb);
 				response.sendRedirect("Login");
 			    //request.getRequestDispatcher("Index").forward(request, response);

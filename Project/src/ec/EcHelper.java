@@ -49,7 +49,13 @@ public class EcHelper {
 		static final String ITEM_MASTER_PAGE ="WEB-INF/jsp/itemmaster.jsp";
 		//商品マスタ詳細ページ
 		static final String ITEM_MASTER_DETAIL_PAGE ="WEB-INF/jsp/itemmasterdetail.jsp";
-		// 新規登録
+		//商品マスタ新規登録ページ
+		static final String ITEM_MASTER_CREATE_PAGE ="WEB-INF/jsp/itemmastercreate.jsp";
+		//商品マスタ更新ページ
+		static final String ITEM_MASTER_UPDATE_PAGE ="WEB-INF/jsp/itemmasterupdate.jsp";
+		//商品マスタ削除ページ
+		static final String ITEM_MASTER_DELETE_PAGE ="WEB-INF/jsp/itemmasterdelete.jsp";
+		// ユーザー新規登録
 		static final String USER_CREATE_PAGE = "WEB-INF/jsp/usercreate.jsp";
 		// 新規登録入力内容確認
 		static final String REGIST_CONFIRM_PAGE = "/registconfirm.jsp";
@@ -153,5 +159,21 @@ public class EcHelper {
         }
         return name;
     }
+
+
+	/**
+	 * 文字列がnullかどうかチェックする
+	 *
+	 * @param string
+	 * @return str
+	 */
+
+	public static String nullCheck(String str) {
+			if(str==null) {
+				return "";
+			}else {
+				return str;
+			}
+		}
 
 }

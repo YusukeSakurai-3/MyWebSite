@@ -9,7 +9,8 @@
   <jsp:include page="/baselayout/header.jsp" />
 <%
 ItemDataBeans item = (ItemDataBeans) request.getAttribute("item");
-int count = (int)request.getAttribute("count");
+int purchaseNum = (int)request.getAttribute("purchaseNum");
+
 %>
   </head>
   <body>
@@ -21,7 +22,7 @@ int count = (int)request.getAttribute("count");
 
       <h1 align="center">商品詳細</h1>
       <div class="text-right">
-        <a href="itemmanagement.html">商品マスタ一覧へ</a>
+        <a href="ItemMaster">商品マスタ一覧へ</a>
       </div>
       <br><br>
 
@@ -32,9 +33,10 @@ int count = (int)request.getAttribute("count");
       <img src="<%="img/" + item.getFileName()%>"  width="400" height="400" />
       </div>
         <div class="col-md-6">
-          <h2><%=item.getName()%></h2>
-          <h4><%=item.getPrice() %>円</h4>
-          <br><br><%=item.getDetail() %>
+          <h2>商品名:<%=item.getName()%></h2>
+          <br><br>
+          <h4>価格:<%=item.getPrice() %>円</h4>
+          <br><br>商品詳細:<%=item.getDetail() %>
          </div>
       </div>
 
@@ -54,11 +56,11 @@ int count = (int)request.getAttribute("count");
                <tr>
                  <td><%=item.getId() %></td>
 
-                   <td><%=item.getFormatDate(item.getCreateDate()) %></td>
-                   <td><%=item.getFormatDate(item.getUpdateDate()) %></td>
-                   <td><%=count %></td>
-                 <td> <a class="btn btn-success" href="itemupdate.html">更新</a>
-                      <a class="btn btn-danger" href="itemdelete.html">削除</a>
+                   <td><%=item.getFormatCreateDate() %></td>
+                   <td><%=item.getFormatUpdateDate() %></td>
+                   <td><%=purchaseNum %></td>
+                 <td> <a class="btn btn-success" href="ItemMasterUpdate?item_id=<%=item.getId()%>">更新</a>
+                      <a class="btn btn-danger" href="ItemMasterUpdate?item_id=<%=item.getId()%>">削除</a>
                   </td>
                </tr>
 

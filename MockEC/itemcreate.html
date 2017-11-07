@@ -10,9 +10,10 @@
     <link href="css/original/common.css" rel="stylesheet">
     <!-- Jqeryの読み込み -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
-     <script src="https://code.jquery.com/jquery-3.1.0.slim.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.0.slim.min.js"></script>
     <!-- BootstrapのJS読み込み -->
     <script src="js/bootstrap.min.js"></script>
+    <script src="js/fileupload.js"></script>
     <!-- レイアウトカスタマイズ用個別CSS -->
 
 
@@ -33,22 +34,6 @@
 }
 </style>
   <script>
-  $(document).on('change', ':file', function() {
-      var input = $(this),
-      numFiles = input.get(0).files ? input.get(0).files.length : 1,
-      label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
-      input.parent().parent().next(':text').val(label);
-
-      var files = !!this.files ? this.files : [];
-      if (!files.length || !window.FileReader) return; // no file selected, or no FileReader support
-      if (/^image/.test( files[0].type)){ // only image file
-          var reader = new FileReader(); // instance of the FileReader
-          reader.readAsDataURL(files[0]); // read the local file
-          reader.onloadend = function(){ // set image data as background of div
-              input.parent().parent().parent().prev('.imagePreview').css("background-image", "url("+this.result+")");
-          }
-      }
-  });
   </script>
 
   </head>

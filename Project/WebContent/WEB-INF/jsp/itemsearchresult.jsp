@@ -75,7 +75,7 @@
 
       <div class="text-center">
 			<ul class="pagination">
-				<!-- １ページ戻るボタン  -->
+
 				<%
 				    String check = select.equals("and")?"&select=and&":"";
 				    String mPrice = morePrice!=-1?"&morePrice="+morePrice+"&":"";
@@ -83,7 +83,9 @@
 				    boolean flagMin = true;
 				    boolean flagMax = true;
 					if (pageNum == 1) {
-				%><li><a><font color="black">≪ 前へ</font></a></li>
+				%>
+				<!-- １ページ戻るボタン  -->
+				<li><a><font color="black">≪ 前へ</font></a></li>
 				<% }else{%>
 				<li><a href="<%="ItemSearchResult?search_word=" + searchWord+check+mPrice+ePrice + "&page_num=" + (pageNum - 1)%>">≪ 前へ</a></li>
 				<%
