@@ -30,7 +30,7 @@ public class ItemSearchResult extends HttpServlet {
 	    String select = request.getParameter("select")!=null?(String)request.getParameter("select"):"or";
 	    int morePrice = request.getParameter("morePrice")!=null? EcHelper.parseInt(request.getParameter("morePrice"),-1):-1;
 	    int lessPrice = request.getParameter("lessPrice")!=null? EcHelper.parseInt(request.getParameter("lessPrice"),-1):-1;
-	    System.out.println("morePrice:"+morePrice);
+	    //System.out.println("morePrice:"+morePrice);
 
 
 		//表示ページ番号 未指定の場合 1ページ目を表示

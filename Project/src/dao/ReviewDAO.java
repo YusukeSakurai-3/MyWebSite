@@ -16,7 +16,7 @@ public class ReviewDAO {
 		return new ReviewDAO();
 	}
 	/**
-	 * レビューリスト更新
+	 * レビューリスト挿入
 	 * @param ReviewDataBeans
 	 *
 	 * @throws SQLException
@@ -27,7 +27,7 @@ public class ReviewDAO {
 		try {
 			con = DBManager.getConnection();
 
-				// ほしい物リスト更新
+				// レビューリスト挿入
 				st = con.prepareStatement("insert t_review (user_id, item_id,title,file_name,review_text,evaluation) VALUES(?,?,?,?,?,?)");
 				st.setInt(1, rdb.getUserId());
 				st.setInt(2, rdb.getItemId());
@@ -35,6 +35,41 @@ public class ReviewDAO {
 				st.setString(4, rdb.getFileName());
 				st.setString(5,rdb.getReviewText());
 				st.setInt(6,rdb.getEvaluation());
+
+
+			int rs = st.executeUpdate();
+
+			System.out.println("insert Review has been completed");
+			return ;
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			throw new SQLException(e);
+		} finally {
+			if (con != null) {
+				con.close();
+			}
+		}
+	}
+
+	/**
+	 * レビューリスト更新
+	 * @param ReviewDataBeans
+	 *
+	 * @throws SQLException
+	 */
+	public void updateUserReview(ReviewDataBeans rdb) throws SQLException {
+		Connection con = null;
+		PreparedStatement st = null;
+		try {
+			con = DBManager.getConnection();
+
+				// レビューリスト更新
+				st = con.prepareStatement("update t_review  set title = ?, file_name = ?,review_text = ?, evaluation = ? WHERE id = ? ");
+				st.setString(1, rdb.getTitle());
+				st.setString(2, rdb.getFileName());
+				st.setString(3,rdb.getReviewText());
+				st.setInt(4,rdb.getEvaluation());
+				st.setInt(5, rdb.getId());
 
 
 			int rs = st.executeUpdate();
@@ -51,6 +86,7 @@ public class ReviewDAO {
 		}
 	}
 
+
 	/**
 	 * ユーザーIDによるレビューリスト取得
 	 * @param userId
@@ -63,7 +99,7 @@ public class ReviewDAO {
 		try {
 			con = DBManager.getConnection();
 
-			st = con.prepareStatement("SELECT * FROM t_review WHERE user_id = ?");
+			st = con.prepareStatement("SELECT * FROM t_review WHERE user_id = ? order by id DESC");
 			st.setInt(1, userId);
 
 			ResultSet rs = st.executeQuery();
@@ -106,7 +142,7 @@ public class ReviewDAO {
 		try {
 			con = DBManager.getConnection();
 
-			st = con.prepareStatement("SELECT * FROM t_review WHERE id = ?");
+			st = con.prepareStatement("SELECT * FROM t_review WHERE id = ? ");
 			st.setInt(1, reviewId);
 
 			ResultSet rs = st.executeQuery();
@@ -177,6 +213,44 @@ public class ReviewDAO {
 			}
 		}
 	}
+
+	/**
+	 * ユーザーIDと商品IDからレビューが存在するか検索
+	 * @param itemId
+	 * @return Boolean
+	 * @throws SQLException
+	 */
+	public static Boolean IsReviewed(int itemId, int userId) throws SQLException {
+		Connection con = null;
+		PreparedStatement st = null;
+		try {
+			con = DBManager.getConnection();
+
+			st = con.prepareStatement("SELECT * FROM t_review WHERE item_id = ? and user_id = ?");
+			st.setInt(1, itemId);
+			st.setInt(2, userId);
+
+			ResultSet rs = st.executeQuery();
+
+			Boolean flag = false;
+			if (rs.next()) {
+				flag = true;
+			}
+
+			System.out.println("searching review by itemID and user_id has been completed");
+
+			return flag;
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			throw new SQLException(e);
+		} finally {
+			if (con != null) {
+				con.close();
+			}
+		}
+	}
+
+
 	/**
 	 * レビュー削除
 	 * @param userId

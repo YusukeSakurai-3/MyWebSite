@@ -4,6 +4,7 @@
 <%@ page import="beans.BuyDataBeans" %>
 <%@ page import="beans.ItemDataBeans" %>
 <%@page import=" java.util.ArrayList"%>
+<%@page import=" java.util.HashMap"%>
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -16,6 +17,7 @@
 	String date = (String)request.getAttribute("formatDate");
 	int virtualTotalPrice = (int)request.getAttribute("virtualTotalPrice");
 	ArrayList<ItemDataBeans> iddb = (ArrayList<ItemDataBeans>)request.getAttribute("itemList");
+	HashMap<Integer,Boolean> isReviewed = (HashMap<Integer,Boolean>)request.getAttribute("isReviewed");
   %>
   <body>
 
@@ -55,8 +57,8 @@
 
 
 
-      　　　</form>
-    　　</div>
+       </form>
+     </div>
 
 
 
@@ -78,9 +80,13 @@
                      <tr class="something">
                        <td class="col-md-6"><%=item.getName() %></td>
                        <td>
+                       <%if(!isReviewed.get(item.getId())){ %>
                        <form action="ItemReview" >
                        <input type="hidden" name="item_id" value="<%=item.getId() %>">
                        <button class="btn btn-primary col-sm-4" type="submit">レビューする</button>
+                       <%}else{ %>
+                       <button class="btn btn-default col-sm-4" >レビュー済</button>
+                       <%} %>
                        </form>
                       </td>
                          <td class="col-md-2"><%=item.getPrice()%>円</td>

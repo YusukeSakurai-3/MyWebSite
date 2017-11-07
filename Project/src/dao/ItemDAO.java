@@ -81,6 +81,8 @@ public class ItemDAO {
 				item.setDetail(rs.getString("detail"));
 				item.setPrice(rs.getInt("price"));
 				item.setFileName(rs.getString("file_name"));
+				item.setCreateDate(rs.getDate("create_date"));
+				item.setUpdateDate(rs.getDate("update_date"));
 			}
 
 			System.out.println("searching item by itemID has been completed");
@@ -134,6 +136,8 @@ public class ItemDAO {
 				item.setDetail(rs.getString("detail"));
 				item.setPrice(rs.getInt("price"));
 				item.setFileName(rs.getString("file_name"));
+				item.setCreateDate(rs.getDate("create_date"));
+				item.setUpdateDate(rs.getDate("update_date"));
 				itemList.add(item);
 			}
 			System.out.println("get Items by itemName has been completed");

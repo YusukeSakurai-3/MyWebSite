@@ -46,7 +46,9 @@ public class EcHelper {
 		//商品レビュー詳細ページ
 		static final String USER_LIST_PAGE ="WEB-INF/jsp/userlist.jsp";
 		//商品マスタ一覧ページ
-		static final String ITEM_MANAGEMENT_PAGE ="WEB-INF/jsp/itemmanagement.jsp";
+		static final String ITEM_MASTER_PAGE ="WEB-INF/jsp/itemmaster.jsp";
+		//商品マスタ詳細ページ
+		static final String ITEM_MASTER_DETAIL_PAGE ="WEB-INF/jsp/itemmasterdetail.jsp";
 		// 新規登録
 		static final String USER_CREATE_PAGE = "WEB-INF/jsp/usercreate.jsp";
 		// 新規登録入力内容確認
@@ -57,6 +59,8 @@ public class EcHelper {
 		static final String RANKING_PAGE ="WEB-INF/jsp/ranking.jsp";
 		//商品レビューページ
 		static final String ITEM_REVIEW_PAGE ="WEB-INF/jsp/itemreview.jsp";
+		//商品レビュー更新ページ
+	    static final String ITEM_REVIEW_UPDATE_PAGE ="WEB-INF/jsp/itemreviewupdate.jsp";
 		//商品レビュー一覧ページ
 		static final String ITEM_REVIEW_LIST_PAGE ="WEB-INF/jsp/itemreviewlist.jsp";
 		//商品レビュー詳細ページ

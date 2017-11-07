@@ -11,7 +11,6 @@
   <body>
 <%
 ReviewDataBeans review = (ReviewDataBeans)request.getAttribute("review");
-System.out.println(review.getEvaluation());
 %>
 
     <br><br><br><br>
@@ -24,8 +23,9 @@ System.out.println(review.getEvaluation());
 
       <h1 align="center">商品レビュー詳細</h1>
 
-      <form align="right" action="ItemReviewUpdate" method="POST" >
-						<input type="hidden" name="update_item_id" value="<%=review.getId() %>">
+      <form align="right" action="ItemReviewUpdate" >
+						<input type="hidden" name="update_review_id" value="<%=review.getId() %>">
+						<input type="hidden" name="update_item_id" value="<%=review.getItemId() %>">
 						<button class="btn btn-primary" type="submit" name="action">
 							レビューを変更する
 						</button>

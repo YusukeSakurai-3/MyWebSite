@@ -2,6 +2,7 @@ package ec;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,6 +16,7 @@ import beans.BuyDetailDataBeans;
 import beans.ItemDataBeans;
 import dao.BuyDetailDAO;
 import dao.ItemDAO;
+import dao.ReviewDAO;
 
 /**
  * Servlet implementation class UserBuyHistoryDetail
@@ -29,6 +31,8 @@ public class UserBuyHistoryDetail extends HttpServlet {
 
 		//セッション開始
 		HttpSession session = request.getSession();
+
+		int userId = (int) session.getAttribute("userId");
 
 		BuyDataBeans bdb = new BuyDataBeans();
 
@@ -45,6 +49,9 @@ public class UserBuyHistoryDetail extends HttpServlet {
 			ArrayList<BuyDetailDataBeans> bddb = bdd.getBuyDataBeansListByBuyId(bdb.getId());
 			//商品のデータを得る
 			ArrayList<ItemDataBeans>  itemList = new ArrayList<ItemDataBeans>();
+			//レビューしたかどうか
+			HashMap<Integer,Boolean> isReviewed = new HashMap<Integer,Boolean>();
+
 
 			//ポイントを使用したか確認のため,ポイントを使用しなかった場合の仮のtotalPriceを計算する
 			int  virtualTotalPrice = dmp;
@@ -53,8 +60,11 @@ public class UserBuyHistoryDetail extends HttpServlet {
 				ItemDataBeans item = ItemDAO.getItemByItemID(data.getItemId());
 				int price = item.getPrice();
 				virtualTotalPrice += price;
-
 				itemList.add(item);
+
+				//レビューがあるか確認
+				Boolean flag = ReviewDAO.IsReviewed(item.getId(),userId);
+				isReviewed.put(item.getId(),flag);
 		}
 
 
@@ -62,6 +72,7 @@ public class UserBuyHistoryDetail extends HttpServlet {
 		request.setAttribute("buyDetail",bdb);
 		request.setAttribute("formatDate", formatDate);
 		request.setAttribute("itemList",itemList);
+		request.setAttribute("isReviewed", isReviewed);
 
 		request.getRequestDispatcher(EcHelper.USER_BUY_HISTORY_DETAIL_PAGE).forward(request, response);
 		} catch (Exception e) {

@@ -122,7 +122,7 @@
       <%if(udb.getLoginId().equals("admin")) {%>
       <div class="col-xs-4">
         <a href="UserList">ユーザー一覧画面へ</a>
-        <a href="ItemManagement">商品マスタ一覧画面へ</a>
+        <a href="ItemMaster">商品マスタ一覧画面へ</a>
       </div>
       <%} %>
       <br><br><br>

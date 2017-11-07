@@ -10,6 +10,7 @@
 <title>商品レビュー一覧</title>
 <%
 ArrayList<ReviewDataBeans> rdb = (ArrayList<ReviewDataBeans>)request.getAttribute("rdb");
+String reviewActionMessage = (String)request.getAttribute("reviewActionMessage");
 %>
 
     <!-- body -->
@@ -22,6 +23,13 @@ ArrayList<ReviewDataBeans> rdb = (ArrayList<ReviewDataBeans>)request.getAttribut
     <div class="container">
       <h1 align="center">ユーザーさんのレビュー一覧</h1>
     </div>
+
+ <%
+ if(reviewActionMessage!=null) {
+ %>
+  <div class="alert alert-success" role="alert"><%=reviewActionMessage %></div>
+ <%} %>
+
   <div class="container">
     <h4>レビューした商品一覧<h4>
   	 <div class="row">

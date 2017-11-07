@@ -1,10 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="beans.ItemDataBeans"%>
+<%@page import=" java.util.ArrayList"%>
+<%@page import=" java.util.HashMap"%>
 <!DOCTYPE html>
 <html lang="ja">
 <title>商品マスタ一覧</title>
 <jsp:include page="/baselayout/head.html" />
 <jsp:include page="/baselayout/header.jsp" />
+
+<%
+ArrayList<ItemDataBeans> itemList = (ArrayList<ItemDataBeans>) request.getAttribute("itemList");
+String searchWord = (String) session.getAttribute("searchWordMaster");
+HashMap<Integer, Integer> purchaseNum= (HashMap<Integer, Integer>)request.getAttribute("purchaseNum");
+%>
   <body>
 
       <br><br><br>
@@ -72,54 +81,31 @@
                    <th>登録日</th>
                    <th>価格</th>
                    <th>購入数</th>
-                   <th>カテゴリ</th>
-                   <th>ポイント</th>
+
                    <th></th>
                  </tr>
                </thead>
                <tbody>
+  	           <%
+					for (ItemDataBeans item : itemList) {
+	            %>
                  <tr>
-                   <td>id0001</td>
-                   <td>ぶどう</td>
-                   <td>1989年04月20日</td>
-                   <td>1000円</td>
-                   <td>345</td>
-                   <td>果物</td>
-                   <td>90pt</td>
+                   <td><%=item.getId() %></td>
+                   <%if(item.getName().length()<=20) {%>
+                   <td><%=item.getName() %></td>
+                   <%}else{ %>
+                   <td><%=item.getName().substring(0,20) %>⋯</td>
+                   <%} %>
+                   <td><%=item.getFormatDate(item.getCreateDate()) %></td>
+                   <td><%=item.getPrice()%>円</td>
+                   <td><%=purchaseNum.get(item.getId())%></td>
                    <td>
-                     <a class="btn btn-primary" href="itemdetailmanagement.html">詳細</a>
+                     <a class="btn btn-primary" href="ItemMasterDetail?item_id=<%=item.getId()%>">詳細</a>
                      <a class="btn btn-success" href="itemupdate.html">更新</a>
                      <a class="btn btn-danger" href ="itemdelete.html">削除</a>
                    </td>
                  </tr>
-                 <tr>
-                   <td>id0002</td>
-                   <td>もも</td>
-                   <td>2001年11月12日</td>
-                   <td>1000円</td>
-                   <td>354367</td>
-                   <td>果物</td>
-                   <td>90pt</td>
-                   <td>
-                     <a class="btn btn-primary" href="itemdetailmanagement.html">詳細</a>
-                     <a class="btn btn-success" href="itemupdate.html">更新</a>
-                     <a class="btn btn-danger" href ="itemdelete.html">削除</a>
-                   </td>
-                 </tr>
-                 <tr>
-                   <td>id0003</td>
-                   <td>机</td>
-                   <td>2000年01月01日</td>
-                   <td>44444円</td>
-                   <td>56845</td>
-                   <td>家具</td>
-                   <td>90pt</td>
-                   <td>
-                     <a class="btn btn-primary" href="itemdetailmanagement.html">詳細</a>
-                     <a class="btn btn-success" href="itemupdate.html">更新</a>
-                     <a class="btn btn-danger" href ="itemdelete.html">削除</a>
-                   </td>
-                 </tr>
+                 <%} %>
                </tbody>
              </table>
            </div>
