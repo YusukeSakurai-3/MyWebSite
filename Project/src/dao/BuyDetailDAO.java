@@ -139,6 +139,7 @@ public class BuyDetailDAO {
 	public ArrayList<Integer> getCountGroupByItemId() throws SQLException {
 		Connection con = null;
 		PreparedStatement st = null;
+		int maxitem = 8;
 		try {
 			con = DBManager.getConnection();
 
@@ -149,7 +150,7 @@ public class BuyDetailDAO {
 			ArrayList<Integer> itemIdList = new ArrayList<Integer>();
 
 
-			while (rs.next()&&itemIdList.size()<8) {
+			while (rs.next()&&itemIdList.size()< maxitem) {
 				int i = 0;
 				i = rs.getInt("item_id");
 				itemIdList.add(i);

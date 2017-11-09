@@ -22,7 +22,7 @@ public class EcHelper {
 		// TOPページ
 		static final String TOP_PAGE = "/WEB-INF/jsp/index.jsp";
 		// エラーページ
-		static final String ERROR_PAGE = "/error.jsp";
+		static final String ERROR_PAGE = "/WEB-INF/jsp/error.jsp";
 		// 買い物かごページ
 		static final String CART_PAGE = "/WEB-INF/jsp/cart.jsp";
 		// 購入
@@ -37,10 +37,6 @@ public class EcHelper {
 		static final String USER_ITEM_LIST_PAGE= "WEB-INF/jsp/useritemlist.jsp";
 		// ユーザー情報
 		static final String USER_DETAIL_PAGE = "WEB-INF/jsp/userdetail.jsp";
-		// ユーザー情報更新確認
-		static final String USER_DATA_UPDATE_CONFIRM_PAGE = "/userdataupdateconfirm.jsp";
-		// ユーザー情報更新完了
-		static final String USER_UPDATE_PAGE = "WEB-INF/jsp/userupdate.jsp";
 		// ユーザー購入履歴
 		static final String USER_BUY_HISTORY_DETAIL_PAGE = "WEB-INF/jsp/userbuyhistorydetail.jsp";
 		// ログイン
@@ -57,12 +53,16 @@ public class EcHelper {
 		static final String ITEM_MASTER_UPDATE_PAGE ="WEB-INF/jsp/itemmasterupdate.jsp";
 		//商品マスタ削除ページ
 		static final String ITEM_MASTER_DELETE_PAGE ="WEB-INF/jsp/itemmasterdelete.jsp";
+		//ユーザー情報マスタページ
+		static final String USER_DETAIL_MASTER_PAGE ="WEB-INF/jsp/userdetailmaster.jsp";
+		//ユーザー情報更新ページ
+		static final String USER_UPDATE_PAGE ="WEB-INF/jsp/userupdate.jsp";
+		//ユーザー情報更新マスタページ
+		static final String USER_UPDATE_MASTER_PAGE ="WEB-INF/jsp/userupdatemaster.jsp";
+		//ユーザー削除マスタページ
+		static final String USER_DELETE_MASTER_PAGE ="WEB-INF/jsp/userdeletemaster.jsp";
 		// ユーザー新規登録
 		static final String USER_CREATE_PAGE = "WEB-INF/jsp/usercreate.jsp";
-		// 新規登録入力内容確認
-		static final String REGIST_CONFIRM_PAGE = "/registconfirm.jsp";
-		// 新規登録完了
-		static final String REGIST_RESULT_PAGE = "/registresult.jsp";
 		//ランキングページ
 		static final String RANKING_PAGE ="WEB-INF/jsp/ranking.jsp";
 		//商品レビューページ

@@ -26,6 +26,9 @@ public class UserList extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		try {
+
+			//ユーザー削除成功した時使用
+			String deleteMessage = (String)EcHelper.cutSessionAttribute(session,"deleteActionMessage");
 			//検索情報
 			String searchName = request.getParameter("searchName")==null?"":request.getParameter("searchName");
 			//ログインID
@@ -64,12 +67,11 @@ public class UserList extends HttpServlet {
 			//date
 			request.setAttribute("startDate", startDate);
 			request.setAttribute("endDate", endDate);
+
+			request.setAttribute("deleteMessage",deleteMessage);
 			request.setAttribute("pageMax", pageMax);
 			request.setAttribute("pageNum", pageNum);
 			request.setAttribute("userList", searchResultUserList);
-
-
-
 
 			request.getRequestDispatcher(EcHelper.USER_LIST_PAGE).forward(request, response);
 

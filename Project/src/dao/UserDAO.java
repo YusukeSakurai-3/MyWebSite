@@ -515,12 +515,15 @@ public class UserDAO {
 	 * @param UserDataBeans
 	 * @throws SQLException
 	 */
-	public String updateUser(UserDataBeans udb,String birthDate) throws SQLException {
+	public String updateUser(UserDataBeans udb,String birthDate,String confirmPassword) throws SQLException {
 		Connection con = null;
 		PreparedStatement st = null;
 		String error = "入力内容が正しくありません";
 		try {
 
+			if(!udb.getPassword().equals(confirmPassword)) {
+				return "パスワードとパスワード(確認)か一致していません";
+			}
 			if(udb.getName().length()==0) {
 				return "名前が入力されていません";
 			}
@@ -532,7 +535,7 @@ public class UserDAO {
 			con = DBManager.getConnection();
 
 			// ユーザー情報更新
-			st = con.prepareStatement("UPDATE t_user  SET name = ?, address = ?, password = ?, birth_date = ?, is_open = ? , update_date = ? WHERE id = ? ");
+			st = con.prepareStatement("UPDATE t_user  SET name = ?, address = ?, login_password = ?, birth_date = ?, is_open = ? , update_date = ? WHERE id = ? ");
 			st.setString(1, udb.getName());
 			st.setString(2, udb.getAddress());
 			st.setString(3,udb.getPassword());
@@ -540,6 +543,8 @@ public class UserDAO {
 			st.setBoolean(5,udb.getIs_open());
 			st.setTimestamp(6, new Timestamp(System.currentTimeMillis()));
 			st.setInt(7, udb.getId());
+
+			System.out.println(st);
 
 
 			int rs = st.executeUpdate();

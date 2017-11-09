@@ -14,8 +14,8 @@
   <%
 	ArrayList<ItemDataBeans> cart = (ArrayList<ItemDataBeans>) session.getAttribute("cart");
 	ArrayList<DeliveryMethodDataBeans> dmdbList = (ArrayList<DeliveryMethodDataBeans>) request.getAttribute("dmdbList");
-	int userId = (int) session.getAttribute("userId");
-	int userPoint = PointDAO.getInstance().getPointById(userId);
+	//int userId = (int) session.getAttribute("userId");
+	int userPoint = (int) request.getAttribute("userPoint");
 	String buyActionMessage = request.getAttribute("buyActionMessage")!=null?(String)request.getAttribute("buyActionMessage"):"";
 %>
 
@@ -78,7 +78,7 @@
          <div class="col-xs-2">
               <input class="form-control"  type="text" name="point" placeholder="pt">
             </div>
-            <label  class="control-label col-sm-3">所持ポイント:<%=userPoint%>pt</label>
+            <label  class="control-label col-sm-3">所持ポイント:<%=userPoint %>pt</label>
           </div>
            <label class="col-sm-3"><font color="red"><%= buyActionMessage%></font></label>
 

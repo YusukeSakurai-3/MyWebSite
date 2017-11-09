@@ -30,7 +30,7 @@
               <li><a href="Cart">買い物かご</a></li>
             <li><a href="Ranking">ランキング</a></li>
            <%if(isLogin){%> <li> <a href="ItemGetList?listUserId=<%=userId%>">ほしい物リスト</a></li><%} %>
-            <li> <a href="Index">最近見た商品</a></li>
+            <!--  <li> <a href="Index">最近見た商品</a></li> -->
             <li> <a href="Item?item_id=<%=ItemDAO.getRandomItemID() %>">ランダムページ</a></li>
           </ul>
         </li>

@@ -43,12 +43,14 @@ public class BuyConfirm extends HttpServlet {
 				// 配送方法をDBから取得
 				ArrayList<DeliveryMethodDataBeans> dMDBList = DeliveryMethodDAO.getAllDeliveryMethodDataBeans();
 				request.setAttribute("dmdbList", dMDBList);
+				request.setAttribute("userPoint", userPoint);
 				request.getRequestDispatcher(EcHelper.BUY_PAGE).forward(request, response);
 			}else if(point> totalPrice){
 				request.setAttribute("buyActionMessage", "ポイントが合計金額を超えています");
 				// 配送方法をDBから取得
 				ArrayList<DeliveryMethodDataBeans> dMDBList = DeliveryMethodDAO.getAllDeliveryMethodDataBeans();
 				request.setAttribute("dmdbList", dMDBList);
+				request.setAttribute("userPoint", userPoint);
 				request.getRequestDispatcher(EcHelper.BUY_PAGE).forward(request, response);
 			}else {
 

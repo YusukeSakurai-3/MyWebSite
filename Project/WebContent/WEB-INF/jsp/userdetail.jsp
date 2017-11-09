@@ -15,11 +15,17 @@
   <%
   UserDataBeans udb = (UserDataBeans)request.getAttribute("updateuser");
   ArrayList<BuyDataBeans> bdbs = (ArrayList<BuyDataBeans>)request.getAttribute("bdb");
+  String updateMessage = (String)request.getAttribute("updateMessage");
   %>
   </head>
   <body>
 
       <br><br><br>
+ <%
+ if(updateMessage!=null) {
+ %>
+  <div class="alert alert-success"><%=updateMessage %></div>
+ <%} %>
 
     <!-- body -->
     <div class="container">

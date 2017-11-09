@@ -33,12 +33,17 @@ public class UserDetail extends HttpServlet {
 		//test
 		System.out.println(userId);
 		try {
+			//ユーザー情報更新した時に取得
+			String updateMessage = (String)EcHelper.cutSessionAttribute(session,"userUpdateMessage");
+
+
 			UserDataBeans udb = UserDAO.getUserDataBeansByUserId(userId);
 			int point = PointDAO.getInstance().getPointById(userId);
 			ArrayList<BuyDataBeans> bdb = BuyDAO.getInstance().getBuyDataBeansByBuyUserId(userId) ;
 			request.setAttribute("point", point);
 			request.setAttribute("updateuser", udb);
 			request.setAttribute("bdb",bdb);
+			request.setAttribute("updateMessage", updateMessage);
 			request.getRequestDispatcher(EcHelper.USER_DETAIL_PAGE).forward(request, response);
 
 		} catch (SQLException e) {

@@ -51,6 +51,6 @@ if (loginErrorMessage != null) {
                      </div>
                           <div class="text-right">
                             <br><a href="UserCreate" class="btn btn-success">register</a>
-                          </div><!-- /form -->
+                          </div>
   </body>
 </html>

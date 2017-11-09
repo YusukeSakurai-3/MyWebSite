@@ -3,6 +3,7 @@
 <%@page import="beans.ItemDataBeans"%>
 <%@page import="beans.ReviewDataBeans"%>
 <%@page import="java.util.ArrayList"%>
+<%@page import="java.util.HashMap"%>
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -15,6 +16,7 @@
     ArrayList<ReviewDataBeans> reviewList = (ArrayList<ReviewDataBeans>)request.getAttribute("reviewList");
 	//String searchWord = (String) session.getAttribute("searchWord");
 	int pageNum = (int) request.getAttribute("pageNum");
+	HashMap<Integer,String> userName = (HashMap<Integer,String>)request.getAttribute("reviewUserName");
 %>
     <br><br><br><br>
 
@@ -61,7 +63,7 @@
 	         </div>
 	      </div>
 	   </div><br>
-
+<!--
    <div class="container">
      <h4>同じカテゴリの商品<h4>
     <div class="row">
@@ -135,13 +137,13 @@
                    </div>
                   </div>
                  </div>
-               </div>
+               </div>-->
              </div>
            </div>
 
 <%for(ReviewDataBeans review:reviewList) {%>
    <div class="container">
-        <h4>ユーザーさんのレビュー<h4>
+        <h4><%=userName.get(review.getId()) %>さんのレビュー<h4>
 
 
      <div class="panel ">

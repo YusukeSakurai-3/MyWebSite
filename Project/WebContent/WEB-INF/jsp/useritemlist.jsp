@@ -25,9 +25,9 @@
 
 
 
-      <h1 align="center">ほしい物リストを公開しているユーザー</h1>
+      <h1 align="center">ほしい物リストを公開しているユーザー</h1><br><br><br>
 
-
+<!--
       <div class="panel-body">
         <div class="panel panel-primary">
             <div class="panel-heading">
@@ -55,13 +55,12 @@
 
 
           </div>
-        </div>
+        </div>-->
 
         <div class="table-responsive">
              <table class="table table-striped table-bordered" class="table table-bordered">
                <thead>
                  <tr>
-                   <th>ログインID</th>
                    <th>ユーザ名</th>
 
                    <th></th>
@@ -70,7 +69,6 @@
                <tbody>
                <% for(UserDataBeans user : udb){ %>
                  <tr>
-                   <td><%=user.getLoginId() %></td>
                    <td><%=user.getName() %></td>
 
                    <td>

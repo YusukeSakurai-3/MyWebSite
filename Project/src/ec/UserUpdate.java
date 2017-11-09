@@ -1,8 +1,6 @@
 package ec;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -30,7 +28,10 @@ public class UserUpdate extends HttpServlet {
 		//test
 		System.out.println(userId);
 		try {
+			String updateMessage = (String)EcHelper.cutSessionAttribute(session,"updateActionMessage");
 			UserDataBeans udb = UserDAO.getUserDataBeansByUserId(userId);
+
+			request.setAttribute("updateMessage", updateMessage);
 			request.setAttribute("updateuser", udb);
 			request.getRequestDispatcher(EcHelper.USER_UPDATE_PAGE).forward(request, response);
 		} catch (Exception e) {
@@ -51,22 +52,15 @@ public class UserUpdate extends HttpServlet {
 
 			String updateUserName = (String)request.getParameter("updateUserName");
 			String updateAddress = (String)request.getParameter("updateAddress");
+			String prePassword = (String)request.getParameter("prePassword");
 			String updatePassword = (String)request.getParameter("updatePassword");
 			String updateConfirmPassword = (String)request.getParameter("updateConfirmPassword");
+			System.out.println(updateConfirmPassword);
 			String updateBirthDate =(String)request.getParameter("updateBirthDate");
 			boolean isOpen = ((String)request.getParameter("isOpen")).equals("open")?true:false;
-			System.out.println(isOpen);
-			System.out.println(updateBirthDate);
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-
-	        // Date型変換
-	        Date formatDate = sdf.parse(updateBirthDate);
-
-	        /*
-			if(updatePassword.length()==0||!updatePassword.equals(updateConfirmPassword)) {
-				session.setAttribute("updateActionMessage","パスワードがパスワード(確認)と一致していません");
-				response.sendRedirect("UserUpdate");
-			}*/
+			//System.out.println(isOpen);
+			//System.out.println(updateBirthDate);
+			//SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
 
 			UserDataBeans udb = new UserDataBeans();
@@ -75,13 +69,20 @@ public class UserUpdate extends HttpServlet {
 			udb.setId(userId);
 			udb.setName(updateUserName);
 			udb.setAddress(updateAddress);
-			udb.setBirthDate(formatDate);
-			udb.setPassword(updatePassword);
+			//パスワードが入力されていない時は元のパスワードをセットする
+			if(updatePassword.length()!=0&&updateConfirmPassword.length()!=0) {
+			    udb.setPassword(EcHelper.toCode(updatePassword));
+			    updateConfirmPassword = EcHelper.toCode(updateConfirmPassword);
+			    System.out.println(EcHelper.toCode(updatePassword));
+			}else {
+				updateConfirmPassword = prePassword;
+				udb.setPassword(prePassword);
+			}
 			udb.setIs_open(isOpen);
 
 
 			//商品を更新
-			String updateCheck = UserDAO.getInstance().updateUser(udb,updateBirthDate);
+			String updateCheck = UserDAO.getInstance().updateUser(udb,updateBirthDate,updateConfirmPassword);
 			System.out.println(updateCheck);
 
 			if(updateCheck.equals("success")) {
@@ -90,7 +91,6 @@ public class UserUpdate extends HttpServlet {
 			}else {
 
 			    session.setAttribute("updateActionMessage",updateCheck);
-			    System.out.println("unkounkounko");
 			    response.sendRedirect("UserUpdate");
 			}
 

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import beans.ReviewDataBeans;
 import dao.ReviewDAO;
+import dao.UserDAO;
 
 /**
  * Servlet implementation class ItemReviewDetail
@@ -28,8 +29,10 @@ public class ItemReviewDetail extends HttpServlet {
 
 			//対象のレビュー情報を取得
 			ReviewDataBeans review = ReviewDAO.getInstance().getReviewByReviewId(id);
+			String reviewUserName = UserDAO.getUserName(review.getUserId());
 			//リクエストパラメーターにセット
 			request.setAttribute("review", review);
+			request.setAttribute("reviewUserName", reviewUserName);
 
 
 			request.getRequestDispatcher(EcHelper.ITEM_REVIEW_DETAIL_PAGE).forward(request, response);

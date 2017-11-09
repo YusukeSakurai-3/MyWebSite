@@ -46,7 +46,7 @@
 <br>
 
 
-  <div class="container">
+ <!--  <div class="container">
     <h4>最近見た商品<h4>
   	<div class="row">
 
@@ -120,7 +120,7 @@
                  </div>
                 </div>
               </div>
-            </div>
+            </div>-->
           </div>
 
 

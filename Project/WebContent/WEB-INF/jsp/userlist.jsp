@@ -18,6 +18,7 @@
   String endDate = request.getAttribute("endDate")!=null?(String)request.getAttribute("endDate"):"nodate";
   int pageNum = (int) request.getAttribute("pageNum");
   int pageMax = (int)request.getAttribute("pageMax");
+  String deleteMessage = (String)request.getAttribute("deleteMessage");
   %>
       <br><br><br>
 
@@ -25,6 +26,10 @@
     <div class="container">
 
       <h1 align="center">ユーザー一覧</h1>
+<%if(deleteMessage!=null) {
+%>
+<div class="alert alert-success"><%=deleteMessage %></div>
+<%} %>
 
 
       <div class="panel-body">
@@ -88,9 +93,9 @@
                    <td><%=user.getFormatbirthDate() %></td>
                    <td><%=user.getAddress() %></td>
                    <td>
-                     <a class="btn btn-primary" href="userDetailMaster?loginId=<%=user.getId()%>&page_num=<%= pageNum%>">詳細</a>
-                     <a class="btn btn-success" href="userUpdateMaster?loginId=<%=user.getId()%>&page_num=<%= pageNum%>">更新</a>
-                     <a class="btn btn-danger" href ="userDeleteMaster?loginId=<%=user.getId()%>&page_num=<%= pageNum%>">削除</a>
+                     <a class="btn btn-primary" href="UserDetailMaster?user_id=<%=user.getId()%>&page_num=<%= pageNum%>">詳細</a>
+                     <a class="btn btn-success" href="UserUpdateMaster?user_id=<%=user.getId()%>&page_num=<%= pageNum%>">更新</a>
+                     <a class="btn btn-danger" href ="UserDeleteMaster?user_id=<%=user.getId()%>&page_num=<%= pageNum%>">削除</a>
                    </td>
                  </tr>
                  <%} %>

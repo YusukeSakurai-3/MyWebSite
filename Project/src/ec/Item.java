@@ -2,6 +2,7 @@ package ec;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,6 +15,7 @@ import beans.ItemDataBeans;
 import beans.ReviewDataBeans;
 import dao.ItemDAO;
 import dao.ReviewDAO;
+import dao.UserDAO;
 
 /**
  * Servlet implementation class Item
@@ -34,10 +36,15 @@ public class Item extends HttpServlet {
 			ItemDataBeans item = ItemDAO.getInstance().getItemByItemID(id);
 			//対象のレビュー情報を取得
 			ArrayList<ReviewDataBeans> rdb = ReviewDAO.getInstance().getReviewListByItemId(id);
+			HashMap<Integer,String>  reviewUserName = new HashMap<Integer,String>();
+			for(ReviewDataBeans review :rdb) {
+				reviewUserName.put(review.getId(), UserDAO.getUserName(review.getUserId()));
+			}
 			//リクエストパラメーターにセット
 			request.setAttribute("item", item);
 			request.setAttribute("reviewList", rdb);
 			request.setAttribute("pageNum", pageNum);
+			request.setAttribute("reviewUserName", reviewUserName);
 
 			request.getRequestDispatcher(EcHelper.ITEM_PAGE).forward(request, response);
 		} catch (Exception e) {

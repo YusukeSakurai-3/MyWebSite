@@ -50,7 +50,7 @@ public class PointDAO {
 	 * @throws SQLException
 	 *             呼び出し元にcatchさせるためにスロー
 	 */
-	public int getPointById(int userId) throws SQLException {
+	public static int getPointById(int userId) throws SQLException {
 		Connection con = null;
 		PreparedStatement st = null;
 		int point = 0;
@@ -77,10 +77,10 @@ public class PointDAO {
 	}
 
 	/**
-	 * ユーザーを登録した時同時にポイントを0で登録する
+	 *購入時にポイントを更新する
 	 *
 	 * @param id
-	 *            対応したデータを保持しているJavaBeans
+	 *
 	 * @throws SQLException
 	 *             呼び出し元にcatchさせるためにスロー
 	 */
@@ -96,6 +96,35 @@ public class PointDAO {
 			System.out.println(pdb.getPoint()+":"+pdb.getUserId());
 			st.executeUpdate();
 			System.out.println("update userpoint has been completed");
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			throw new SQLException(e);
+		} finally {
+			if (con != null) {
+				con.close();
+			}
+		}
+	}
+
+
+	/**
+	 * ポイント情報を削除する
+	 *
+	 * @param id
+	 *
+	 * @throws SQLException
+	 *             呼び出し元にcatchさせるためにスロー
+	 */
+	public void deletePoint(int userId) throws SQLException {
+		Connection con = null;
+		PreparedStatement st = null;
+		try {
+			con = DBManager.getConnection();
+			st = con.prepareStatement("DELETE FROM t_point WHERE user_id = ? ");
+			st.setInt(1,userId);
+
+			st.executeUpdate();
+			System.out.println("delete point has been completed");
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 			throw new SQLException(e);

@@ -11,6 +11,7 @@
   <body>
 <%
 ReviewDataBeans review = (ReviewDataBeans)request.getAttribute("review");
+String userName = (String)request.getAttribute("reviewUserName");
 %>
 
     <br><br><br><br>
@@ -68,7 +69,7 @@ ReviewDataBeans review = (ReviewDataBeans)request.getAttribute("review");
     <div class="container">
 
    <div class="container">
-        <h4>ユーザーさんのレビュー<h4>
+        <h4><%=userName %>さんのレビュー<h4>
      <div class="panel ">
        <div class="panel-body">
      <div class="col-md-6">

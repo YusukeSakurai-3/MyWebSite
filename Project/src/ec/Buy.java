@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import beans.DeliveryMethodDataBeans;
 import beans.ItemDataBeans;
 import dao.DeliveryMethodDAO;
+import dao.PointDAO;
 
 /**
  * Servlet implementation class Buy
@@ -27,6 +28,7 @@ public class Buy extends HttpServlet {
 		try {
 
 			Boolean isLogin = session.getAttribute("isLogin") != null ? (Boolean) session.getAttribute("isLogin") : false;
+
 			ArrayList<ItemDataBeans> cart = (ArrayList<ItemDataBeans>) session.getAttribute("cart");
 
 			if (!isLogin) {
@@ -39,8 +41,12 @@ public class Buy extends HttpServlet {
 				request.setAttribute("cartActionMessage", "購入する商品がありません");
 				request.getRequestDispatcher(EcHelper.CART_PAGE).forward(request, response);
 			} else {
+				int userId = (int) session.getAttribute("userId");
 				// 配送方法をDBから取得
 				ArrayList<DeliveryMethodDataBeans> dMDBList = DeliveryMethodDAO.getAllDeliveryMethodDataBeans();
+				//ポイント情報を取得
+				int userPoint = PointDAO.getPointById(userId);
+				request.setAttribute("userPoint", userPoint);
 				request.setAttribute("dmdbList", dMDBList);
 				request.getRequestDispatcher(EcHelper.BUY_PAGE).forward(request, response);
 			}
