@@ -39,10 +39,13 @@ public class ItemMaster extends HttpServlet {
 			//価格
 			int startPrice = request.getParameter("startPrice")!=null? EcHelper.parseInt(request.getParameter("startPrice"),-1):-1;
 		    int endPrice = request.getParameter("endPrice")!=null? EcHelper.parseInt(request.getParameter("endPrice"),-1):-1;
-		    //日付
+		    //日付  nullcheckとformatcheck
 		    String startDate = request.getParameter("startDate")!=null?(String)request.getParameter("startDate"):"nodate";
+		    startDate = startDate.equals("")?"nodate":startDate;
 		    String endDate = request.getParameter("endDate")!=null?(String)request.getParameter("endDate"):"nodate";
-		    //System.out.println(startDate);
+		    endDate = endDate.equals("")?"nodate":endDate;
+		    System.out.println("sDate:"+startDate+"sDate");
+		    System.out.println("eDate:"+endDate+"eDate");
 
 			//表示ページ番号 未指定の場合 1ページ目を表示
 			int pageNum = Integer.parseInt(request.getParameter("page_num") == null ? "1" : request.getParameter("page_num"));
@@ -58,21 +61,20 @@ public class ItemMaster extends HttpServlet {
 
 			// 検索ワードに対しての総ページ数を取得
 			double itemCount = ItemMasterDAO.getItemCountMaster(searchWordMaster,itemId,startDate,endDate,startPrice,endPrice);
+			//検索したかチェックする
+			boolean searchCheck = EcHelper.searchCheck(searchWordMaster,itemId,startDate,endDate,startPrice,endPrice);
 
 			int pageMax = (int) Math.ceil(itemCount / PAGE_MAX_ITEM_COUNT);
 			System.out.println("pageMax:"+pageMax);
 
+			//商品総数を取得する
+			double itemNum = ItemMasterDAO.getItemCountMaster("",-1,"nodate","nodate",-1,-1);
 
 			//購入数を取得する
 			HashMap<Integer, Integer> purchaseNum = new HashMap<Integer,Integer>();
 			for(ItemDataBeans item : searchResultItemList) {
 				purchaseNum.put(item.getId(),ItemMasterDAO.getInstance().getCountByItemId(item.getId()));
 			}
-
-
-
-
-
 
 			// リクエストパラメーターにセット
 			//id
@@ -88,6 +90,9 @@ public class ItemMaster extends HttpServlet {
 			request.setAttribute("updateMessage", updateMessage);
 			request.setAttribute("deleteMessage", deleteMessage);
 			request.setAttribute("purchaseNum", purchaseNum);
+			request.setAttribute("itemCount",(int)itemCount);
+			request.setAttribute("itemNum",(int)itemNum);
+			request.setAttribute("searchCheck",searchCheck);
 			request.setAttribute("pageMax", pageMax);
 			request.setAttribute("pageNum", pageNum);
 			request.setAttribute("itemList", searchResultItemList);

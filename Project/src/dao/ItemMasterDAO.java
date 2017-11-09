@@ -219,7 +219,7 @@ public class ItemMasterDAO {
 			con = DBManager.getConnection();
 			ResultSet rs;
 
-			if (searchWord.length() == 0&&itemId == -1&&!startDate.equals("nodate")&&!endDate.equals("nodate")&&startPrice==-1&&endPrice==-1) {
+			if (searchWord.length() == 0&&itemId == -1&&startDate.equals("nodate")&&endDate.equals("nodate")&&startPrice==-1&&endPrice==-1) {
 				// 全検索
 				st = con.prepareStatement("SELECT * FROM m_item ORDER BY id ASC LIMIT ?,? ");
 				st.setInt(1, startiItemNum);
@@ -328,14 +328,16 @@ public class ItemMasterDAO {
 				sql = sql +and+"id ="+itemId;
 			}
 
-			if(!startDate.equals("nodate")) {
-				startDate = "'"+startDate+"'";
-				sql = sql +and+"create_date >= "+startDate;
-			}
 
-			if(!endDate.equals("nodate")) {
+			if(!(startDate.equals("nodate"))) {
+				startDate = "'"+startDate+"'";
+				sql = sql +and+" create_date >= "+startDate;
+			}
+			System.out.println("itemMaster:"+startDate);
+
+			if(!(endDate.equals("nodate"))) {
 				endDate = "'"+endDate+"'";
-				sql = sql +and+"create_date <= "+endDate;
+				sql = sql +and+" create_date <= "+endDate;
 			}
 
 			if(startPrice!=-1) {
@@ -344,7 +346,7 @@ public class ItemMasterDAO {
 			if(endPrice!=-1) {
 			    sql = sql+and+"price <= "+endPrice+" ";
 			}
-			//System.out.println(sql);
+			System.out.println(sql);
 
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery(sql);

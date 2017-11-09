@@ -14,6 +14,9 @@ ArrayList<ItemDataBeans> itemList = (ArrayList<ItemDataBeans>) request.getAttrib
 String searchWordMaster = (String) session.getAttribute("searchWordMaster");
 int pageMax = (int) request.getAttribute("pageMax");
 int pageNum = (int) request.getAttribute("pageNum");
+int itemCount = (int)request.getAttribute("itemCount");
+int itemNum = (int)request.getAttribute("itemNum");
+boolean searchCheck = (boolean)request.getAttribute("searchCheck");
 HashMap<Integer, Integer> purchaseNum= (HashMap<Integer, Integer>)request.getAttribute("purchaseNum");
 int itemId = request.getAttribute("itemId")!=null?(int)request.getAttribute("itemId"):-1;
 int startPrice = request.getAttribute("startPrice")!=null?(int)request.getAttribute("startPrice"):-1;
@@ -64,13 +67,13 @@ String updateMessage = (String)request.getAttribute("updateMessage");
                 <div class="form-group">
                   <label for="code" class="control-label col-sm-2">商品ID</label>
                   <div class="col-sm-6">
-                    <input type="text" name="itemId"  class="form-control"/>
+                    <input type="text" name="itemId"  class="form-control"  value="<%=itemId!=-1?""+itemId:""%>"/>
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="name" class="control-label col-sm-2">商品名</label>
                   <div class="col-sm-6">
-                    <input type="text" name="search_word"  class="form-control"/>
+                    <input type="text" name="search_word"  class="form-control"  value="<%=searchWordMaster %>" />
                   </div>
                 </div>
              <!-- 登録日 -->
@@ -84,7 +87,7 @@ String updateMessage = (String)request.getAttribute("updateMessage");
                       ~
                     </div>
                     <div class="col-sm-2">
-                      <input type="date" name="endDate"  class="form-control"/>
+                      <input type="date" name="endDate"  class="form-control" size="30"/>
                     </div>
                 </div>
                 </div>
@@ -93,13 +96,13 @@ String updateMessage = (String)request.getAttribute("updateMessage");
                   <label for="continent" class="control-label col-sm-2">価格</label>
                   <div class="row">
                     <div class="col-sm-2">
-                      <input type="text" name="startPrice"  class="form-control" size="30"/>
+                      <input type="text" name="startPrice"  class="form-control" size="30" value="<%=startPrice!=-1?""+startPrice:""%>"/>
                     </div>
                     <div class="col-xs-1 text-center">
                       ~
                     </div>
                     <div class="col-sm-2">
-                      <input type="text" name="endPrice" class="form-control"/>
+                      <input type="text" name="endPrice" class="form-control" value="<%=endPrice!=-1?""+endPrice:""%>" />
                     </div>
                 </div>
                 </div>
@@ -113,6 +116,7 @@ String updateMessage = (String)request.getAttribute("updateMessage");
         </div>
 
         <div class="table-responsive">
+          商品総数:<%=itemNum %>   <%if(searchCheck){ %> 検索結果:<%=itemCount %> <% }%>
              <table class="table table-striped table-bordered" class="table table-bordered">
                <thead>
                  <tr>

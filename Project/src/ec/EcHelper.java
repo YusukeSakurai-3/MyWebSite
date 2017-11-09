@@ -33,6 +33,8 @@ public class EcHelper {
 		static final String BUY_RESULT_PAGE = "WEB-INF/jsp/buyresult.jsp";
 		//ほしい物リストページ
 		static final String  ITEM_GET_LIST_PAGE= "WEB-INF/jsp/itemgetlist.jsp";
+		//ほしい物リストを公開しているユーザーリストページ
+		static final String USER_ITEM_LIST_PAGE= "WEB-INF/jsp/useritemlist.jsp";
 		// ユーザー情報
 		static final String USER_DETAIL_PAGE = "WEB-INF/jsp/userdetail.jsp";
 		// ユーザー情報更新確認
@@ -175,5 +177,24 @@ public class EcHelper {
 				return str;
 			}
 		}
+
+	/**
+	 * 検索したかどうかチェックする
+	 *
+	 * @param string
+	 * @param int
+	 * @return boolean
+	 */
+
+
+
+	public static boolean searchCheck(String searchWordMaster, int itemId, String startDate, String endDate,
+			int startPrice, int endPrice) {
+		if (searchWordMaster.length() == 0&&itemId == -1&&startDate.equals("nodate")&&endDate.equals("nodate")&&startPrice==-1&&endPrice==-1) {
+			return false;
+		}else {
+			return true;
+		}
+	}
 
 }

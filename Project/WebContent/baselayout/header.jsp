@@ -2,14 +2,14 @@
     pageEncoding="UTF-8"%>
 <%@page import="ec.EcHelper" %>
 <%@page import="dao.ItemDAO" %>
-<%@page import="java.util.Random" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html >
 
 <% boolean isLogin = session.getAttribute("isLogin")!=null?(boolean) session.getAttribute("isLogin"):false;
  boolean isIndex = session.getAttribute("isIndex")!=null?(boolean) session.getAttribute("isIndex"):false;
  String userName = session.getAttribute("userName")!=null?(String) session.getAttribute("userName"):"no";
+ int userId = session.getAttribute("userId")!=null?(int)session.getAttribute("userId"):-1;
  String searchWord = ("/MyWebSiteEC/WEB-INF/jsp/itemsearchresult.jsp".equals(request.getRequestURI()))? (String)session.getAttribute("searchWord"):"";
- Random rnd = new Random();%>
+%>
     <!-- header -->
 
     <div id="navbar-main">
@@ -29,9 +29,9 @@
           <ul class="dropdown-menu">
               <li><a href="Cart">買い物かご</a></li>
             <li><a href="Ranking">ランキング</a></li>
-            <li> <a href="ItemGetList">ほしい物リスト</a></li>
+           <%if(isLogin){%> <li> <a href="ItemGetList?listUserId=<%=userId%>">ほしい物リスト</a></li><%} %>
             <li> <a href="Index">最近見た商品</a></li>
-            <li> <a href="Item?item_id=<%= rnd.nextInt(ItemDAO.getMaxItemID())+1 %>">ランダムページ</a></li>
+            <li> <a href="Item?item_id=<%=ItemDAO.getRandomItemID() %>">ランダムページ</a></li>
           </ul>
         </li>
 

@@ -29,7 +29,6 @@
     <br>
   <div class="container">
     <h1 align="center">検索結果</h1>
-    <%System.out.println(request.getRequestURI()); %>
     <h4 align="center">検索結果<%=itemCount%>件</h4>
   	 <div class="row">
   	 <%

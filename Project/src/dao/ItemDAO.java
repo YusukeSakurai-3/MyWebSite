@@ -285,28 +285,27 @@ public class ItemDAO {
 
 
 	/**
-	 * 商品IDの最大値を返す
+	 * ランダムに商品のIDを返す
 	 *
-	 * @return 商品IDの最大値
+	 * @return itemId
 	 * @throws SQLException
 	 */
-	public static int getMaxItemID() throws SQLException {
+	public static int getRandomItemID() throws SQLException {
 		Connection con = null;
 		PreparedStatement st = null;
 		try {
 			con = DBManager.getConnection();
 
-			st = con.prepareStatement("SELECT max(id) FROM m_item");
+			st = con.prepareStatement("SELECT id FROM m_item ORDER BY RAND() LIMIT 1 ");
 			ResultSet rs = st.executeQuery();
 
-			int maxId = 0;
+			int Id = 0;
 			if (rs.next()) {
-				maxId = rs.getInt("max(id)");
+				Id = rs.getInt("id");
 			}
 
-			//System.out.println("searching max by itemID has been completed");
 
-			return maxId;
+			return Id;
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 			throw new SQLException(e);

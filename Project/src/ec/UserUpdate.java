@@ -1,7 +1,8 @@
 package ec;
 
 import java.io.IOException;
-import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -32,9 +33,71 @@ public class UserUpdate extends HttpServlet {
 			UserDataBeans udb = UserDAO.getUserDataBeansByUserId(userId);
 			request.setAttribute("updateuser", udb);
 			request.getRequestDispatcher(EcHelper.USER_UPDATE_PAGE).forward(request, response);
-		} catch (SQLException e) {
-
+		} catch (Exception e) {
 			e.printStackTrace();
+			session.setAttribute("errorMessage", e.toString());
+			response.sendRedirect("Error");
+		}
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		//文字化け対策
+		request.setCharacterEncoding("UTF-8");
+
+		try {
+
+			int userId = (int)session.getAttribute("userId");
+
+			String updateUserName = (String)request.getParameter("updateUserName");
+			String updateAddress = (String)request.getParameter("updateAddress");
+			String updatePassword = (String)request.getParameter("updatePassword");
+			String updateConfirmPassword = (String)request.getParameter("updateConfirmPassword");
+			String updateBirthDate =(String)request.getParameter("updateBirthDate");
+			boolean isOpen = ((String)request.getParameter("isOpen")).equals("open")?true:false;
+			System.out.println(isOpen);
+			System.out.println(updateBirthDate);
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+	        // Date型変換
+	        Date formatDate = sdf.parse(updateBirthDate);
+
+	        /*
+			if(updatePassword.length()==0||!updatePassword.equals(updateConfirmPassword)) {
+				session.setAttribute("updateActionMessage","パスワードがパスワード(確認)と一致していません");
+				response.sendRedirect("UserUpdate");
+			}*/
+
+
+			UserDataBeans udb = new UserDataBeans();
+
+
+			udb.setId(userId);
+			udb.setName(updateUserName);
+			udb.setAddress(updateAddress);
+			udb.setBirthDate(formatDate);
+			udb.setPassword(updatePassword);
+			udb.setIs_open(isOpen);
+
+
+			//商品を更新
+			String updateCheck = UserDAO.getInstance().updateUser(udb,updateBirthDate);
+			System.out.println(updateCheck);
+
+			if(updateCheck.equals("success")) {
+				session.setAttribute("userUpdateMessage", "ユーザー情報を更新しました");
+				response.sendRedirect("UserDetail");
+			}else {
+
+			    session.setAttribute("updateActionMessage",updateCheck);
+			    System.out.println("unkounkounko");
+			    response.sendRedirect("UserUpdate");
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			session.setAttribute("errorMessage", e.toString());
+			response.sendRedirect("Error");
 		}
 	}
 

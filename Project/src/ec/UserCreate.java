@@ -66,12 +66,14 @@ public class UserCreate extends HttpServlet {
 			 flag = false;
 			}
 			// loginIdの重複をチェック
-			if (UserDAO.isOverlapLoginId(udb.getLoginId(), 0)) {
+			if (UserDAO.isOverlapLoginId(udb.getLoginId(), 0)||udb.getLoginId().equals("__noId")) {
 			  flag = false;
 			}
 
 			if(flag) {
 			   check = UserDAO.getInstance().insertUser(udb);
+			}else {
+				check = false;
 			}
 
 			if(check) {
@@ -80,7 +82,6 @@ public class UserCreate extends HttpServlet {
 			    PointDAO.getInstance().insertPoint(id);
 				request.setAttribute("udb", udb);
 				response.sendRedirect("Login");
-			    //request.getRequestDispatcher("Index").forward(request, response);
 			  }else {
 			    session.setAttribute("udb", udb);
 				request.setAttribute("check1", "NG");

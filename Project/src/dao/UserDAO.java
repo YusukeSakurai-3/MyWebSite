@@ -4,10 +4,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 import base.DBManager;
+import beans.SearchDataBeans;
 import beans.UserDataBeans;
 import ec.EcHelper;
 
@@ -227,5 +230,331 @@ public class UserDAO {
 		System.out.println("overlap check has been completed");
 		return isOverlap;
 	}
+
+	/**
+	 * ほしい物リストを公開しているユーザーを取得
+	 * @return UserDataBeans
+	 * @throws SQLException
+	 */
+	public static ArrayList<UserDataBeans> getUsersByisOpen(int pageNum,int pageMaxUserCount) throws SQLException {
+		Connection con = null;
+		PreparedStatement st = null;
+		String searchWord = "";
+		try {
+			int startUserNum = (pageNum - 1) * pageMaxUserCount;
+			con = DBManager.getConnection();
+
+			if (searchWord.length() == 0) {
+				// 全検索
+				st = con.prepareStatement("SELECT * FROM t_user WHERE is_open = 1 ORDER BY id ASC LIMIT ?,? ");
+				st.setInt(1, startUserNum);
+				st.setInt(2, pageMaxUserCount);
+			} else {
+				// ユーザー名検索
+				searchWord="%"+searchWord+"%";
+				st = con.prepareStatement("SELECT * FROM t_user WHERE name like   ?  ORDER BY id ASC LIMIT ?,? ");
+				st.setString(1,searchWord);
+				st.setInt(2, startUserNum);
+				st.setInt(3, pageMaxUserCount);
+			}
+
+			ResultSet rs = st.executeQuery();
+			ArrayList<UserDataBeans> userList = new ArrayList<UserDataBeans>();
+
+			while (rs.next()) {
+				UserDataBeans user = new UserDataBeans();
+				/*if(rs.getInt("id")==1) {
+					continue;
+				}*/
+				user.setId(rs.getInt("id"));
+				user.setLoginId(rs.getString("login_id"));
+				user.setName(rs.getString("name"));
+				user.setBirthDate(rs.getDate("birth_date"));
+				user.setAddress(rs.getString("address"));
+				user.setIs_open(rs.getBoolean("is_open"));
+				user.setCreateDate(rs.getDate("create_date"));
+				user.setUpdateDate(rs.getDate("update_date"));
+				userList.add(user);
+			}
+			System.out.println("get User by userName has been completed");
+			return userList;
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			throw new SQLException(e);
+		} finally {
+			if (con != null) {
+				con.close();
+			}
+		}
+	}
+
+	/**
+	 * ユーザー詳細検索
+	 * @param SerchDataBeans
+	 * @param pageNum
+	 * @param pageMaxUserCount
+	 * @return
+	 * @throws SQLException
+	 */
+	public ArrayList<UserDataBeans> getUsersDetail(SearchDataBeans sdb, int pageNum, int pageMaxUserCount) throws SQLException {
+		Connection con = null;
+		PreparedStatement st = null;
+		try {
+			int startUserNum = (pageNum - 1) * pageMaxUserCount;
+			con = DBManager.getConnection();
+			ResultSet rs;
+			String searchWord = sdb.getName();
+			String loginId = sdb.getLoginId();
+			String startDate = sdb.getStartDate();
+			String endDate = sdb.getEndDate();
+			String or = " or ";
+			String and = " and ";
+
+			if (searchWord.length() == 0&&!loginId.equals("__noId")&&!startDate.equals("nodate")&&!endDate.equals("nodate")) {
+				// 全検索
+				st = con.prepareStatement("SELECT * FROM t_user ORDER BY id ASC LIMIT ?,? ");
+				st.setInt(1, startUserNum);
+				st.setInt(2, pageMaxUserCount);
+				rs = st.executeQuery();
+			} else {
+				boolean flag = true;
+				// 商品名検索
+				String sql = "SELECT * FROM t_user WHERE name like ";
+
+				String[] searchWords = searchWord.split("　", 0);
+				for(String word:searchWords) {
+				  word=" '%"+word+"%' ";
+				  if(flag) {
+					  sql += word;
+					  flag = false;
+				  }else {
+					  sql = sql +" "+or+" name like " + word;
+					  }
+				}
+
+				if(!loginId.equals("__noId")) {
+					loginId = " '"+loginId+"' ";
+					sql = sql + and + "login_id = "+loginId+" ";
+				}
+
+				if(!startDate.equals("nodate")) {
+					startDate = "' "+startDate+" '";
+				    sql = sql +and+" birth_date >= "+startDate+" ";
+				    	}
+
+				if(!endDate.equals("nodate")) {
+					endDate = "' "+endDate+" '";
+				    sql = sql+and+"birth_date <= "+endDate+" ";
+				}
+
+
+			sql += "LIMIT "+startUserNum+" , "+pageMaxUserCount;
+			System.out.println(sql);
+
+			Statement stmt = con.createStatement();
+			rs = stmt.executeQuery(sql);
+
+			}
+
+			ArrayList<UserDataBeans> userList = new ArrayList<UserDataBeans>();
+
+			while (rs.next()) {
+				UserDataBeans user = new UserDataBeans();
+				/*if(rs.getInt("id")==1) {
+					continue;
+				}*/
+				user.setId(rs.getInt("id"));
+				user.setLoginId(rs.getString("login_id"));
+				user.setName(rs.getString("name"));
+				user.setBirthDate(rs.getDate("birth_date"));
+				user.setAddress(rs.getString("address"));
+				user.setIs_open(rs.getBoolean("is_open"));
+				user.setCreateDate(rs.getDate("create_date"));
+				user.setUpdateDate(rs.getDate("update_date"));
+				userList.add(user);
+			}
+			System.out.println("get User by userName has been completed");
+			return userList;
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			throw new SQLException(e);
+		} finally {
+			if (con != null) {
+				con.close();
+			}
+		}
+	}
+
+
+	/**
+	 * ユーザー総数を取得
+	 *
+	 * @param SearchDataBeans
+	 * @return
+	 * @throws SQLException
+	 */
+	public static double getUserCount(SearchDataBeans sdb) throws SQLException {
+		Connection con = null;
+
+		String searchUserName = sdb.getName();
+		String loginId = sdb.getLoginId();
+		String startDate = sdb.getStartDate();
+		String endDate = sdb.getEndDate();
+
+		boolean flag = true;
+		String or = " or ";
+		String and = " and ";
+		try {
+			con = DBManager.getConnection();
+
+			String sql ="select count(*) as cnt from t_user where name like ";
+			String[] searchWords = searchUserName.split("　", 0);
+			for(String word:searchWords) {
+			  word=" '%"+word+"%' ";
+			  if(flag) {
+				  sql += word;
+				  flag = false;
+			  }else {
+				  sql = sql +or+" name like " + word;
+				  }
+			}
+
+			if(!loginId.equals("__noId")) {
+				loginId = " '"+loginId+"' ";
+				sql = sql + and + "login_id = "+loginId+" ";
+			}
+
+			if(!startDate.equals("nodate")) {
+				startDate = "' "+startDate+" '";
+			    sql = sql +and+" birth_date >= "+startDate+" ";
+			    		}
+			if(!endDate.equals("nodate")) {
+				endDate = "' "+endDate+" '";
+			    sql = sql+and+"birth_date <= "+endDate+" ";
+			}
+			//System.out.println(sql);
+
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery(sql);
+			//test
+			//System.out.println(rs);
+			double count = 0.0;
+			while (rs.next()) {
+				count = Double.parseDouble(rs.getString("cnt"));
+			}
+			return count;
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			throw new SQLException(e);
+		} finally {
+			if (con != null) {
+				con.close();
+			}
+		}
+	}
+
+	/**
+	 * ほしい物リストを公開しているユーザー総数を取得
+	 *
+	 * @param SearchDataBeans
+	 * @return
+	 * @throws SQLException
+	 */
+	public static double getOpenUserCount(String searchUserName) throws SQLException {
+		Connection con = null;
+		boolean flag = true;
+		String or = " or ";
+		String and = " and ";
+		try {
+			con = DBManager.getConnection();
+
+			String sql ="select count(*) as cnt from t_user where is_open = 1 and name like ";
+			String[] searchWords = searchUserName.split("　", 0);
+			for(String word:searchWords) {
+			  word=" '%"+word+"%' ";
+			  if(flag) {
+				  sql += word;
+				  flag = false;
+			  }else {
+				  sql = sql +or+" name like " + word;
+				  }
+			}
+
+			//test
+			String loginId = "__noId";
+
+			if(!loginId.equals("__noId")) {
+				loginId = " '"+loginId+"' ";
+				sql = sql + and + "login_id = "+loginId+" ";
+			}
+
+			System.out.println(sql);
+
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery(sql);
+			//test
+			//System.out.println(rs);
+			double count = 0.0;
+			while (rs.next()) {
+				count = Double.parseDouble(rs.getString("cnt"));
+			}
+			return count;
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			throw new SQLException(e);
+		} finally {
+			if (con != null) {
+				con.close();
+			}
+		}
+	}
+
+
+	/**
+	 * ユーザー情報更新
+	 * @param UserDataBeans
+	 * @throws SQLException
+	 */
+	public String updateUser(UserDataBeans udb,String birthDate) throws SQLException {
+		Connection con = null;
+		PreparedStatement st = null;
+		String error = "入力内容が正しくありません";
+		try {
+
+			if(udb.getName().length()==0) {
+				return "名前が入力されていません";
+			}
+
+			if(udb.getAddress().length()== 0) {
+				return "住所が入力されていません";
+			}
+
+			con = DBManager.getConnection();
+
+			// ユーザー情報更新
+			st = con.prepareStatement("UPDATE t_user  SET name = ?, address = ?, password = ?, birth_date = ?, is_open = ? , update_date = ? WHERE id = ? ");
+			st.setString(1, udb.getName());
+			st.setString(2, udb.getAddress());
+			st.setString(3,udb.getPassword());
+			st.setString(4,birthDate);
+			st.setBoolean(5,udb.getIs_open());
+			st.setTimestamp(6, new Timestamp(System.currentTimeMillis()));
+			st.setInt(7, udb.getId());
+
+
+			int rs = st.executeUpdate();
+
+			System.out.println("update User has been completed");
+			return "success";
+		} catch (SQLException e) {
+			return error;
+
+		} finally {
+			if (con != null) {
+				con.close();
+			}
+		}
+	}
+
 
 }

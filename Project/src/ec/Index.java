@@ -16,7 +16,6 @@ import dao.ItemDAO;
 
 /**
  *
- *
  * Servlet implementation class Index
  */
 @WebServlet("/Index")
@@ -29,8 +28,6 @@ public class Index extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		try {
-
-
 			//商品情報を取得
 			ArrayList<ItemDataBeans>itemList = ItemDAO.getRandItem(4);
 

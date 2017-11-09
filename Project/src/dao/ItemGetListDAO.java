@@ -16,22 +16,25 @@ public class ItemGetListDAO {
 	public static ItemGetListDAO getInstance() {
 		return new ItemGetListDAO();
 	}
+
 	/**
-	 * 商品検索
+	 * ユーザーIdに対するほしい物リストを取得する
 	 * @param userId
 	 * @return itemDataBeans
 	 * @throws SQLException
 	 */
-	public ArrayList<ItemDataBeans> getUserItemList(int userId) throws SQLException {
+	public ArrayList<ItemDataBeans> getUserItemList(int userId,int pageNum,int pageMaxItemCount) throws SQLException {
 		Connection con = null;
 		PreparedStatement st = null;
 		try {
-			//int startiItemNum = (pageNum - 1) * pageMaxItemCount;
+			int startItemNum = (pageNum - 1) * pageMaxItemCount;
 			con = DBManager.getConnection();
 
 				// 商品名検索
-				st = con.prepareStatement("SELECT item_id FROM t_lists WHERE user_id = ?");
+				st = con.prepareStatement("SELECT item_id FROM t_lists WHERE user_id = ? ORDER BY id ASC LIMIT ?,?");
 				st.setInt(1, userId);
+				st.setInt(2, startItemNum);
+				st.setInt(3, pageMaxItemCount);
 
 
 			ResultSet rs = st.executeQuery();
@@ -46,6 +49,43 @@ public class ItemGetListDAO {
 			System.out.println("get UserItemList by userId  has been completed");
 			return itemList;
 		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			throw new SQLException(e);
+		} finally {
+			if (con != null) {
+				con.close();
+			}
+		}
+	}
+
+	/**
+	 * ユーザーIDに対する商品総数を取得
+	 *
+	 * @param
+	 * @return
+	 * @throws SQLException
+	 */
+	public static double getItemCount(int userId,int pageNum,int pageMaxItemCount) throws SQLException {
+		Connection con = null;
+		PreparedStatement st = null;
+		try {
+			int startItemNum = (pageNum - 1) * pageMaxItemCount;
+			con = DBManager.getConnection();
+
+			st = con.prepareStatement("select count(*) as cnt from t_lists where user_id = ? ORDER BY id ASC LIMIT ?,?");
+			st.setInt(1, userId);
+			st.setInt(2, startItemNum);
+			st.setInt(3, pageMaxItemCount);
+
+
+			ResultSet rs = st.executeQuery();
+
+			double count = 0.0;
+			while (rs.next()) {
+				count = Double.parseDouble(rs.getString("cnt"));
+			}
+			return count;
+		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			throw new SQLException(e);
 		} finally {

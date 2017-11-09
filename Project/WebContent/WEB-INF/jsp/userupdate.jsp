@@ -19,36 +19,35 @@
       <div class="panel panel-default">
         <div class="panel-body">
           <div class="panel-body">
-            <form method="post" action="#" class="form-horizontal">
+            <form method="POST" action="UserUpdate" class="form-horizontal">
               <div class="form-group">
                 <label for="user-id" class="control-label col-sm-2">ログインID</label>
-                <div  class="form-control-static col-sm-6">
-
+                <div  class="form-control-static col-sm-6"><%= udb.getLoginId()%>
                 </div>
               </div>
               <div class="form-group">
                 <label for="password" class="control-label col-sm-2">パスワード</label>
                 <div class="col-sm-6">
-                  <input type="password" name="password" id="password" class="form-control" />
+                  <input type="password" name="updatePassword" class="form-control" />
                 </div>
               </div>
               <div class="form-group form-margin">
                 <label for="password-confirm" class="control-label col-sm-2">パスワード(確認)</label>
                 <div class="col-sm-6">
-                  <input type="password" name="password-confirm" id="password-confirm" class="form-control" />
+                  <input type="password" name="updateConfirmPassword"  class="form-control" />
                 </div>
               </div>
               <div class="form-group form-margin">
                 <label for="user-name" class="control-label col-sm-2">ユーザ名</label>
                 <div class="col-sm-6">
-                  <input type="text" name="user-name" id="user-name" class="form-control" value="<%= udb.getName()%>" />
+                  <input type="text" name="updateUserName" class="form-control" value="<%= udb.getName()%>" />
                 </div>
               </div>
               <div class="form-group form-margin">
                 <label for="continent" class="control-label col-sm-2">生年月日</label>
                 <div class="row">
                   <div class="col-sm-5">
-                    <input  type="date" name="birthDate" id="date-start" class="form-control" size="30" value="<%= udb.getBirthDate()%>" />
+                    <input  type="date" name="updateBirthDate" class="form-control" size="30" value="<%= udb.getBirthDate()%>" />
                   </div>
               </div>
               </div>
@@ -56,7 +55,7 @@
                 <label for="continent" class="control-label col-sm-2">住所</label>
                 <div class="row">
                   <div class="col-sm-5">
-                    <input  type="text" name="address"  class="form-control" size="30" value="<%= udb.getAddress()%>" />
+                    <input  type="text" name="updateAddress"  class="form-control" size="30" value="<%= udb.getAddress()%>" />
                   </div>
               </div>
               </div>
@@ -64,7 +63,7 @@
                 <label for="continent" class="control-label col-sm-2">ほしい物リスト</label>
                 <div class="row">
                   <div class="col-sm-2">
-                    <select class="form-control" name="example1" style="position: relative;top :4px">
+                    <select class="form-control" name="isOpen" style="position: relative;top :4px">
                     <option value="open">公開</option>
                     <option value="close">非公開</option>
                     </select>
