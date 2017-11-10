@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="beans.ReviewDataBeans"%>
+<%@page import="beans.ItemDataBeans"%>
 <%@page import="java.util.ArrayList"%>
+<%@page import="java.util.HashMap"%>
 <!DOCTYPE html>
 <html lang="ja">
 <head></head>
@@ -11,6 +13,8 @@
 <%
 ArrayList<ReviewDataBeans> rdb = (ArrayList<ReviewDataBeans>)request.getAttribute("rdb");
 String reviewActionMessage = (String)request.getAttribute("reviewActionMessage");
+String reviewUserName = (String)request.getAttribute("reviewUserName");
+HashMap<Integer,ItemDataBeans> item = (HashMap<Integer,ItemDataBeans>)request.getAttribute("item");
 %>
 
     <!-- body -->
@@ -21,7 +25,7 @@ String reviewActionMessage = (String)request.getAttribute("reviewActionMessage")
 
 
     <div class="container">
-      <h1 align="center">ユーザーさんのレビュー一覧</h1>
+      <h1 align="center"><%=reviewUserName %>さんのレビュー一覧</h1>
     </div>
 
  <%
@@ -42,6 +46,9 @@ String reviewActionMessage = (String)request.getAttribute("reviewActionMessage")
       <div class="col-md-3">
         <br>
         <div class="card">
+        商品名:<a href="Item?item_id=<%= item.get(review.getId()).getId() %>" >
+             <%if(item.get(review.getId()).getName().length()<8){ %><%=item.get(review.getId()).getName() %>⋯<%}
+             else{%><%=item.get(review.getId()).getName().substring(0,8) %>⋯</a><%} %>
             <div class="card-image">
               <a href="ItemReviewDetail?review_id=<%=review.getId()%>">
             <img   src="<%="img/" + review.getFileName()%>"   width="260" height="250" />

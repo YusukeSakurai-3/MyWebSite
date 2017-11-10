@@ -23,18 +23,22 @@ public class ItemListAdd extends HttpServlet {
 		HttpSession session = request.getSession();
 
 		try {
+			Boolean isLogin = session.getAttribute("isLogin") != null ? (Boolean) session.getAttribute("isLogin") : false;
+			if (!isLogin) {
+				// Login画面にリダイレクト
+				response.sendRedirect("Login");
+			}else {
+				int userId = (int) session.getAttribute("userId");
+				String userName = (String)session.getAttribute("userName");
+				//選択された商品のIDを型変換し利用
+				int itemId = Integer.parseInt(request.getParameter("itemget_id"));
 
+				//ほしい物リストに商品を追加。
+				ItemGetListDAO.getInstance().updateUserItemList(userId,itemId);
 
-			int userId = (int) session.getAttribute("userId");
-			String userName = (String)session.getAttribute("userName");
-			//選択された商品のIDを型変換し利用
-			int itemId = Integer.parseInt(request.getParameter("itemget_id"));
-
-			//ほしい物リストに商品を追加。
-			ItemGetListDAO.getInstance().updateUserItemList(userId,itemId);
-
-			session.setAttribute("listActionMessage", "商品をほしい物リストに追加しました");
-			response.sendRedirect("ItemGetList");
+				session.setAttribute("listActionMessage", "商品をほしい物リストに追加しました");
+				response.sendRedirect("ItemGetList");
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			session.setAttribute("errorMessage", e.toString());

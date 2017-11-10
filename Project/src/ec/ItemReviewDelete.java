@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import beans.ReviewDataBeans;
 import dao.ReviewDAO;
+import dao.UserDAO;
 
 /**
  * Servlet implementation class ItemReviewDelete
@@ -30,11 +31,13 @@ public class ItemReviewDelete extends HttpServlet {
 
 			//対象のレビュー情報を削除する
 			ReviewDAO.getInstance().deleteUserReview(id);
+			String reviewUserName = UserDAO.getUserName(userId);
 
 
 			ArrayList<ReviewDataBeans> rdb  = ReviewDAO.getInstance().getReviewListByUserId(userId);
 			//リクエストパラメーターにセット
 			request.setAttribute("rdb", rdb);
+			request.setAttribute("reviewUserName", reviewUserName);
 
 
 			request.getRequestDispatcher(EcHelper.ITEM_REVIEW_LIST_PAGE).forward(request, response);

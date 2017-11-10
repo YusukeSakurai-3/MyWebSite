@@ -60,7 +60,7 @@ int purchaseNum = (int)request.getAttribute("purchaseNum");
                    <td><%=item.getFormatUpdateDate() %></td>
                    <td><%=purchaseNum %></td>
                  <td> <a class="btn btn-success" href="ItemMasterUpdate?item_id=<%=item.getId()%>">更新</a>
-                      <a class="btn btn-danger" href="ItemMasterUpdate?item_id=<%=item.getId()%>">削除</a>
+                      <a class="btn btn-danger" href="ItemMasterDelete?item_id=<%=item.getId()%>">削除</a>
                   </td>
                </tr>
 

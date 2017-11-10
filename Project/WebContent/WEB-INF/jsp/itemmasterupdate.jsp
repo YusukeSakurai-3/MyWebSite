@@ -40,6 +40,7 @@ String itemUpdateError = (String)request.getAttribute("itemUpdateError");
       	<div class="row">
             <div class="col-sm-12">
                   <form method="post" action="ItemMasterUpdate" class="form-horizontal" enctype="multipart/form-data">
+                  <input type="hidden" name="preFileName" value="<%=item.getFileName()%>">
                   <div class="col-sm-2">
                   <img src="<%="img/" + item.getFileName()%>"  width="250" height="250">
                   </div>

@@ -14,6 +14,7 @@ import javax.servlet.http.Part;
 
 import beans.ReviewDataBeans;
 import dao.ReviewDAO;
+import dao.UserDAO;
 
 /**
  * Servlet implementation class ItemReviewAdd
@@ -62,6 +63,8 @@ public class ItemReviewAdd extends HttpServlet {
 			rdb.setFileName(fileName);
 			rdb.setEvaluation(evaluation);
 
+			String reviewUserName = UserDAO.getUserName(userId);
+
 
 			//レビューを追加。
 			ReviewDAO.getInstance().insertUserReview(rdb);
@@ -69,6 +72,7 @@ public class ItemReviewAdd extends HttpServlet {
 			//userIdのレビューリストを取得
 			ArrayList<ReviewDataBeans> ReviewList = ReviewDAO.getReviewListByUserId(userId);
 			request.setAttribute("rdb", ReviewList);
+			request.setAttribute("reviewUserName", reviewUserName);
 			request.setAttribute("reviewActionMessage", "商品のレビューを投稿しました");
 			request.getRequestDispatcher(EcHelper.ITEM_REVIEW_LIST_PAGE).forward(request, response);
 		} catch (Exception e) {

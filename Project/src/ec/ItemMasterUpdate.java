@@ -51,6 +51,8 @@ public class ItemMasterUpdate extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 
 		try {
+			//元の画像ファイルを取得
+			String preFileName = (String)request.getParameter("preFileName");
 			//アップロードされた画像ファイルを取得
 			String fileName = "";
 
@@ -60,7 +62,7 @@ public class ItemMasterUpdate extends HttpServlet {
 			 if(!fileName.equals("")) {
 			     part.write(EcHelper.UPLOAD_PAGE+ "/" + fileName);
 			 }else {
-				 fileName = "noimage.png";
+				 fileName = preFileName;
 			 }
 
 			//選択された商品のIDを型変換し利用

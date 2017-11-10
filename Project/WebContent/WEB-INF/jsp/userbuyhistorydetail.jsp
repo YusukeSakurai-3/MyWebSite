@@ -78,7 +78,7 @@
                    <tbody>
                    <% for(ItemDataBeans item :iddb){%>
                      <tr class="something">
-                       <td class="col-md-6"><%=item.getName() %></td>
+                       <td class="col-md-6"><a href="Item?item_id=<%=item.getId()%>"><%=item.getName() %></a></td>
                        <td>
                        <%if(!isReviewed.get(item.getId())){ %>
                        <form action="ItemReview" >

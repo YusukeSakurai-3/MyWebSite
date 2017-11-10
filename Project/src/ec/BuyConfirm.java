@@ -38,7 +38,7 @@ public class BuyConfirm extends HttpServlet {
 			ArrayList<ItemDataBeans> cartIDBList = (ArrayList<ItemDataBeans>) session.getAttribute("cart");
 			//合計金額
 			int totalPrice = EcHelper.getTotalItemPrice(cartIDBList)+userSelectDMB.getPrice();
-			if(point > userPoint) {
+			if(point > userPoint||point < 0) {
 				request.setAttribute("buyActionMessage", "ポイントが不正な値です");
 				// 配送方法をDBから取得
 				ArrayList<DeliveryMethodDataBeans> dMDBList = DeliveryMethodDAO.getAllDeliveryMethodDataBeans();

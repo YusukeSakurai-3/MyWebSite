@@ -42,7 +42,7 @@ public class UserCreate extends HttpServlet {
 	        String inputUserBirthDate =(String)request.getParameter("birthDate");
 	        String inputUserAddress = (String)request.getParameter("address");
 	        //パスワード以外の入力内容を残す
-	        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+	        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
 	        // Date型変換
 	        Date formatDate = sdf.parse(inputUserBirthDate);

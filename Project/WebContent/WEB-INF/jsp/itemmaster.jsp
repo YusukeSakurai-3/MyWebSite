@@ -132,6 +132,7 @@ String updateMessage = (String)request.getAttribute("updateMessage");
                <tbody>
   	           <%
 					for (ItemDataBeans item : itemList) {
+					int  cnt = purchaseNum.get(item.getId());
 	            %>
                  <tr>
                    <td><%=item.getId() %></td>
@@ -142,11 +143,13 @@ String updateMessage = (String)request.getAttribute("updateMessage");
                    <%} %>
                    <td><%=item.getFormatCreateDate() %></td>
                    <td><%=item.getPrice()%>円</td>
-                   <td><%=purchaseNum.get(item.getId())%></td>
+                   <td><%=cnt %></td>
                    <td>
                      <a class="btn btn-primary" href="ItemMasterDetail?item_id=<%=item.getId()%>&page_num=<%= pageNum%>">詳細</a>
+                     <%if(cnt==0) {%>
                      <a class="btn btn-success" href="ItemMasterUpdate?item_id=<%=item.getId()%>&page_num=<%= pageNum%>">更新</a>
                      <a class="btn btn-danger" href ="ItemMasterDelete?item_id=<%=item.getId()%>&page_num=<%= pageNum%>">削除</a>
+                     <%} %>
                    </td>
                  </tr>
                  <%} %>

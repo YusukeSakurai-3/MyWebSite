@@ -56,6 +56,8 @@ public class ItemReviewUpdate extends HttpServlet {
 		try {
 
 
+			//元の画像ファイルを取得
+			String preFileName = (String)request.getParameter("preFileName");
 			//アップロードされた画像ファイルを取得
 			String fileName = "";
 
@@ -65,7 +67,7 @@ public class ItemReviewUpdate extends HttpServlet {
 			 if(!fileName.equals("")) {
 			     part.write(EcHelper.UPLOAD_PAGE+ "/" + fileName);
 			 }else {
-				 fileName = "noimage.png";
+				 fileName = preFileName;
 			 }
 
 

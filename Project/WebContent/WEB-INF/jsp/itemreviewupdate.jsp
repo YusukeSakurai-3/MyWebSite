@@ -48,6 +48,7 @@ ItemDataBeans item = (ItemDataBeans)request.getAttribute("item");
           <div class="col-md-5">
             <form action="ItemReviewUpdate" method="post" enctype="multipart/form-data">
              <input type="hidden" name="itemReviewId" value="<%=reviewItem.getId()%>">
+             <input type="hidden" name="preFileName" value="<%=reviewItem.getFileName()%>">
             <div class="form-group">
               <label for="review">レビュー
                   <input  type="text" class="form-control" name="reviewTitle" value="<%=reviewItem.getTitle()%>"/>
