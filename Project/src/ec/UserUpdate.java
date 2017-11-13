@@ -53,6 +53,7 @@ public class UserUpdate extends HttpServlet {
 			String updateUserName = (String)request.getParameter("updateUserName");
 			String updateAddress = (String)request.getParameter("updateAddress");
 			String prePassword = (String)request.getParameter("prePassword");
+			//System.out.println("prePassword"+prePassword);
 			String updatePassword = (String)request.getParameter("updatePassword");
 			String updateConfirmPassword = (String)request.getParameter("updateConfirmPassword");
 			System.out.println(updateConfirmPassword);

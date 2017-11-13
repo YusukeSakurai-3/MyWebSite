@@ -118,12 +118,13 @@ public class UserDAO {
 		PreparedStatement st = null;
 		try {
 			con = DBManager.getConnection();
-			st = con.prepareStatement("SELECT id,name,birth_date,is_open,login_id, address FROM t_user WHERE id =" + userId);
+			st = con.prepareStatement("SELECT id,name,birth_date,is_open,login_id,login_password, address FROM t_user WHERE id =" + userId);
 			ResultSet rs = st.executeQuery();
 
 			while (rs.next()) {
 				udb.setId(rs.getInt("id"));
 				udb.setName(rs.getString("name"));
+				udb.setPassword(rs.getString("login_password"));
 				udb.setLoginId(rs.getString("login_id"));
 				udb.setAddress(rs.getString("address"));
 				udb.setBirthDate(rs.getDate("birth_date"));
