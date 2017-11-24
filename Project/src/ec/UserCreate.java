@@ -45,7 +45,7 @@ public class UserCreate extends HttpServlet {
 	        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
 	        // Date型変換
-	        Date formatDate = sdf.parse(inputUserBirthDate);
+	        Date formatDate = EcHelper.parse(inputUserBirthDate);
 	        //test
 	        System.out.println(inputLoginId+inputPassword+inputUserName+inputConfirmPassword+inputUserBirthDate+inputUserAddress);
 	        UserDataBeans udb = new UserDataBeans();
@@ -62,7 +62,7 @@ public class UserCreate extends HttpServlet {
 			boolean check = true;
 
 			// 入力されているパスワードが確認用と等しいか
-			if (!inputPassword.equals(inputConfirmPassword)) {
+			if (!inputPassword.equals(inputConfirmPassword)||inputPassword.length()==0||inputConfirmPassword.length()==0) {
 			 flag = false;
 			}
 			// loginIdの重複をチェック
@@ -83,7 +83,7 @@ public class UserCreate extends HttpServlet {
 				request.setAttribute("udb", udb);
 				response.sendRedirect("Login");
 			  }else {
-			    session.setAttribute("udb", udb);
+			    //session.setAttribute("udb", udb);
 				request.setAttribute("check1", "NG");
 				request.getRequestDispatcher(EcHelper.USER_CREATE_PAGE).forward(request, response);
 

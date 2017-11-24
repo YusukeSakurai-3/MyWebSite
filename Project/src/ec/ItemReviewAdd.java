@@ -1,7 +1,6 @@
 package ec;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -66,15 +65,14 @@ public class ItemReviewAdd extends HttpServlet {
 			String reviewUserName = UserDAO.getUserName(userId);
 
 
+
+
 			//レビューを追加。
 			ReviewDAO.getInstance().insertUserReview(rdb);
 
-			//userIdのレビューリストを取得
-			ArrayList<ReviewDataBeans> ReviewList = ReviewDAO.getReviewListByUserId(userId);
-			request.setAttribute("rdb", ReviewList);
-			request.setAttribute("reviewUserName", reviewUserName);
-			request.setAttribute("reviewActionMessage", "商品のレビューを投稿しました");
-			request.getRequestDispatcher(EcHelper.ITEM_REVIEW_LIST_PAGE).forward(request, response);
+			session.setAttribute("reviewActionMessage", "商品のレビューを投稿しました");
+			response.sendRedirect("ItemReviewList");
+			//request.getRequestDispatcher(EcHelper.ITEM_REVIEW_LIST_PAGE).forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
 			session.setAttribute("errorMessage", e.toString());

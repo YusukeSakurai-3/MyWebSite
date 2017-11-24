@@ -22,6 +22,10 @@ public class Cart extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		try {
+
+			//カート更新時使用
+			String cartAddMessage =session.getAttribute("cartAddMessage")!=null?(String) EcHelper.cutSessionAttribute(session,"cartAddMessage"):"";
+
 			ArrayList<ItemDataBeans> cart = (ArrayList<ItemDataBeans>) session.getAttribute("cart");
 			//セッションにカートがない場合カートを作成
 			if (cart == null) {
@@ -35,6 +39,7 @@ public class Cart extends HttpServlet {
 				cartActionMessage = "カートに商品がありません";
 			}
 
+			request.setAttribute("cartAddMessage", cartAddMessage);
 			request.setAttribute("cartActionMessage", cartActionMessage);
 			request.getRequestDispatcher(EcHelper.CART_PAGE).forward(request, response);
 

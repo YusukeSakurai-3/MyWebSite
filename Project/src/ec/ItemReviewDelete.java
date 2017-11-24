@@ -1,7 +1,6 @@
 package ec;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import beans.ReviewDataBeans;
 import dao.ReviewDAO;
 import dao.UserDAO;
 
@@ -33,14 +31,15 @@ public class ItemReviewDelete extends HttpServlet {
 			ReviewDAO.getInstance().deleteUserReview(id);
 			String reviewUserName = UserDAO.getUserName(userId);
 
+//
+//			ArrayList<ReviewDataBeans> rdb  = ReviewDAO.getInstance().getReviewListByUserId(userId);
+//			//リクエストパラメーターにセット
+//			request.setAttribute("rdb", rdb);
+//			request.setAttribute("reviewUserName", reviewUserName);
+			response.sendRedirect("ItemReviewList");
 
-			ArrayList<ReviewDataBeans> rdb  = ReviewDAO.getInstance().getReviewListByUserId(userId);
-			//リクエストパラメーターにセット
-			request.setAttribute("rdb", rdb);
-			request.setAttribute("reviewUserName", reviewUserName);
 
-
-			request.getRequestDispatcher(EcHelper.ITEM_REVIEW_LIST_PAGE).forward(request, response);
+			//request.getRequestDispatcher(EcHelper.ITEM_REVIEW_LIST_PAGE).forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
 			session.setAttribute("errorMessage", e.toString());

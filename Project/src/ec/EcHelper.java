@@ -4,7 +4,10 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
@@ -118,6 +121,19 @@ public class EcHelper {
 		        // デフォルト値を返す
 		        return defaultValue;
 		  }
+		}
+
+		public static Date parse(String date) throws ParseException {
+			try {
+		        // Dateに変換して返す
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		        return sdf.parse(date);
+		    } catch ( ParseException e ) {
+
+		    	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		    	// デフォルト値を返す
+		        return sdf.parse("1900-01-01");
+		    }
 		}
 
 	/**

@@ -25,6 +25,7 @@ public class ItemAdd extends HttpServlet {
 		HttpSession session = request.getSession();
 
 		try {
+
 			//選択された商品のIDを型変換し利用
 			int id = Integer.parseInt(request.getParameter("item_id"));
 			//対象のアイテム情報を取得
@@ -44,8 +45,9 @@ public class ItemAdd extends HttpServlet {
 			cart.add(item);
 			//カート情報更新
 			session.setAttribute("cart", cart);
-			request.setAttribute("cartActionMessage", "商品を追加しました");
-			request.getRequestDispatcher(EcHelper.CART_PAGE).forward(request, response);
+			session.setAttribute("cartAddMessage", "商品を追加しました");
+			response.sendRedirect("Cart");
+			//request.getRequestDispatcher(EcHelper.CART_PAGE).forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
 			session.setAttribute("errorMessage", e.toString());

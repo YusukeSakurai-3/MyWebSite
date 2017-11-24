@@ -93,18 +93,6 @@
                     <div class="panel-body">
                       <form  action="ItemSearchResult" class="form-horizontal">
 
-                       <!--  <div class="form-group">
-                          <label for="code" class="control-label col-sm-3">カテゴリ</label>
-                          <div class="col-sm-6">
-                              <select class="form-control"  style="position: relative;top :4px">
-                              <option value="カテゴリ1">カテゴリ1</option>
-                              <option value="カテゴリ2">カテゴリ2</option>
-                              <option value="カテゴリ3">カテゴリ3</option>
-                              <option value="カテゴリ4">カテゴリ4</option>
-                              <option value="カテゴリ5">カテゴリ5</option>
-                              </select>
-                          </div>
-                        </div>-->
                         <div class="form-group">
                           <label  class="control-label col-sm-3">キーワード</label>
                           <div class="col-sm-6">

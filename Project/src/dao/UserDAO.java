@@ -32,6 +32,18 @@ public class UserDAO {
 		Connection con = null;
 		PreparedStatement st = null;
 		try {
+			//未入力チェック
+			if(udb.getName().length()==0) {
+				return false;
+				}
+			if(udb.getLoginId().length()==0) {
+				return false;
+				}
+			if(udb.getAddress().length()==0) {
+				return false;
+				}
+
+
 			con = DBManager.getConnection();
 			st = con.prepareStatement("INSERT INTO t_user(name,birth_date,address,login_id,is_open,login_password,create_date,update_date) VALUES(?,?,?,?,?,?,?,?)");
 			st.setString(1, udb.getName());

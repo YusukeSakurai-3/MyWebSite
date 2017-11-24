@@ -27,7 +27,9 @@ public class ItemReviewList extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		try {
+
 			int userId = (int)session.getAttribute("userId");
+			String reviewActionMessage = (String)EcHelper.cutSessionAttribute(session,"reviewActionMessage");
 			ArrayList<ReviewDataBeans> rdb = new ArrayList<ReviewDataBeans>();
 			rdb  = ReviewDAO.getInstance().getReviewListByUserId(userId);
 			String reviewUserName = UserDAO.getUserName(userId);
@@ -38,6 +40,7 @@ public class ItemReviewList extends HttpServlet {
 
 			//リクエストパラメーターにセット
 			request.setAttribute("rdb", rdb);
+			request.setAttribute("reviewActionMessage",reviewActionMessage);
 			request.setAttribute("reviewUserName", reviewUserName);
 			request.setAttribute("item",item);
 

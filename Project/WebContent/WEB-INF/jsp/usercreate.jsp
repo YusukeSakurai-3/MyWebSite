@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@page import="beans.UserDataBeans"%>
+<%@page import="ec.EcHelper"%>
+<!DOCTYPE html>
 <html lang="ja">
   <head>
   <title>ユーザー新規登録</title>
    <jsp:include page="/baselayout/head.html" />
-
   <jsp:include page="/baselayout/header.jsp" />
   </head>
   <body>
@@ -30,7 +31,7 @@
               <div class="form-group">
                 <label for="user-id" class="control-label col-sm-2">ログインID</label>
                 <div class="col-sm-6">
-                  <input type="text" name="loginId"  class="form-control" value="" />
+                  <input type="text" name="loginId"  class="form-control" value="<%= EcHelper.nullCheck((String)request.getParameter("loginId"))%>" />
                 </div>
               </div>
               <div class="form-group">
@@ -48,14 +49,14 @@
               <div class="form-group form-margin">
                 <label for="user-name" class="control-label col-sm-2">ユーザ名</label>
                 <div class="col-sm-6">
-                  <input type="text" name="userName" id="user-name" class="form-control" value=""/>
+                  <input type="text" name="userName" id="user-name" class="form-control" value="<%= EcHelper.nullCheck((String)request.getParameter("userName"))%>"/>
                 </div>
               </div>
               <div class="form-group form-margin">
                 <label for="continent" class="control-label col-sm-2">生年月日</label>
                 <div class="row">
                   <div class="col-sm-5">
-                    <input  type="date" name="birthDate" id="date-start" class="form-control" size="30" value="1989-04-26" />
+                    <input  type="date" name="birthDate" id="date-start" class="form-control" size="30" value="<%= EcHelper.nullCheck((String)request.getParameter("birthDate"))%>" />
                   </div>
               </div>
               </div>
@@ -63,7 +64,7 @@
                 <label for="continent" class="control-label col-sm-2">住所</label>
                 <div class="row">
                   <div class="col-sm-5">
-                    <input  type="text" name="address"  class="form-control" size="30" value="" />
+                    <input  type="text" name="address"  class="form-control" size="30" value="<%= EcHelper.nullCheck((String)request.getParameter("userName"))%>" />
                   </div>
               </div>
               </div>

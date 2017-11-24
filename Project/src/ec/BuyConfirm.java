@@ -58,6 +58,7 @@ public class BuyConfirm extends HttpServlet {
 
 				BuyDataBeans bdb = new BuyDataBeans();
 				bdb.setUserId(userId);
+				//pointを引いた状態の合計金額
 				bdb.setTotalPrice(totalPrice-point);
 				bdb.setDelivertMethodId(userSelectDMB.getId());
 				bdb.setDeliveryMethodName(userSelectDMB.getName());

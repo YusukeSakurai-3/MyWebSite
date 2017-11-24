@@ -14,6 +14,7 @@
   <%
   ArrayList<ItemDataBeans> cart = (ArrayList<ItemDataBeans>) session.getAttribute("cart");
   String cartActionMessage = (String) request.getAttribute("cartActionMessage");
+  String cartAddMessage = (String) request.getAttribute("cartAddMessage");
   %>
 
 
@@ -24,7 +25,11 @@
       <h1 align="center">買い物かご</h1>
 			<br><br>
 			<div class="container">
-
+<%
+ if(cartAddMessage!=null && !cartAddMessage.equals("")) {
+ %>
+  <div class="alert alert-success" role="alert"><%=cartAddMessage%></div>
+ <%} %>
 			<%=cartActionMessage%>
 			<br>
 
